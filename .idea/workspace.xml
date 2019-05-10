@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cace5f3c-6524-466c-ab4a-4e97a484049d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RSAController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RSAController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="319">
+              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
             </state>
           </provider>
         </entry>
@@ -114,6 +113,10 @@
       <command text="php artisan make:Auth" />
       <command text="git add -A" />
       <command text="git commit -m &quot;push code&quot;" />
+      <command text="git push" />
+      <command text="git pull" />
+      <command text="git add -A" />
+      <command text="git commit -m &quot;comments&quot;" />
       <command text="git push" />
     </commandsHistory>
   </component>
@@ -326,12 +329,12 @@
       <workItem from="1557495112727" duration="129000" />
       <workItem from="1557495291445" duration="176000" />
       <workItem from="1557498113266" duration="3188000" />
-      <workItem from="1557521841159" duration="2100000" />
+      <workItem from="1557521841159" duration="2307000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12399000" />
+    <option name="totallyTimeSpent" value="12606000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1839" y="38" width="1680" height="953" extended-state="0" />
@@ -419,8 +422,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="319">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
         </state>
       </provider>
     </entry>

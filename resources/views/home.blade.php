@@ -111,4 +111,24 @@
 </div>
 
 
+{{--<div class="container">--}}
+{{--    <?php print_r($response->Offers);?>--}}
+{{--    @foreach($response->Offers as $o)--}}
+{{--        {{$o->Title}}<br>--}}
+{{--        {{$o->Details}}<br>--}}
+{{--        {{$o->DiscountAmount}}<br>--}}
+{{--        <img src="{{$o->ImagePath}}" alt="Discount Offer - {{$o->DiscountAmount}}" width="200"><br>--}}
+{{--        Click Here {{$o->RSAOfferId}}<br>--}}
+{{--        {{$o->ProductName}}<br>--}}
+{{--        ------------------------<br>--}}
+{{--    @endforeach--}}
+
+{{--</div>--}}
+
+{{--[1] => stdClass Object ( [CategoryDescription] => UPC Promotion [CategoryId] => 5 [DepartmentName] =>--}}
+{{--[Details] => Buy 1 Doll Kind get 1 free [DiscountAmount] => 100 [ExpiresOn] => /Date(1555891140000+0000)/--}}
+{{--[ImagePath] => https://s3.amazonaws.com/buyforlessok/SpecialsImages/IMG_04172019_185426226.jpg [IsDiscountPercentage] => 1 [IsFeatured] =>--}}
+{{--[ProductName] => Group [RSAOfferId] => 579 [Title] => Doll Kind BOGO [ValidFrom] => /Date(1555462800000+0000)/ )--}}
+
+
 @endsection
