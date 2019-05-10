@@ -60,6 +60,25 @@
     </div>
 
     <div>
+    </div>
+
+</div>
+
+-----------------------------------------------
+
+<div class="container">
+    <form action="" method="post">
+        {{ csrf_field() }}
+
+        <div class="form-group">
+            <label>Get Coupons</label>
+
+            <input type="hidden" name="UserToken" value="873b0a64-9760-4de3-8115-774d5641ae1d">
+        </div>
+        <input type="submit">
+    </form>
+
+    <div>
         @if(isset($reponse))
             <?php print_r($response)?>
         @endif
@@ -69,38 +88,27 @@
 
 
 
-<script>
+------------------------------------------
 
-    /*
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://buyforlessok.rsaamerica.com/PartnerApi/SSWebRestApi.svc/RegisterUser",
-        "method": "POST",
-        "headers": {
-            "Content-Type": "application/json",
-            "cache-control": "no-cache",
-            "Postman-Token": "1a6ba060-e727-4b37-b98f-1e3edb6736ea",
-            "Access-Control-Allow-Origin":  "http://127.0.0.1:8000",
-            "Access-Control-Allow-Methods": "POST",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization"
-        },
-        "processData": false,
-        "data": { "ZipCode": "60646", "UserName": "User10@gmail.com", "FirstName": "John", "LastName": "Doe", "Password": "1234", "ClientStoreId": 2, "EnterpriseId": "A07DC24C-B545-4FED-A840-3632CBD5F0F5", "SecurityKey": "ED2559CF-6927-4A3B-811A-E223808D98CD" }
-    };
-    */
+<div class="container">
+    <form action="{{action('RSAController@validate_user')}}" method="post">
+        {{ csrf_field() }}
 
-/*
-    $(document).ready(function(){
-        $("#SubmitButton").click(function(){
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-            });
+        <div class="form-group">
+            <label>Get User Clipped Coupons</label>
 
-           // $("p").slideToggle();
-        });
-    });
-*/
+            <input type="hidden" name="UserToken" value="873b0a64-9760-4de3-8115-774d5641ae1d">
+        </div>
+        <input type="submit">
+    </form>
 
-</script>
+    <div>
+        @if(isset($reponse))
+            <?php print_r($response)?>
+        @endif
+    </div>
+
+</div>
+
+
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use Illuminate\Http\Request;
 
 class RSAController extends Controller
@@ -145,6 +146,64 @@ class RSAController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return bool|string
+     */
+    public function get_coupons(Request $request){
+
+        $data = $request->toArray();
+
+        $data['SecurityKey']    = $this->brand->loyalty_security_id;
+        $data['EnterpriseId']   = $this->brand->loyalty_enterprise_id;
+        $data = json_encode($data);
+        $url = $this->build_url($this->brand->loyalty_url, 'GetRSAOffers');
+
+        $response = $this->curl_post($url, $data);
+
+        $response = json_decode($response);
+
+        return view('loyalty.coupons', compact('response'));
+    }
+
+    /**
+     * @param Request $request
+     * @return bool|string
+     */
+    public function clip_offer(Request $request){
+
+        $request->SecurityKey = $this->security_key($this->brand);
+        $request->EnterpriseId = $this->enterprise_id($this->brand);
+
+        $data = json_encode($request);
+
+        $url = $this->build_url($this->brand->loyalty_url, 'ClipOffer');
+
+        $response = $this->curl_post($url, $data);
+        return $response;
+
+    }
+
+    /**
+     * @param Request $request
+     * POST UserToken
+     * returns users clipped coupons
+     */
+    public function get_user_clips(Request $request){
+
+        $url = $this->build_url($this->brand->loyalty_url, 'GetUserClips');
+
+        $SecurityKey    = $this->brand->loyalty_security_id;
+        $EnterpriseId   = $this->brand->loyalty_enterprise_id;
+
+        $url = $url."/".$request->UserToken."/".$EnterpriseId."/".$SecurityKey;
+
+        $response = $this->curl_get($url);
+
+        return $response;
+
+    }
+
+    /**
      * @param $url
      * @param $data
      * @return bool|string
@@ -198,6 +257,35 @@ class RSAController extends Controller
         $data = Brand::join('stores', 'stores.brand_id', '=', 'brands.id')->where('stores.store_code', '=', $store_code)->first();
 
         return $data;
+    }
+
+    public function curl_get($url){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
     }
 
 }
