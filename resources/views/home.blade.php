@@ -2,11 +2,6 @@
 
 @section('content')
 
-<test-component text="My Button Text" type="submit"></test-component>
-
-
-
-
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">Register For Loyalty Program</div>
