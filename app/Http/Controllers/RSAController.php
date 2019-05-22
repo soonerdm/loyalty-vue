@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RSAController extends Controller
 {
@@ -14,7 +15,8 @@ class RSAController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = $this->get_coupons();
+        return view('home2', compact('coupons'));
     }
 
     /**
@@ -103,8 +105,50 @@ class RSAController extends Controller
 
         echo  $response = $this->curl_post($url, $data);
 
+        $data = json_decode($response);
+
+      //  print_r($data);
+
+        if($data->ErrorMessage->ErrorCode == 1){
+            $loggedIn = $this->get_user($request->UserName, $request->Password);
+
+            $loggedIn = json_decode($loggedIn);
+
+            Session::put('MemberNumber', $loggedIn->MemberNumber);
+            Session::put('UserId', $loggedIn->UserId);
+            Session::put('UserToken', $loggedIn->UserToken);
+
+            echo "You have been registered";
+        }
+        if($data->ErrorMessage->ErrorCode = -1){
+
+            echo $data->ErrorMessage->ErrorDetails;
+        }
+
         //return view('loyalty.index', compact('response'));
 
+    }
+
+    public function get_user($UserName, $Password){
+
+        $data['UserName'] = $UserName;
+        $data['Password'] = $Password;
+
+        $url = $this->build_url('buyforlessok', 'ValidateUser');
+
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+
+
+
+        $data = json_encode($data);
+
+        print_r($data);
+
+        $response = $this->curl_post($url, $data);
+
+        // die(print_r($response));
+        echo $response;
     }
 
 
@@ -129,19 +173,26 @@ class RSAController extends Controller
 
         $url = $this->build_url('buyforlessok', 'ValidateUser');
 
-        $data['SecurityKey']    = ENV('RSA_SecurityKey');//$brand->loyalty_security_id;
-        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');//$brand->loyalty_enterprise_id;
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
 
 
 
         $data = json_encode($data);
 
-        print_r($data);
+       // print_r($data);
 
         $response = $this->curl_post($url, $data);
 
-        // die(print_r($response));
-        echo $response;
+        $jr = json_decode($response);
+
+        if($jr->ErrorMessage->ErrorCode ==1){
+            Session::put('MemberNumber', $jr->MemberNumber);
+            Session::put('UserId', $jr->UserId);
+            Session::put('UserToken', $jr->UserToken);
+        }
+
+        return $response;
 
     }
 
@@ -149,20 +200,19 @@ class RSAController extends Controller
      * @param Request $request
      * @return bool|string
      */
-    public function get_coupons(Request $request){
+    public function get_coupons(){
 
-        $data = $request->toArray();
-
-        $data['SecurityKey']    = $this->brand->loyalty_security_id;
-        $data['EnterpriseId']   = $this->brand->loyalty_enterprise_id;
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         $data = json_encode($data);
-        $url = $this->build_url($this->brand->loyalty_url, 'GetRSAOffers');
+
+        $url = $this->build_url('buyforlessok', 'GetRSAOffers');
 
         $response = $this->curl_post($url, $data);
 
-        $response = json_decode($response);
+       // $response = json_decode($response);
 
-        return view('loyalty.coupons', compact('response'));
+        return $response;
     }
 
     /**
@@ -171,12 +221,18 @@ class RSAController extends Controller
      */
     public function clip_offer(Request $request){
 
-        $request->SecurityKey = $this->security_key($this->brand);
-        $request->EnterpriseId = $this->enterprise_id($this->brand);
+        $data['RSAOfferId']     = $request->RSAOfferId;
+        $data['CategoryId']     = $request->CategoryId;
 
-        $data = json_encode($request);
+        $data['MemberNumber']   = Session::get('MemberNumber');
+        $data['UserToken']      = Session::get('UserToken');
 
-        $url = $this->build_url($this->brand->loyalty_url, 'ClipOffer');
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+
+        $data = json_encode($data);
+
+        $url = $this->build_url('buyforlessok', 'ClipOffer');
 
         $response = $this->curl_post($url, $data);
         return $response;
@@ -184,18 +240,17 @@ class RSAController extends Controller
     }
 
     /**
-     * @param Request $request
-     * POST UserToken
+     *
+     * Session UserToken
      * returns users clipped coupons
      */
-    public function get_user_clips(Request $request){
+    public function get_user_clips(){
 
-        $url = $this->build_url($this->brand->loyalty_url, 'GetUserClips');
+        $url = $this->build_url('buyforlessok', 'GetUserClips');
 
-        $SecurityKey    = $this->brand->loyalty_security_id;
-        $EnterpriseId   = $this->brand->loyalty_enterprise_id;
+        $url = $url."/".Session::get('UserToken')."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
 
-        $url = $url."/".$request->UserToken."/".$EnterpriseId."/".$SecurityKey;
+       // echo $url;
 
         $response = $this->curl_get($url);
 
@@ -284,7 +339,7 @@ class RSAController extends Controller
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            echo $response;
+            return $response;
         }
     }
 

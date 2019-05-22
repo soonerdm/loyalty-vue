@@ -11,13 +11,22 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('home');
 });
+*/
 
 Auth::routes();
 
+Route::get('/', 'RSAController@index');
+
+Route::get('/ava_coupons', 'RSAController@get_coupons');
+
+Route::post('/clip_offer', 'RSAController@clip_offer');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/my_coupons', 'RSAController@get_user_clips');
 
 Route::Post('validate', 'RSAController@validate_user');
 
