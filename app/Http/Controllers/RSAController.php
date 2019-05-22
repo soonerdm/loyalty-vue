@@ -97,6 +97,9 @@ class RSAController extends Controller
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+
+        //todo
+        // Name this in a Session::()
         $data['ClientStore']    = 1;
 
         $data = json_encode($data);
@@ -107,9 +110,7 @@ class RSAController extends Controller
 
         $data = json_decode($response);
 
-      //  print_r($data);
-
-        if($data->ErrorMessage->ErrorCode == 1){
+       if($data->ErrorMessage->ErrorCode == 1){
             $loggedIn = $this->get_user($request->UserName, $request->Password);
 
             $loggedIn = json_decode($loggedIn);
@@ -117,15 +118,9 @@ class RSAController extends Controller
             Session::put('MemberNumber', $loggedIn->MemberNumber);
             Session::put('UserId', $loggedIn->UserId);
             Session::put('UserToken', $loggedIn->UserToken);
+      }
 
-            echo "You have been registered";
-        }
-        if($data->ErrorMessage->ErrorCode = -1){
-
-            echo $data->ErrorMessage->ErrorDetails;
-        }
-
-        //return view('loyalty.index', compact('response'));
+       return $response;
 
     }
 
@@ -139,16 +134,11 @@ class RSAController extends Controller
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
 
-
-
         $data = json_encode($data);
-
-        print_r($data);
 
         $response = $this->curl_post($url, $data);
 
-        // die(print_r($response));
-        echo $response;
+        return  $response;
     }
 
 

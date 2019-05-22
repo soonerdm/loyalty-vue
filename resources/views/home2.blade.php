@@ -18,47 +18,11 @@
 
 
         <div class="col-md-4" id="RegisterForm">
-            <div class="card">
-                <div class="card-header bg-primary">Register Here 2
-                    <span class="float-right"><a href="#" id="SignInLink" style="color: #FFF;">Sign In</a></span>
-                </div>
-                <div class="card-body">
-                    <form action="{{action('RSAController@register_user')}}" method="post">
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label for="FirstName">First Name</label>
-                            <input class="form-control" name="FirstName" id="FirstName" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="LastName">Last Name</label>
-                            <input name="LastName" class="form-control" id="LastName" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="UserName">User Name</label>
-                            <input class="form-control" name="UserName" id="UserName" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input class="form-control" id="password" name="Password" type="password">
-                        </div>
-                        <div class="form-group">
-                            <label for="zipcode">Zip Code</label>
-                            <input class="form-control" id="zipcode" name="ZipCode" type="text">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
-
-                </div>
-            </div>
-
+            <register-component></register-component>
         </div>
 
         <div class="col-md-4" id="LoginForm" style="display: none;">
             <login-component></login-component>
-
-            <div><button class="btn btn-primary" id="myCouponButton">My Coupons</button></div>
-
         </div>
 
 

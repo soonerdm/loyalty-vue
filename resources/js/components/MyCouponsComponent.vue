@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <pre>{{myCoupons.UserClips | json}}</pre>
+       <!-- <pre>{{myCoupons.UserClips | json}}</pre> -->
         <div v-for="UC in myCoupons.UserClips" class="col" :key="UC.RSAOfferId">
             <div>{{UC.Title}}</div>
            <br>

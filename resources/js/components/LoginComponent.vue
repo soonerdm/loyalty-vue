@@ -49,7 +49,6 @@
                             alert(response.data);
                         }
 
-
                     })
 
                 }else {
