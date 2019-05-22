@@ -1984,7 +1984,7 @@ __webpack_require__.r(__webpack_exports__);
         Password: this.Password,
         store_code_login: this.store_code_login
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response);
       });
     }
   }
