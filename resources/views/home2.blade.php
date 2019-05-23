@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -13,22 +12,14 @@
                 <div id="my-coupons">
                     <my-coupons-component></my-coupons-component>
                 </div>
-
             </div>
-
-
-        <div class="col-md-4" id="RegisterForm">
-            <register-component></register-component>
+            <div class="col-md-4" id="RegisterForm">
+                <register-component></register-component>
+            </div>
+            <div class="col-md-4" id="LoginForm" style="display: none;">
+                <login-component></login-component>
+            </div>
         </div>
-
-        <div class="col-md-4" id="LoginForm" style="display: none;">
-            <login-component></login-component>
-        </div>
-
-
-
-
-    </div>
     </div>
 
     <script type="application/javascript">
