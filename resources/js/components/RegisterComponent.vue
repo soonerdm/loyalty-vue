@@ -1,7 +1,7 @@
 <template>
     <div class="card">
-        <div class="card-header bg-primary">Register Here -- vue
-            <span class="float-right"><a href="#" id="SignInLink" style="color: #FFF;">Sign In</a></span>
+        <div class="card-header bg-primary text-white">Register Here
+            <a href="#" id="SignInLink" class="text-white float-right">Sign In</a>
         </div>
         <div class="card-body">
             <div class="form-group">

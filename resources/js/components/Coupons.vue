@@ -1,7 +1,6 @@
 <template>
     <div class="row row-eq-height">
         <div v-for="o in coupons.Offers" class="col-4 mb-3" :key="o.RSAOfferId">
-
             <div class="card h-100">
                 <div class="mt-3 text-center">
                     <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
@@ -12,12 +11,11 @@
                         {{ o.Title }}<br />
                         <!--<small><b>Valid: {{ O.ValidFrom }} to {{ O.ExpiresOn }}</b></small>-->
                     </p>
+                </div>
+                <div class="card-footer bg-transparent">
                     <a href="#" class="btn btn-block btn-primary" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton">Clip Coupon</a>
                 </div>
             </div>
-
-            <!--<pre>{{ O | json }}</pre>-->
-
         </div>
     </div>
 </template>

@@ -1785,8 +1785,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37316,8 +37314,10 @@ var render = function() {
             _c("p", { staticClass: "card-text" }, [
               _vm._v("\n                    " + _vm._s(o.Title)),
               _c("br")
-            ]),
-            _vm._v(" "),
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer bg-transparent" }, [
             _vm.clipButton
               ? _c(
                   "a",
@@ -37472,24 +37472,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-primary" }, [
+    return _c("div", { staticClass: "card-header bg-primary text-white" }, [
       _vm._v("Login Here\n        "),
       _c(
-        "span",
+        "a",
         {
-          staticClass: "float-right",
-          attrs: { title: "No Login? Register here" }
+          staticClass: "text-white float-right",
+          attrs: { href: "#", id: "RegisterLink" }
         },
-        [
-          _c(
-            "a",
-            {
-              staticStyle: { color: "#FFF" },
-              attrs: { href: "#", id: "RegisterLink" }
-            },
-            [_vm._v("Register")]
-          )
-        ]
+        [_vm._v("Register")]
       )
     ])
   }
@@ -37704,18 +37695,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-primary" }, [
-      _vm._v("Register Here -- vue\n        "),
-      _c("span", { staticClass: "float-right" }, [
-        _c(
-          "a",
-          {
-            staticStyle: { color: "#FFF" },
-            attrs: { href: "#", id: "SignInLink" }
-          },
-          [_vm._v("Sign In")]
-        )
-      ])
+    return _c("div", { staticClass: "card-header bg-primary text-white" }, [
+      _vm._v("Register Here\n        "),
+      _c(
+        "a",
+        {
+          staticClass: "text-white float-right",
+          attrs: { href: "#", id: "SignInLink" }
+        },
+        [_vm._v("Sign In")]
+      )
     ])
   }
 ]

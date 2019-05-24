@@ -1,7 +1,7 @@
 <template>
     <div class="card">
-        <div class="card-header bg-primary">Login Here
-            <span class="float-right" title="No Login? Register here"><a href="#" style="color: #FFF" id="RegisterLink">Register</a></span>
+        <div class="card-header bg-primary text-white">Login Here
+            <a href="#" class="text-white float-right" id="RegisterLink">Register</a>
         </div>
         <div class="card-body">
             <div v-if="auth" class="bg-success">Logged In Succesfully</div>
