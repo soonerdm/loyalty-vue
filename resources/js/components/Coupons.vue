@@ -1,18 +1,18 @@
 <template>
-    <div class="row">
-        <div v-for="O in coupons.Offers" class="col-4" :key="O.RSAOfferId">
+    <div class="row row-eq-height">
+        <div v-for="o in coupons.Offers" class="col-4 mb-3" :key="o.RSAOfferId">
 
-            <div class="card mb-3">
+            <div class="card h-100">
                 <div class="mt-3 text-center">
-                    <img :src="O.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
+                    <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ O.ProductName }}</h5>
+                    <h5 class="card-title">{{ o.ProductName }}</h5>
                     <p class="card-text">
-                        {{ O.Title }}<br />
+                        {{ o.Title }}<br />
                         <!--<small><b>Valid: {{ O.ValidFrom }} to {{ O.ExpiresOn }}</b></small>-->
                     </p>
-                    <a href="#" class="btn btn-primary" @click="add( O.RSAOfferId, O.CategoryId )" v-if="clipButton"><i class="fa fa-cut"></i>Clip Coupon</a>
+                    <a href="#" class="btn btn-block btn-primary" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton">Clip Coupon</a>
                 </div>
             </div>
 

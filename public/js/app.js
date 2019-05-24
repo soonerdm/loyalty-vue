@@ -37296,25 +37296,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
-    _vm._l(_vm.coupons.Offers, function(O) {
-      return _c("div", { key: O.RSAOfferId, staticClass: "col-4" }, [
-        _c("div", { staticClass: "card mb-3" }, [
+    { staticClass: "row row-eq-height" },
+    _vm._l(_vm.coupons.Offers, function(o) {
+      return _c("div", { key: o.RSAOfferId, staticClass: "col-4 mb-3" }, [
+        _c("div", { staticClass: "card h-100" }, [
           _c("div", { staticClass: "mt-3 text-center" }, [
             _c("img", {
               staticClass: "card-img-top rounded",
               staticStyle: { "max-height": "150px", "max-width": "150px" },
-              attrs: { src: O.ImagePath }
+              attrs: { src: o.ImagePath }
             })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("h5", { staticClass: "card-title" }, [
-              _vm._v(_vm._s(O.ProductName))
+              _vm._v(_vm._s(o.ProductName))
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
-              _vm._v("\n                    " + _vm._s(O.Title)),
+              _vm._v("\n                    " + _vm._s(o.Title)),
               _c("br")
             ]),
             _vm._v(" "),
@@ -37322,15 +37322,15 @@ var render = function() {
               ? _c(
                   "a",
                   {
-                    staticClass: "btn btn-primary",
+                    staticClass: "btn btn-block btn-primary",
                     attrs: { href: "#" },
                     on: {
                       click: function($event) {
-                        return _vm.add(O.RSAOfferId, O.CategoryId)
+                        return _vm.add(o.RSAOfferId, o.CategoryId)
                       }
                     }
                   },
-                  [_c("i", { staticClass: "fa fa-cut" }), _vm._v("Clip Coupon")]
+                  [_vm._v("Clip Coupon")]
                 )
               : _vm._e()
           ])
