@@ -12,7 +12,7 @@
                         <!--<small><b>Valid: {{ O.ValidFrom }} to {{ O.ExpiresOn }}</b></small>-->
                     </p>
                 </div>
-                <div class="card-footer bg-transparent">
+                <div class="card-footer bg-transparent border-top-0">
                     <a href="#" class="btn btn-block btn-primary" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton">Clip Coupon</a>
                 </div>
             </div>

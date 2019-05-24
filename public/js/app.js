@@ -37317,23 +37317,27 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer bg-transparent" }, [
-            _vm.clipButton
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-block btn-primary",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        return _vm.add(o.RSAOfferId, o.CategoryId)
+          _c(
+            "div",
+            { staticClass: "card-footer bg-transparent border-top-0" },
+            [
+              _vm.clipButton
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block btn-primary",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.add(o.RSAOfferId, o.CategoryId)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Clip Coupon")]
-                )
-              : _vm._e()
-          ])
+                    },
+                    [_vm._v("Clip Coupon")]
+                  )
+                : _vm._e()
+            ]
+          )
         ])
       ])
     }),
