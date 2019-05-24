@@ -1775,11 +1775,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-/*export default {
-    name: "Coupons"
-}
-*/
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1805,7 +1812,7 @@ __webpack_require__.r(__webpack_exports__);
         this.clipButton = false;
       })["catch"](function (error) {
         console.log(error.data);
-      }); //alert(coupon_id);
+      });
     }
   }
 });
@@ -1899,9 +1906,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MyCouponsComponent.vue",
   data: function data() {
@@ -1930,7 +1934,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -37295,26 +37298,43 @@ var render = function() {
     "div",
     { staticClass: "row" },
     _vm._l(_vm.coupons.Offers, function(O) {
-      return _c("div", { key: O.RSAOfferId, staticClass: "col" }, [
-        _c("div", [_vm._v(_vm._s(O.Title))]),
-        _vm._v(" "),
-        _c("img", { attrs: { src: O.ImagePath, width: "150" } }),
-        _c("br"),
-        _vm._v(" "),
-        _vm.clipButton
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                on: {
-                  click: function($event) {
-                    return _vm.add(O.RSAOfferId, O.CategoryId)
-                  }
-                }
-              },
-              [_vm._v("Clip Coupon")]
-            )
-          : _vm._e()
+      return _c("div", { key: O.RSAOfferId, staticClass: "col-4" }, [
+        _c("div", { staticClass: "card mb-3" }, [
+          _c("div", { staticClass: "mt-3 text-center" }, [
+            _c("img", {
+              staticClass: "card-img-top rounded",
+              staticStyle: { "max-height": "150px", "max-width": "150px" },
+              attrs: { src: O.ImagePath }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(O.ProductName))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v("\n                    " + _vm._s(O.Title)),
+              _c("br")
+            ]),
+            _vm._v(" "),
+            _vm.clipButton
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.add(O.RSAOfferId, O.CategoryId)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-cut" }), _vm._v("Clip Coupon")]
+                )
+              : _vm._e()
+          ])
+        ])
       ])
     }),
     0
@@ -37453,7 +37473,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary" }, [
-      _vm._v("Login Here -- vue\n        "),
+      _vm._v("Login Here\n        "),
       _c(
         "span",
         {
@@ -37501,7 +37521,6 @@ var render = function() {
     _vm._l(_vm.myCoupons.UserClips, function(UC) {
       return _c("div", { key: UC.RSAOfferId, staticClass: "col" }, [
         _c("div", [_vm._v(_vm._s(UC.Title))]),
-        _vm._v(" "),
         _c("br")
       ])
     }),
@@ -50235,8 +50254,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

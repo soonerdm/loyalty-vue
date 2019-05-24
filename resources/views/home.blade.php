@@ -5,7 +5,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                Stuff Goes Here
                 <div id="store-coupons">
                     <coupons-component></coupons-component>
                 </div>
