@@ -23,6 +23,7 @@ Vue.component('coupons-component', require('./components/Coupons.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
 Vue.component('my-coupons-component', require('./components/MyCouponsComponent.vue').default);
 Vue.component('register-component', require('./components/RegisterComponent.vue').default);
+Vue.component('forgot-pin-component', require('./components/ForgotPinComponent.vue').default);
 
 
 /**

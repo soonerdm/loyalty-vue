@@ -214,6 +214,13 @@ class RSAController extends Controller
         $data['RSAOfferId']     = $request->RSAOfferId;
         $data['CategoryId']     = $request->CategoryId;
 
+      // die("Member Num ". Session::get('MemberNumber'));
+
+        if(empty(Session::get('MemberNumber'))){
+            $data['ErrorMessage'] = "No MemberNumber";
+            return json_encode($data);
+        }
+
         $data['MemberNumber']   = Session::get('MemberNumber');
         $data['UserToken']      = Session::get('UserToken');
 
@@ -236,6 +243,10 @@ class RSAController extends Controller
      */
     public function get_user_clips(){
 
+        if(empty(Session::get('UserToken'))){
+            return json_encode($data['ErrorMessage'] = "Not Logged In" );
+        }
+
         $url = $this->build_url('buyforlessok', 'GetUserClips');
 
         $url = $url."/".Session::get('UserToken')."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
@@ -246,6 +257,21 @@ class RSAController extends Controller
 
         return $response;
 
+    }
+
+    public function forgot_pin(Request $request){
+
+
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+        $data['UserName']       = $request->UserNamePin;
+
+        $data = json_encode($data);
+
+        $url = $this->build_url('buyforlessok', 'ForgotPin');
+
+        $response = $this->curl_post($url, $data);
+        return $response;
     }
 
     /**

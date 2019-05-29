@@ -6,17 +6,26 @@
         <div class="row">
             <div class="col-md-8">
                 <div id="store-coupons">
+                    @if(!empty(Session::get('MemberNumber')))
+                        <a href='#' id="MyClipsLink">My Clipped Coupon</a>
+                    @endif
                     <coupons-component></coupons-component>
                 </div>
-                <div id="my-coupons">
+                <div id="my-coupons" style="display: none;">
+                    <a href="#" id="AllCouponsLink">All Coupons</a>
                     <my-coupons-component></my-coupons-component>
                 </div>
             </div>
             <div class="col-md-4" id="RegisterForm">
                 <register-component></register-component>
+                <a href="#" class="float-right" id="ForgotPinLink">Forgot Pin</a>
             </div>
             <div class="col-md-4" id="LoginForm" style="display: none;">
                 <login-component></login-component>
+                <a href="#" class="float-right" id="ForgotPinLink2">Forgot Pin</a>
+            </div>
+            <div class="col-md-4" id="ForgotPin" style="display: none;">
+                <forgot-pin-component></forgot-pin-component>
             </div>
         </div>
     </div>
@@ -26,12 +35,38 @@
             $('#SignInLink').click(function(){
                 $("#RegisterForm").hide();
                 $("#LoginForm").show();
+                $("#ForgotPin").hide();
             });
-
             $('#RegisterLink').click(function(){
                 $("#RegisterForm").show();
                 $("#LoginForm").hide();
+                $("#ForgotPin").hide();
+            });
+            $('#ForgotPinLink').click(function(){
+                $("#RegisterForm").hide();
+                $("#LoginForm").hide();
+                $("#ForgotPin").show();
+            });
+            $('#ForgotPinLink2').click(function(){
+                $("#RegisterForm").hide();
+                $("#LoginForm").hide();
+                $("#ForgotPin").show();
+            });
+            $('#LoginLink').click(function(){
+                $("#RegisterForm").hide();
+                $("#LoginForm").show();
+                $("#ForgotPin").hide();
+            });
+            $('#MyClipsLink').click(function(){
+                $('#store-coupons').hide();
+                $('#my-coupons').show();
+            });
+            $('#AllCouponsLink').click(function() {
+                $('#store-coupons').show();
+                $('#my-coupons').hide();
             })
+
+
         });
     </script>
 

@@ -24,6 +24,8 @@ Route::get('/ava_coupons', 'RSAController@get_coupons');
 
 Route::post('/clip_offer', 'RSAController@clip_offer');
 
+Route::post('forgot_pin', 'RSAController@forgot_pin');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/my_coupons', 'RSAController@get_user_clips');

@@ -19,6 +19,12 @@
             <div class="col-md-4" id="LoginForm" style="display: none;">
                 <login-component></login-component>
             </div>
+            <div class="col-md-4" id="ForgotPin" style="display: none;">
+                <forgot-pin-component></forgot-pin-component>
+            </div>
+            <div class="col-md-4" id="Pin">
+                <a href="#" class="text-white float-right" id="ForgotPinLink">Forgot Pin</a>
+            </div>
         </div>
     </div>
 
@@ -26,13 +32,21 @@
         $(document).ready(function(){
             $('#SignInLink').click(function(){
                 $("#RegisterForm").hide();
+                $("#ForgotPin").hide();
                 $("#LoginForm").show();
             });
 
             $('#RegisterLink').click(function(){
                 $("#RegisterForm").show();
                 $("#LoginForm").hide();
+                $("#ForgotPin").hide();
+            });
+            $('#ForgotPinLink').click(function(){
+                $("#RegisterForm").hide();
+                $("#LoginForm").hide();
+                $("#ForgotPin").show();
             })
+
         });
     </script>
 

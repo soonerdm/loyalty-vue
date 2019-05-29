@@ -40,13 +40,18 @@
                     RSAOfferId: coupon_id,
                     CategoryId: CategoryId
                 }).then(function (response){
-                    console.log(response.data);
-                    alert('Coupon Clipped');
-                    this.clipButton = false;
+                    console.log(response);
+                    if (response.data.ErrorMessage === "No MemberNumber"){
+                        alert('You must be logged in');
+                    }
+                    else {
+                        alert('Coupon Clipped');
+                        this.clipButton = false;
+                    }
                 })
-                .catch(function (error){
-                    console.log(error.data);
-                });
+                  .catch(function (error){
+                   console.log(error.data);
+                  });
             }
         }
      }
