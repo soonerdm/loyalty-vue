@@ -23,7 +23,7 @@
 <script>
 
     export default {
-        data() {
+        data: function () {
             return {
                 coupons: [],
                 clipButton: true
@@ -46,7 +46,7 @@
                     }
                     else {
                         alert('Coupon Clipped');
-                        this.clipButton = false;
+                     // this.clipButton = false;
                     }
                 })
                   .catch(function (error){

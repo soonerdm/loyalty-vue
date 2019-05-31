@@ -1785,8 +1785,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1812,8 +1810,7 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.ErrorMessage === "No MemberNumber") {
           alert('You must be logged in');
         } else {
-          alert('Coupon Clipped');
-          this.clipButton = false;
+          alert('Coupon Clipped'); // this.clipButton = false;
         }
       })["catch"](function (error) {
         console.log(error.data);
