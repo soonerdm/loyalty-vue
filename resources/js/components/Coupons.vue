@@ -1,6 +1,6 @@
 <template>
     <div class="row row-eq-height">
-        <div v-for="o in coupons.Offers" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
+        <div v-for="o in $parent.coupons.Offers" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
                 <div class="mt-3 text-center">
                     <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
@@ -25,14 +25,11 @@
     export default {
         data: function () {
             return {
-                coupons: [],
                 clipButton: true
             }
         },
         mounted() {
-            axios.get('/ava_coupons').then((response) => {
-                this.coupons = response.data;
-            });
+
         },
         methods: {
             add: function (coupon_id, CategoryId){
