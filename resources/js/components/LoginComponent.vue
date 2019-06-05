@@ -43,13 +43,18 @@
                             self.logged= true;
                             self.UserNameLogin= '';
                             self.PasswordLogin ='';
-                            alert('Logged In')
+                            self.$parent.auth = true;
+                            self.$parent.user = response.data;
+                            axios.get('/my_coupons').then((coupons) => {
+                                self.$parent.clipped = coupons.data;
+                            });
+                            alert('Logged In');
                         } else {
                             alert(response.data);
                         }
                     })
                 } else {
-                    alert('You gotta fill in the fields')
+                    alert('All fields required');
                 }
             }
         }

@@ -1794,6 +1794,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     add: function add(coupon_id, CategoryId) {
+      var self = this;
       axios.post('/clip_offer', {
         RSAOfferId: coupon_id,
         CategoryId: CategoryId
@@ -1803,7 +1804,10 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.ErrorMessage === "No MemberNumber") {
           alert('You must be logged in');
         } else {
-          alert('Coupon Clipped'); // this.clipButton = false;
+          alert('Coupon Clipped');
+          axios.get('/my_coupons').then(function (coupons) {
+            self.$parent.clipped = coupons.data;
+          });
         }
       })["catch"](function (error) {
         console.log(error.data);
@@ -1898,8 +1902,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       UserNameLogin: '',
       PasswordLogin: '',
+<<<<<<< HEAD
       store_code_login: '',
       logged: false
+=======
+      store_code_login: ''
+>>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
     };
   },
   methods: {
@@ -1915,10 +1923,20 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
+<<<<<<< HEAD
             self.logged = true;
             self.UserNameLogin = '';
             self.PasswordLogin = '';
             alert('Logged In');
+=======
+            self.UserNameLogin = '';
+            self.PasswordLogin = '';
+            self.$parent.auth = true;
+            self.$parent.user = response.data;
+            axios.get('/my_coupons').then(function (coupons) {
+              self.$parent.clipped = coupons.data;
+            });
+>>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
           } else {
             alert(response.data);
           }
@@ -1969,11 +1987,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       coupons: [],
-      auth: false
+      auth: false,
+      user: {},
+      clipped: []
     };
   },
   mounted: function mounted() {
@@ -2072,8 +2110,7 @@ __webpack_require__.r(__webpack_exports__);
       LastName: '',
       UserName: '',
       Password: '',
-      ZipCode: '',
-      auth: false
+      ZipCode: ''
     };
   },
   methods: {
@@ -37726,76 +37763,135 @@ var render = function() {
             _c("coupons-component")
           ],
           1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticStyle: { display: "none" }, attrs: { id: "my-coupons" } },
-          [
-            _c("a", { attrs: { href: "#", id: "AllCouponsLink" } }, [
-              _vm._v("All Coupons")
-            ]),
-            _vm._v(" "),
-            _c("my-coupons-component")
-          ],
-          1
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-4", attrs: { id: "RegisterForm" } },
-        [
-          _c("register-component"),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "float-right",
-              attrs: { href: "#", id: "ForgotPinLink" }
-            },
-            [_vm._v("Forgot Pin")]
+      !_vm.auth
+        ? _c(
+            "div",
+            { staticClass: "col-md-4", attrs: { id: "RegisterForm" } },
+            [
+              _c("register-component"),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "float-right",
+                  attrs: { href: "#", id: "ForgotPinLink" }
+                },
+                [_vm._v("Forgot Pin")]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.auth
+        ? _c(
+            "div",
+            {
+              staticClass: "col-md-4",
+              staticStyle: { display: "none" },
+              attrs: { id: "LoginForm" }
+            },
+            [
+              _c("login-component"),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "float-right",
+                  attrs: { href: "#", id: "ForgotPinLink2" }
+                },
+                [_vm._v("Forgot Pin")]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.auth
+        ? _c(
+            "div",
+            {
+              staticClass: "col-md-4",
+              staticStyle: { display: "none" },
+              attrs: { id: "ForgotPin" }
+            },
+            [_c("forgot-pin-component")],
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
         {
-          staticClass: "col-md-4",
-          staticStyle: { display: "none" },
-          attrs: { id: "LoginForm" }
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.auth,
+              expression: "auth"
+            }
+          ],
+          staticClass: "col-md-4"
         },
         [
-          _c("login-component"),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "float-right",
-              attrs: { href: "#", id: "ForgotPinLink2" }
-            },
-            [_vm._v("Forgot Pin")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "col-md-4",
-          staticStyle: { display: "none" },
-          attrs: { id: "ForgotPin" }
-        },
-        [_c("forgot-pin-component")],
-        1
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header bg-primary text-white" }, [
+              _vm._v("Welcome, " + _vm._s(_vm.user.FirstName) + "!")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("p", [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: { src: _vm.user.MyCardBarCodeImagePath }
+                })
+              ]),
+              _vm._v(" "),
+              _c("table", { staticClass: "table table-condensed" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.clipped.UserClips, function(c) {
+                    return _c("tr", { key: c.RSAOfferId }, [
+                      _c("td", [_vm._v(_vm._s(c.Details))]),
+                      _vm._v(" "),
+                      _vm._m(1, true)
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
+        ]
       )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { colspan: "2" } }, [_vm._v("My Clipped Coupons")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-sm btn-danger" }, [_vm._v("×")])
+    ])
+  }
+]
 render._withStripped = true
 
 
