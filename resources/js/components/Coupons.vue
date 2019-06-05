@@ -33,6 +33,7 @@
         },
         methods: {
             add: function (coupon_id, CategoryId){
+                let self = this;
                 axios.post('/clip_offer', {
                     RSAOfferId: coupon_id,
                     CategoryId: CategoryId
@@ -43,11 +44,12 @@
                     }
                     else {
                         alert('Coupon Clipped');
-                     // this.clipButton = false;
+                        axios.get('/my_coupons').then((coupons) => {
+                            self.$parent.clipped = coupons.data;
+                        });
                     }
-                })
-                  .catch(function (error){
-                   console.log(error.data);
+                }).catch(function (error){
+                    console.log(error.data);
                   });
             }
         }

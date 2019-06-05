@@ -33,7 +33,7 @@
     export default {
         name: "RegisterComponent.vue",
         data: function () {
-            return {FirstName: '', LastName: '', UserName: '', Password: '', ZipCode: '', auth: false};
+            return {FirstName: '', LastName: '', UserName: '', Password: '', ZipCode: ''};
         },
         methods: {
             Register() {

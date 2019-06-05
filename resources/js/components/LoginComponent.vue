@@ -4,7 +4,6 @@
             <a href="#" class="text-white float-right" id="RegisterLink">Register</a>
         </div>
         <div class="card-body">
-            <div v-if="auth" class="bg-success">Logged In Succesfully</div>
                 <div class="form-group">
                     <label for="UserNameLogin">User Name</label>
                     <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin">
@@ -28,8 +27,7 @@
             return {
                 UserNameLogin: '',
                 PasswordLogin: '',
-                store_code_login: '',
-                auth: false
+                store_code_login: ''
             };
         },
         methods:{
@@ -43,15 +41,19 @@
                     }).then(function(response){
                         console.log(response.data);
                         if (response.data.ErrorMessage.ErrorCode === 1){
-                            self.auth = true;
                             self.UserNameLogin= '';
-                            //alert('Logged In')
+                            self.PasswordLogin= '';
+                            self.$parent.auth = true;
+                            self.$parent.user = response.data;
+                            axios.get('/my_coupons').then((coupons) => {
+                                self.$parent.clipped = coupons.data;
+                            });
                         } else {
                             alert(response.data);
                         }
                     })
                 } else {
-                    alert('You gotta fill in the fields')
+                    alert('You gotta fill in the fields');
                 }
             }
         }
