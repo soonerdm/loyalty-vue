@@ -15,8 +15,7 @@ class RSAController extends Controller
      */
     public function index()
     {
-        $coupons = $this->get_coupons();
-        return view('home', compact('coupons'));
+        return view('home');
     }
 
     /**
