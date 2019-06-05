@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div id="store-coupons">
+                    <a href="#" id="MyCouponsLink" v-if="auth">My Coupons</a>
                     <coupons-component></coupons-component>
                 </div>
                 <div id="my-coupons" style="display: none;">

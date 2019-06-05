@@ -8,8 +8,6 @@
                 <label for="UserNamePin">User Name</label>
                 <input class="form-control" name="UserNameLogin" v-model="UserNamePin" type="text" id="UserNamePin">
             </div>
-
-                <input type="hidden" name="store_code_login" v-model="store_code_login" value="3501">
             <div class="form-group">
                 <button type="submit" id="SubmitButton" class="btn btn-primary" v-on:click="forgotPin()">Send Pin Reset Link</button>
             </div>
@@ -22,15 +20,14 @@
         name: "ForgotPinComponent.vue",
         data: function () {
             return {
-                UserNamePin: '',
-                store_code_login: '',
+                UserNamePin: ''
             }
         },
         methods: {
             forgotPin() {
                 axios.post('/forgot_pin', {
-                    UserName: this.UserNamePin,
-                    store_code_login: this.store_code_login
+                    UserName: this.UserNamePin
+
                 }).then(function (response) {
                     console.log(response.data);
                     alert(response.data.ErrorMessage.ErrorDetails);

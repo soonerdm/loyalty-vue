@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Session;
 
 class RSAController extends Controller
 {
+
+    public $brand;
+
+   public function __construct()
+   {
+        $url = explode('.', $_SERVER['HTTP_HOST'])[0];
+
+        $this->brand = $this->get_brand($url);
+
+   }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +26,9 @@ class RSAController extends Controller
      */
     public function index()
     {
+
+
+
         return view('home');
     }
 
@@ -103,16 +117,16 @@ class RSAController extends Controller
 
         $data = json_encode($data);
 
-        $url =  $this->build_url('buyforlessok', 'RegisterUser');
+        $url =  $this->build_url($this->brand, 'RegisterUser');
 
-        echo  $response = $this->curl_post($url, $data);
+        $response = $this->curl_post($url, $data);
 
         $data = json_decode($response);
 
        if($data->ErrorMessage->ErrorCode == 1){
-            $loggedIn = $this->get_user($request->UserName, $request->Password);
+            $loggedInRaw = $this->get_user($request->UserName, $request->Password);
 
-            $loggedIn = json_decode($loggedIn);
+            $loggedIn = json_decode($loggedInRaw);
 
             Session::put('MemberNumber', $loggedIn->MemberNumber);
             Session::put('UserId', $loggedIn->UserId);
@@ -128,7 +142,7 @@ class RSAController extends Controller
         $data['UserName'] = $UserName;
         $data['Password'] = $Password;
 
-        $url = $this->build_url('buyforlessok', 'ValidateUser');
+        $url = $this->build_url($this->brand, 'ValidateUser');
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
@@ -160,7 +174,7 @@ class RSAController extends Controller
         $data['UserName'] = $request->UserName;
         $data['Password'] = $request->Password;
 
-        $url = $this->build_url('buyforlessok', 'ValidateUser');
+        $url = $this->build_url($this->brand, 'ValidateUser');
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
@@ -195,7 +209,7 @@ class RSAController extends Controller
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         $data = json_encode($data);
 
-        $url = $this->build_url('buyforlessok', 'GetRSAOffers');
+        $url = $this->build_url($this->brand, 'GetRSAOffers');
 
         $response = $this->curl_post($url, $data);
 
@@ -228,7 +242,7 @@ class RSAController extends Controller
 
         $data = json_encode($data);
 
-        $url = $this->build_url('buyforlessok', 'ClipOffer');
+        $url = $this->build_url($this->brand, 'ClipOffer');
 
         $response = $this->curl_post($url, $data);
         return $response;
@@ -246,7 +260,7 @@ class RSAController extends Controller
             return json_encode($data['ErrorMessage'] = "Not Logged In" );
         }
 
-        $url = $this->build_url('buyforlessok', 'GetUserClips');
+        $url = $this->build_url($this->brand, 'GetUserClips');
 
         $url = $url."/".Session::get('UserToken')."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
 
@@ -260,18 +274,35 @@ class RSAController extends Controller
 
     public function forgot_pin(Request $request){
 
-
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         $data['UserName']       = $request->UserNamePin;
 
         $data = json_encode($data);
 
-        $url = $this->build_url('buyforlessok', 'ForgotPin');
+        $url = $this->build_url($this->brand, 'ForgotPin');
 
         $response = $this->curl_post($url, $data);
         return $response;
     }
+
+    /**
+     *
+     */
+    public function get_brand($url){
+
+        $domain['buyforlessok'] = 'buyforlessok';
+
+        if (!isset($domain[$url])){
+            return 'buyforlessok';
+        }
+        else {
+            return $domain[$url];
+        }
+
+
+    }
+
 
     /**
      * @param $url
@@ -322,12 +353,6 @@ class RSAController extends Controller
      * @param $store_code
      * @return mixed
      */
-    public function get_brand($store_code){
-
-        $data = Brand::join('stores', 'stores.brand_id', '=', 'brands.id')->where('stores.store_code', '=', $store_code)->first();
-
-        return $data;
-    }
 
     public function curl_get($url){
         $curl = curl_init();
@@ -356,6 +381,13 @@ class RSAController extends Controller
         } else {
             return $response;
         }
+    }
+
+    public function logout(){
+        Session::flush();
+        $response ='';
+
+        return back();
     }
 
 }

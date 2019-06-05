@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/stores.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,6 +38,10 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        @if(Session::has('MemberNumber'))
+                            <a class="nav-link-logged" id="nav-link-logged" style="display:none;"  href="{{ route('logout') }}">Logout</a>
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             {{--<li class="nav-item">--}}

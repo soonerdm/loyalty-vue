@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input class="form-control" id="password" name="Password" v-model="Password" type="password">
+                <input class="form-control" id="password" name="Password" maxlength="4" v-model="Password" type="password">
             </div>
             <div class="form-group">
                 <label for="zipcode">Zip Code</label>
@@ -37,16 +37,31 @@
         },
         methods: {
             Register() {
-                axios.post('/register', {
-                    ZipCode: this.ZipCode,
-                    FirstName: this.FirstName,
-                    LastName: this.LastName,
-                    UserName: this.UserName,
-                    Password: this.Password,
-                    store_code_login: this.store_code_login
-                }).then(function(response){
-                    console.log(response);
-                })
+                if(this.Password.length !== 4){
+                    alert('Pin Must be 4 digits')
+                    return false;
+                }else {
+                    axios.post('/register', {
+                        ZipCode: this.ZipCode,
+                        FirstName: this.FirstName,
+                        LastName: this.LastName,
+                        UserName: this.UserName,
+                        Password: this.Password,
+                        store_code_login: this.store_code_login
+                    }).then(function (response) {
+                        console.log(response.data.ErrorMessage);
+                        if(response.data.ErrorMessage.ErrorCode ===1){
+                            alert('Successfully Registered. Please Login');
+                            $("#RegisterForm").hide();
+                            $("#LoginForm").show();
+                            $("#ForgotPin").hide();
+
+                        }
+                        else {
+                            alert(response.data.ErrorMessage.ErrorDetails);
+                        }
+                    })
+                }
             }
         }
     }

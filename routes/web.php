@@ -30,6 +30,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/my_coupons', 'RSAController@get_user_clips');
 
+Route::get('logout', 'RSAController@logout');
+
 Route::Post('validate', 'RSAController@validate_user');
 
 Route::Post('register', 'RSAController@register_user');

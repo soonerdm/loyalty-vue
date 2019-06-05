@@ -1840,21 +1840,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ForgotPinComponent.vue",
   data: function data() {
     return {
-      UserNamePin: '',
-      store_code_login: ''
+      UserNamePin: ''
     };
   },
   methods: {
     forgotPin: function forgotPin() {
       axios.post('/forgot_pin', {
-        UserName: this.UserNamePin,
-        store_code_login: this.store_code_login
+        UserName: this.UserNamePin
       }).then(function (response) {
         console.log(response.data);
         alert(response.data.ErrorMessage.ErrorDetails);
@@ -1896,7 +1892,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginComponent.vue",
   data: function data() {
@@ -1904,7 +1899,7 @@ __webpack_require__.r(__webpack_exports__);
       UserNameLogin: '',
       PasswordLogin: '',
       store_code_login: '',
-      auth: false
+      logged: false
     };
   },
   methods: {
@@ -1920,8 +1915,10 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
-            self.auth = true;
-            self.UserNameLogin = ''; //alert('Logged In')
+            self.logged = true;
+            self.UserNameLogin = '';
+            self.PasswordLogin = '';
+            alert('Logged In');
           } else {
             alert(response.data);
           }
@@ -1944,6 +1941,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2080,16 +2078,30 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     Register: function Register() {
-      axios.post('/register', {
-        ZipCode: this.ZipCode,
-        FirstName: this.FirstName,
-        LastName: this.LastName,
-        UserName: this.UserName,
-        Password: this.Password,
-        store_code_login: this.store_code_login
-      }).then(function (response) {
-        console.log(response);
-      });
+      if (this.Password.length !== 4) {
+        alert('Pin Must be 4 digits');
+        return false;
+      } else {
+        axios.post('/register', {
+          ZipCode: this.ZipCode,
+          FirstName: this.FirstName,
+          LastName: this.LastName,
+          UserName: this.UserName,
+          Password: this.Password,
+          store_code_login: this.store_code_login
+        }).then(function (response) {
+          console.log(response.data.ErrorMessage);
+
+          if (response.data.ErrorMessage.ErrorCode === 1) {
+            alert('Successfully Registered. Please Login');
+            $("#RegisterForm").hide();
+            $("#LoginForm").show();
+            $("#ForgotPin").hide();
+          } else {
+            alert(response.data.ErrorMessage.ErrorDetails);
+          }
+        });
+      }
     }
   }
 });
@@ -37503,27 +37515,6 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.store_code_login,
-            expression: "store_code_login"
-          }
-        ],
-        attrs: { type: "hidden", name: "store_code_login", value: "3501" },
-        domProps: { value: _vm.store_code_login },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.store_code_login = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c(
           "button",
@@ -37585,12 +37576,6 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _vm.auth
-        ? _c("div", { staticClass: "bg-success" }, [
-            _vm._v("Logged In Succesfully")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "UserNameLogin" } }, [_vm._v("User Name")]),
         _vm._v(" "),
@@ -37731,7 +37716,15 @@ var render = function() {
         _c(
           "div",
           { attrs: { id: "store-coupons" } },
-          [_c("coupons-component")],
+          [
+            _vm.auth
+              ? _c("a", { attrs: { href: "#", id: "MyCouponsLink" } }, [
+                  _vm._v("My Coupons")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("coupons-component")
+          ],
           1
         ),
         _vm._v(" "),
@@ -37953,7 +37946,12 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { id: "password", name: "Password", type: "password" },
+          attrs: {
+            id: "password",
+            name: "Password",
+            maxlength: "4",
+            type: "password"
+          },
           domProps: { value: _vm.Password },
           on: {
             input: function($event) {
@@ -50701,8 +50699,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
