@@ -1791,6 +1791,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37477,8 +37478,12 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-text" }, [
-                  _vm._v("\n                    " + _vm._s(o.Title)),
-                  _c("br")
+                  _c("span", { staticClass: "text-danger font-weight-bold" }, [
+                    _vm._v(_vm._s(o.Title))
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("small", [_vm._v(_vm._s(o.Details))])
                 ])
               ]),
               _vm._v(" "),
@@ -37520,7 +37525,7 @@ var render = function() {
                 staticClass: "btn btn-success text-center",
                 on: { click: _vm.loadMore }
               },
-              [_vm._v("\n            Load more coupons\n        ")]
+              [_vm._v("\n            Show more coupons\n        ")]
             )
           : _vm._e()
       ])

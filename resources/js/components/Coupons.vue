@@ -8,7 +8,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ o.ProductName }}</h5>
                     <p class="card-text">
-                        {{ o.Title }}<br />
+                        <span class="text-danger font-weight-bold">{{ o.Title }}</span><br />
+                        <small>{{ o.Details }}</small>
                         <!--<small><b>Valid: {{ O.ValidFrom }} to {{ O.ExpiresOn }}</b></small>-->
                     </p>
                 </div>
@@ -20,7 +21,7 @@
         </div>
         <div class="text-center w-100 mb-3">
             <button class="btn btn-success text-center" v-if="$parent.coupons.length > 15 && couponsToShow < $parent.coupons.length" @click="loadMore">
-                Load more coupons
+                Show more coupons
             </button>
         </div>
     </div>
