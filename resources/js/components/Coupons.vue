@@ -1,7 +1,7 @@
 <template>
     <div class="row row-eq-height">
         <div class="w-100 text-center" v-show="$parent.loading">
-            <div class="spinner-border" role="status">
+            <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
