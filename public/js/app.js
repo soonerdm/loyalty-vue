@@ -1785,6 +1785,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1812,6 +1818,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.data);
       });
+    },
+    loadMore: function loadMore() {
+      this.$parent.couponsToShow += 15;
     }
   }
 });
@@ -1895,19 +1904,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginComponent.vue",
   data: function data() {
     return {
       UserNameLogin: '',
       PasswordLogin: '',
-<<<<<<< HEAD
-      store_code_login: '',
       logged: false
-=======
-      store_code_login: ''
->>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
     };
   },
   methods: {
@@ -1917,18 +1920,12 @@ __webpack_require__.r(__webpack_exports__);
       if (this.UserNameLogin !== '' || this.PasswordLogin !== '') {
         axios.post('/validate', {
           UserName: this.UserNameLogin,
-          Password: this.PasswordLogin,
-          store_code_login: this.store_code_login
+          Password: this.PasswordLogin
         }).then(function (response) {
           console.log(response.data);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
-<<<<<<< HEAD
             self.logged = true;
-            self.UserNameLogin = '';
-            self.PasswordLogin = '';
-            alert('Logged In');
-=======
             self.UserNameLogin = '';
             self.PasswordLogin = '';
             self.$parent.auth = true;
@@ -1936,13 +1933,13 @@ __webpack_require__.r(__webpack_exports__);
             axios.get('/my_coupons').then(function (coupons) {
               self.$parent.clipped = coupons.data;
             });
->>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
+            alert('Logged In');
           } else {
             alert(response.data);
           }
         });
       } else {
-        alert('You gotta fill in the fields');
+        alert('All fields required');
       }
     }
   }
@@ -1987,8 +1984,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -2004,14 +1999,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
->>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       coupons: [],
       auth: false,
       user: {},
-      clipped: []
+      clipped: [],
+      couponsToShow: 15
     };
   },
   mounted: function mounted() {
@@ -37447,57 +37443,82 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "row row-eq-height" },
-    _vm._l(_vm.$parent.coupons.Offers, function(o) {
-      return _c(
-        "div",
-        { key: o.RSAOfferId, staticClass: "col-lg-4 col-md-6 col-sm-6 mb-3" },
-        [
-          _c("div", { staticClass: "card h-100" }, [
-            _c("div", { staticClass: "mt-3 text-center" }, [
-              _c("img", {
-                staticClass: "card-img-top rounded",
-                staticStyle: { "max-height": "150px", "max-width": "150px" },
-                attrs: { src: o.ImagePath }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(o.ProductName))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v("\n                    " + _vm._s(o.Title)),
-                _c("br")
+    [
+      _vm._l(
+        _vm.$parent.coupons.Offers.slice(0, _vm.$parent.couponsToShow),
+        function(o) {
+          return _c(
+            "div",
+            {
+              key: o.RSAOfferId,
+              staticClass: "col-lg-4 col-md-6 col-sm-6 mb-3"
+            },
+            [
+              _c("div", { staticClass: "card h-100" }, [
+                _c("div", { staticClass: "mt-3 text-center" }, [
+                  _c("img", {
+                    staticClass: "card-img-top rounded",
+                    staticStyle: {
+                      "max-height": "150px",
+                      "max-width": "150px"
+                    },
+                    attrs: { src: o.ImagePath }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(o.ProductName))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v("\n                    " + _vm._s(o.Title)),
+                    _c("br")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-footer bg-transparent border-top-0" },
+                  [
+                    _vm.clipButton
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-block btn-primary",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.add(o.RSAOfferId, o.CategoryId)
+                              }
+                            }
+                          },
+                          [_vm._v("Clip Coupon")]
+                        )
+                      : _vm._e()
+                  ]
+                )
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "card-footer bg-transparent border-top-0" },
-              [
-                _vm.clipButton
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-block btn-primary",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.add(o.RSAOfferId, o.CategoryId)
-                          }
-                        }
-                      },
-                      [_vm._v("Clip Coupon")]
-                    )
-                  : _vm._e()
-              ]
+            ]
+          )
+        }
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center w-100 mb-3" }, [
+        _vm.$parent.coupons.Offers.length > 15 &&
+        _vm.$parent.couponsToShow < _vm.$parent.coupons.Offers.length
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-success text-center",
+                on: { click: _vm.loadMore }
+              },
+              [_vm._v("\n            Load more coupons\n        ")]
             )
-          ])
-        ]
-      )
-    }),
-    0
+          : _vm._e()
+      ])
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -37655,6 +37676,7 @@ var render = function() {
           attrs: {
             type: "password",
             name: "PasswordLogin",
+            maxlength: "4",
             id: "PasswordLogin"
           },
           domProps: { value: _vm.PasswordLogin },
@@ -37664,27 +37686,6 @@ var render = function() {
                 return
               }
               _vm.PasswordLogin = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.store_code_login,
-              expression: "store_code_login"
-            }
-          ],
-          attrs: { type: "hidden", name: "store_code_login", value: "3501" },
-          domProps: { value: _vm.store_code_login },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.store_code_login = $event.target.value
             }
           }
         })

@@ -153,11 +153,14 @@ var stores = {"GetClientStores":
         }
     ]
 };
-
+/*
 res = {};
+var ss = [];
 for (i in stores.GetClientStores){
-    if ()
+     ss[stores.GetClientStores.ClientStoreId[i]] =  stores.GetClientStores.ClientStoreName[i];
 }
-stores.GetClientStores.filter(function (el){
-    return console.log(el.ClientStoreId = 1);
-});
+*/
+
+
+//alert(ss);
+

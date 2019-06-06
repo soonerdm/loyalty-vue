@@ -49,7 +49,8 @@
                 coupons: [],
                 auth: false,
                 user: {},
-                clipped: []
+                clipped: [],
+                couponsToShow: 15
             }
         },
         mounted() {

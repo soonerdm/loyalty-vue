@@ -1,6 +1,6 @@
 <template>
     <div class="row row-eq-height">
-        <div v-for="o in $parent.coupons.Offers" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
+        <div  v-for="o in $parent.coupons.Offers.slice(0,$parent.couponsToShow)" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
                 <div class="mt-3 text-center">
                     <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
@@ -16,6 +16,12 @@
                     <a href="#" class="btn btn-block btn-primary" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton">Clip Coupon</a>
                 </div>
             </div>
+
+        </div>
+        <div class="text-center w-100 mb-3">
+            <button class="btn btn-success text-center" v-if="$parent.coupons.Offers.length > 15 && $parent.couponsToShow < $parent.coupons.Offers.length" @click="loadMore">
+                Load more coupons
+            </button>
         </div>
     </div>
 </template>
@@ -51,7 +57,13 @@
                 }).catch(function (error){
                     console.log(error.data);
                   });
+            },
+
+            loadMore(){
+
+                this.$parent.couponsToShow += 15;
             }
+
         }
      }
 

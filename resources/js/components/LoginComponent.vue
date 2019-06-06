@@ -35,8 +35,7 @@
                 if (this.UserNameLogin !== '' || this.PasswordLogin !== ''){
                     axios.post('/validate', {
                         UserName: this.UserNameLogin,
-                        Password: this.PasswordLogin,
-                        store_code_login: this.store_code_login
+                        Password: this.PasswordLogin
                     }).then(function(response){
                         console.log(response.data);
                         if (response.data.ErrorMessage.ErrorCode === 1){
