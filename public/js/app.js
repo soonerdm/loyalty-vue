@@ -1791,10 +1791,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      clipButton: true
+      clipButton: true,
+      couponsToShow: 15
     };
   },
   mounted: function mounted() {},
@@ -1820,7 +1822,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     loadMore: function loadMore() {
-      this.$parent.couponsToShow += 15;
+      this.couponsToShow += 15;
     }
   }
 });
@@ -2000,21 +2002,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       coupons: [],
       auth: false,
       user: {},
-      clipped: [],
-      couponsToShow: 15
+      clipped: []
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     axios.get('/ava_coupons').then(function (response) {
-      _this.coupons = response.data;
+      _this.coupons = response.data.Offers;
     });
   },
   methods: {}
@@ -37472,79 +37486,74 @@ var render = function() {
     "div",
     { staticClass: "row row-eq-height" },
     [
-      _vm._l(
-        _vm.$parent.coupons.Offers.slice(0, _vm.$parent.couponsToShow),
-        function(o) {
-          return _c(
-            "div",
-            {
-              key: o.RSAOfferId,
-              staticClass: "col-lg-4 col-md-6 col-sm-6 mb-3"
-            },
-            [
-              _c("div", { staticClass: "card h-100" }, [
-                _c("div", { staticClass: "mt-3 text-center" }, [
-                  _c("img", {
-                    staticClass: "card-img-top rounded",
-                    staticStyle: {
-                      "max-height": "150px",
-                      "max-width": "150px"
-                    },
-                    attrs: { src: o.ImagePath }
-                  })
+      _vm._l(_vm.$parent.coupons.slice(0, _vm.couponsToShow), function(o) {
+        return _c(
+          "div",
+          { key: o.RSAOfferId, staticClass: "col-lg-4 col-md-6 col-sm-6 mb-3" },
+          [
+            _c("div", { staticClass: "card h-100" }, [
+              _c("div", { staticClass: "mt-3 text-center" }, [
+                _c("img", {
+                  staticClass: "card-img-top rounded",
+                  staticStyle: { "max-height": "150px", "max-width": "150px" },
+                  attrs: { src: o.ImagePath }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(o.ProductName))
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(o.ProductName))
+                _c("p", { staticClass: "card-text" }, [
+                  _c("span", { staticClass: "text-danger font-weight-bold" }, [
+                    _vm._v(_vm._s(o.Title))
                   ]),
+                  _c("br"),
                   _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v("\n                    " + _vm._s(o.Title)),
-                    _c("br")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "card-footer bg-transparent border-top-0" },
-                  [
-                    _vm.clipButton
-                      ? _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-block btn-primary",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.add(o.RSAOfferId, o.CategoryId)
-                              }
+                  _c("small", [_vm._v(_vm._s(o.Details))])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-footer bg-transparent border-top-0" },
+                [
+                  _vm.clipButton
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-block btn-primary",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.add(o.RSAOfferId, o.CategoryId)
                             }
-                          },
-                          [
-                            _c("i", { staticClass: "fa fa-cut" }),
-                            _vm._v(" Clip Coupon")
-                          ]
-                        )
-                      : _vm._e()
-                  ]
-                )
-              ])
-            ]
-          )
-        }
-      ),
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-cut" }),
+                          _vm._v(" Clip Coupon")
+                        ]
+                      )
+                    : _vm._e()
+                ]
+              )
+            ])
+          ]
+        )
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "text-center w-100 mb-3" }, [
-        _vm.$parent.coupons.Offers.length > 15 &&
-        _vm.$parent.couponsToShow < _vm.$parent.coupons.Offers.length
+        _vm.$parent.coupons.length > 15 &&
+        _vm.couponsToShow < _vm.$parent.coupons.length
           ? _c(
               "button",
               {
                 staticClass: "btn btn-success text-center",
                 on: { click: _vm.loadMore }
               },
-              [_vm._v("\n            Load more coupons\n        ")]
+              [_vm._v("\n            Show more coupons\n        ")]
             )
           : _vm._e()
       ])
@@ -37889,11 +37898,27 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("p", [
-                _c("img", {
-                  staticClass: "img-fluid",
-                  attrs: { src: _vm.user.MyCardBarCodeImagePath }
-                })
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6" }, [
+                  _c("dt", [_vm._v("Member Number")]),
+                  _vm._v(" "),
+                  _c("dd", [_vm._v(_vm._s(_vm.user.MemberNumber))])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _c("dt", [_vm._v("Total Savings")]),
+                  _vm._v(" "),
+                  _c("dd", [_vm._v("$" + _vm._s(_vm.user.TotalSavingsAmount))])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 mb-3" }, [
+                  _c("dt", [_vm._v("Bar Code")]),
+                  _vm._v(" "),
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: { src: _vm.user.MyCardBarCodeImagePath }
+                  })
+                ])
               ]),
               _vm._v(" "),
               _c("table", { staticClass: "table table-condensed" }, [
@@ -37903,7 +37928,11 @@ var render = function() {
                   "tbody",
                   _vm._l(_vm.clipped.UserClips, function(c) {
                     return _c("tr", { key: c.RSAOfferId }, [
-                      _c("td", [_vm._v(_vm._s(c.Details))]),
+                      _c("td", [
+                        _vm._v(_vm._s(c.Title)),
+                        _c("br"),
+                        _c("small", [_vm._v(_vm._s(c.Details))])
+                      ]),
                       _vm._v(" "),
                       _vm._m(1, true)
                     ])
@@ -37925,7 +37954,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { colspan: "2" } }, [_vm._v("My Clipped Coupons")])
+        _c("th", { staticClass: "text-center", attrs: { colspan: "2" } }, [
+          _c("i", { staticClass: "fa fa-cut" }),
+          _vm._v(" My Clipped Coupons")
+        ])
       ])
     ])
   },
@@ -37934,7 +37966,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [
-      _c("button", { staticClass: "btn btn-sm btn-danger" }, [_vm._v("×")])
+      _c("button", { staticClass: "btn btn-sm btn-danger" }, [
+        _c("b", [_vm._v("×")])
+      ])
     ])
   }
 ]
@@ -50896,8 +50930,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> 3967d9db8665729a98a09c3d4e87f032fc3dc8d2
 
 
 /***/ })
