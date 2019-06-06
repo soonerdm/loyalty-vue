@@ -4,6 +4,7 @@
             <a href="#" class="text-white float-right" id="RegisterLink">Register</a>
         </div>
         <div class="card-body">
+            <form v-on:submit="login()">
                 <div class="form-group">
                     <label for="UserNameLogin">User Name</label>
                     <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin">
@@ -13,8 +14,9 @@
                     <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control">
                 </div>
                 <div class="form-group">
-                    <button type="submit" id="SubmitButton" class="btn btn-primary" v-on:click="login()">Login</button>
+                    <button type="submit" id="SubmitButton" class="btn btn-primary">Login</button>
                 </div>
+            </form>
         </div>
     </div>
 </template>
@@ -47,7 +49,6 @@
                             axios.get('/my_coupons').then((coupons) => {
                                 self.$parent.clipped = coupons.data;
                             });
-                            alert('Logged In');
                         } else {
                             alert(response.data);
                         }

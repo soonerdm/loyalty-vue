@@ -1,10 +1,9 @@
 <template>
     <div class="container mt-4">
-        <!--<p>auth: {{ auth }} <br /> user: {{ user }} <br />clipped {{ clipped }}</p>-->
+        <!--<p>user: <pre>{{ user | json }}</pre></p>-->
         <div class="row">
             <div class="col-md-8">
                 <div id="store-coupons">
-                    <a href="#" id="MyCouponsLink" v-if="auth">My Coupons</a>
                     <coupons-component></coupons-component>
                 </div>
             </div>
@@ -21,7 +20,7 @@
             </div>
             <div class="col-md-4" v-show="auth">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">Welcome, {{ user.FirstName }}!</div>
+                    <div class="card-header bg-primary text-white"><i class="fa fa-user-circle"></i> Welcome, {{ user.FirstName }}!</div>
                     <div class="card-body">
                         <p><img :src="user.MyCardBarCodeImagePath" class="img-fluid" /></p>
                         <table class="table table-condensed">
