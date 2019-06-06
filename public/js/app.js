@@ -1896,18 +1896,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginComponent.vue",
   data: function data() {
     return {
       UserNameLogin: '',
       PasswordLogin: '',
-<<<<<<< HEAD
-      store_code_login: '',
       logged: false
-=======
-      store_code_login: ''
->>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
     };
   },
   methods: {
@@ -1923,12 +1919,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
-<<<<<<< HEAD
             self.logged = true;
-            self.UserNameLogin = '';
-            self.PasswordLogin = '';
-            alert('Logged In');
-=======
             self.UserNameLogin = '';
             self.PasswordLogin = '';
             self.$parent.auth = true;
@@ -1936,13 +1927,12 @@ __webpack_require__.r(__webpack_exports__);
             axios.get('/my_coupons').then(function (coupons) {
               self.$parent.clipped = coupons.data;
             });
->>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
           } else {
             alert(response.data);
           }
         });
       } else {
-        alert('You gotta fill in the fields');
+        alert('All fields required');
       }
     }
   }
@@ -1987,8 +1977,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -2004,7 +1992,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
->>>>>>> ed8717e617e982a2721150057352d5d2aa8b6406
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37488,7 +37475,10 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Clip Coupon")]
+                      [
+                        _c("i", { staticClass: "fa fa-cut" }),
+                        _vm._v(" Clip Coupon")
+                      ]
                     )
                   : _vm._e()
               ]
@@ -37613,98 +37603,84 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "UserNameLogin" } }, [_vm._v("User Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.UserNameLogin,
-              expression: "UserNameLogin"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "UserNameLogin", type: "text", id: "UserNameLogin" },
-          domProps: { value: _vm.UserNameLogin },
+      _c(
+        "form",
+        {
           on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.UserNameLogin = $event.target.value
+            submit: function($event) {
+              return _vm.login()
             }
           }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "PasswordLogin" } }, [_vm._v("Password")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.PasswordLogin,
-              expression: "PasswordLogin"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "password",
-            name: "PasswordLogin",
-            id: "PasswordLogin"
-          },
-          domProps: { value: _vm.PasswordLogin },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "UserNameLogin" } }, [
+              _vm._v("User Name")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.UserNameLogin,
+                  expression: "UserNameLogin"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "UserNameLogin",
+                type: "text",
+                id: "UserNameLogin"
+              },
+              domProps: { value: _vm.UserNameLogin },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.UserNameLogin = $event.target.value
+                }
               }
-              _vm.PasswordLogin = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.store_code_login,
-              expression: "store_code_login"
-            }
-          ],
-          attrs: { type: "hidden", name: "store_code_login", value: "3501" },
-          domProps: { value: _vm.store_code_login },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "PasswordLogin" } }, [
+              _vm._v("Password")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.PasswordLogin,
+                  expression: "PasswordLogin"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "password",
+                name: "PasswordLogin",
+                maxlength: "4",
+                id: "PasswordLogin"
+              },
+              domProps: { value: _vm.PasswordLogin },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.PasswordLogin = $event.target.value
+                }
               }
-              _vm.store_code_login = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { type: "submit", id: "SubmitButton" },
-            on: {
-              click: function($event) {
-                return _vm.login()
-              }
-            }
-          },
-          [_vm._v("Login")]
-        )
-      ])
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ]
+      )
     ])
   ])
 }
@@ -37722,6 +37698,21 @@ var staticRenderFns = [
           attrs: { href: "#", id: "RegisterLink" }
         },
         [_vm._v("Register")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", id: "SubmitButton" }
+        },
+        [_vm._v("Login")]
       )
     ])
   }
@@ -37753,15 +37744,7 @@ var render = function() {
         _c(
           "div",
           { attrs: { id: "store-coupons" } },
-          [
-            _vm.auth
-              ? _c("a", { attrs: { href: "#", id: "MyCouponsLink" } }, [
-                  _vm._v("My Coupons")
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("coupons-component")
-          ],
+          [_c("coupons-component")],
           1
         )
       ]),
@@ -37839,7 +37822,8 @@ var render = function() {
         [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header bg-primary text-white" }, [
-              _vm._v("Welcome, " + _vm._s(_vm.user.FirstName) + "!")
+              _c("i", { staticClass: "fa fa-user-circle" }),
+              _vm._v(" Welcome, " + _vm._s(_vm.user.FirstName) + "!")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
@@ -50795,8 +50779,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
