@@ -61,11 +61,14 @@
                 coupons: [],
                 auth: false,
                 user: {},
-                clipped: []
+                clipped: [],
+                loading: false
             }
         },
         mounted() {
+            this.loading = true;
             axios.get('/ava_coupons').then((response) => {
+                this.loading = false;
                 this.coupons = response.data.Offers;
             });
         },

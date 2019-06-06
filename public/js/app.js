@@ -1792,6 +1792,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1807,8 +1812,6 @@ __webpack_require__.r(__webpack_exports__);
         RSAOfferId: coupon_id,
         CategoryId: CategoryId
       }).then(function (response) {
-        console.log(response);
-
         if (response.data.ErrorMessage === "No MemberNumber") {
           alert('You must be logged in');
         } else {
@@ -2021,13 +2024,16 @@ __webpack_require__.r(__webpack_exports__);
       coupons: [],
       auth: false,
       user: {},
-      clipped: []
+      clipped: [],
+      loading: false
     };
   },
   mounted: function mounted() {
     var _this = this;
 
+    this.loading = true;
     axios.get('/ava_coupons').then(function (response) {
+      _this.loading = false;
       _this.coupons = response.data.Offers;
     });
   },
@@ -37485,6 +37491,22 @@ var render = function() {
     "div",
     { staticClass: "row row-eq-height" },
     [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.$parent.loading,
+              expression: "$parent.loading"
+            }
+          ],
+          staticClass: "w-100 text-center"
+        },
+        [_vm._m(0)]
+      ),
+      _vm._v(" "),
       _vm._l(_vm.$parent.coupons.slice(0, _vm.couponsToShow), function(o) {
         return _c(
           "div",
@@ -37560,7 +37582,18 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "spinner-border", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+    )
+  }
+]
 render._withStripped = true
 
 

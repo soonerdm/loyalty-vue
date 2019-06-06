@@ -1,5 +1,10 @@
 <template>
     <div class="row row-eq-height">
+        <div class="w-100 text-center" v-show="$parent.loading">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
         <div  v-for="o in $parent.coupons.slice(0, couponsToShow)" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
                 <div class="mt-3 text-center">
@@ -46,7 +51,6 @@
                     RSAOfferId: coupon_id,
                     CategoryId: CategoryId
                 }).then(function (response){
-                    console.log(response);
                     if (response.data.ErrorMessage === "No MemberNumber"){
                         alert('You must be logged in');
                     }
