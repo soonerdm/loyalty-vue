@@ -1,6 +1,6 @@
 <template>
     <div class="row row-eq-height">
-        <div  v-for="o in $parent.coupons.Offers.slice(0,$parent.couponsToShow)" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
+        <div  v-for="o in $parent.coupons.slice(0, couponsToShow)" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
                 <div class="mt-3 text-center">
                     <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
@@ -19,7 +19,7 @@
 
         </div>
         <div class="text-center w-100 mb-3">
-            <button class="btn btn-success text-center" v-if="$parent.coupons.Offers.length > 15 && $parent.couponsToShow < $parent.coupons.Offers.length" @click="loadMore">
+            <button class="btn btn-success text-center" v-if="$parent.coupons.length > 15 && couponsToShow < $parent.coupons.length" @click="loadMore">
                 Load more coupons
             </button>
         </div>
@@ -31,7 +31,8 @@
     export default {
         data: function () {
             return {
-                clipButton: true
+                clipButton: true,
+                couponsToShow: 15
             }
         },
         mounted() {
@@ -61,7 +62,7 @@
 
             loadMore(){
 
-                this.$parent.couponsToShow += 15;
+                this.couponsToShow += 15;
             }
 
         }
