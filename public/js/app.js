@@ -2098,6 +2098,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RegisterComponent.vue",
   data: function data() {
@@ -2105,9 +2116,19 @@ __webpack_require__.r(__webpack_exports__);
       FirstName: '',
       LastName: '',
       UserName: '',
+      ClientStore: '',
       Password: '',
-      ZipCode: ''
+      ZipCode: '',
+      Password2: '',
+      stores: []
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.post('/get_stores').then(function (response) {
+      _this.stores = response.data.GetClientStores; //  console.log(response.data.GetClientStores);
+    });
   },
   methods: {
     Register: function Register() {
@@ -2115,13 +2136,13 @@ __webpack_require__.r(__webpack_exports__);
         alert('Pin Must be 4 digits');
         return false;
       } else {
-        axios.post('/register', {
+        axios.post('/register_app', {
           ZipCode: this.ZipCode,
           FirstName: this.FirstName,
           LastName: this.LastName,
           UserName: this.UserName,
           Password: this.Password,
-          store_code_login: this.store_code_login
+          ClientStore: this.ClientStore
         }).then(function (response) {
           console.log(response.data.ErrorMessage);
 
@@ -2134,6 +2155,13 @@ __webpack_require__.r(__webpack_exports__);
             alert(response.data.ErrorMessage.ErrorDetails);
           }
         });
+      }
+    },
+    checkpass: function checkpass() {
+      if (this.Password !== this.Password2) {
+        alert('Pins Do Not Match');
+        this.$refs.Password.focus();
+        return false;
       }
     }
   }
@@ -38048,7 +38076,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+        _c("label", { attrs: { for: "password" } }, [_vm._v("Pin")]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -38059,6 +38087,7 @@ var render = function() {
               expression: "Password"
             }
           ],
+          ref: "Password",
           staticClass: "form-control",
           attrs: {
             id: "password",
@@ -38076,6 +38105,60 @@ var render = function() {
             }
           }
         })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "Password2" } }, [_vm._v("Confirm Pin")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.Password2,
+              expression: "Password2"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "Password2",
+            name: "Password2",
+            maxlength: "4",
+            type: "password"
+          },
+          domProps: { value: _vm.Password2 },
+          on: {
+            blur: function($event) {
+              return _vm.checkpass()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.Password2 = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "ClientStore" } }, [
+          _vm._v("Preferred Store")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { name: "ClientStore", id: "ClientStore" }
+          },
+          _vm._l(_vm.stores, function(store) {
+            return _c("option", { domProps: { value: store.ClientStoreId } }, [
+              _vm._v(_vm._s(store.ClientStoreName))
+            ])
+          }),
+          0
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
@@ -50802,7 +50885,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n@import '~@fortawesome/fontawesome-free/scss/fontawesome';\n       ^\n      Can't find stylesheet to import.\n  ╷\n5 │ @import '~@fortawesome/fontawesome-free/scss/fontawesome';\n  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ╵\n  stdin 5:9  root stylesheet\n      in /Users/davidmeinke/code/loyalty/resources/sass/app.scss (line 5, column 9)\n    at runLoaders (/Users/davidmeinke/code/loyalty/node_modules/webpack/lib/NormalModule.js:301:20)\n    at /Users/davidmeinke/code/loyalty/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /Users/davidmeinke/code/loyalty/node_modules/loader-runner/lib/LoaderRunner.js:233:18\n    at context.callback (/Users/davidmeinke/code/loyalty/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at render (/Users/davidmeinke/code/loyalty/node_modules/sass-loader/lib/loader.js:52:13)\n    at Function.$2 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:24443:48)\n    at wP.$2 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:15367:15)\n    at uU.vt (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8409:6)\n    at py.cv (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8199:35)\n    at Object.m (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:1383:19)\n    at /Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:5078:51\n    at xf.a (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:1394:71)\n    at xf.$2 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8214:23)\n    at vS.$2 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8209:25)\n    at uU.vt (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8409:6)\n    at Object.eval (eval at CM (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:648:15), <anonymous>:3:37)\n    at uU.vt (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/Users/davidmeinke/code/loyalty/node_modules/sass/sass.dart.js:8492:3)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -50813,8 +50896,8 @@ throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/davidmeinke/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/davidmeinke/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

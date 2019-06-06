@@ -153,14 +153,3 @@ var stores = {"GetClientStores":
         }
     ]
 };
-/*
-res = {};
-var ss = [];
-for (i in stores.GetClientStores){
-     ss[stores.GetClientStores.ClientStoreId[i]] =  stores.GetClientStores.ClientStoreName[i];
-}
-*/
-
-
-//alert(ss);
-
