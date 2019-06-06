@@ -2146,6 +2146,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     Register: function Register() {
+      var self = this;
+
       if (this.Password.length !== 4) {
         alert('Pin Must be 4 digits');
         return false;
@@ -2161,12 +2163,9 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data.ErrorMessage);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
-            alert('Successfully Registered. Please Login');
-            $("#RegisterForm").hide();
-            $("#LoginForm").show();
-            $("#ForgotPin").hide();
-          } else {
-            alert(response.data.ErrorMessage.ErrorDetails);
+            alert('Successfully Registered');
+            self.$parent.user = response.data;
+            self.$parent.auth = true;
           }
         });
       }
@@ -50930,13 +50929,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> 3967d9db8665729a98a09c3d4e87f032fc3dc8d2
 
 
 /***/ })

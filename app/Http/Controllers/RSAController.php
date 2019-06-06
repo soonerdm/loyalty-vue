@@ -131,9 +131,12 @@ class RSAController extends Controller
             Session::put('MemberNumber', $loggedIn->MemberNumber);
             Session::put('UserId', $loggedIn->UserId);
             Session::put('UserToken', $loggedIn->UserToken);
-      }
 
-       return $response;
+           return $loggedInRaw;
+      }
+       else return $response;
+
+
 
     }
 

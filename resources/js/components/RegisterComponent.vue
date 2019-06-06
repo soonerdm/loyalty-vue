@@ -54,6 +54,7 @@
         },
         methods: {
             Register() {
+                let self = this;
                 if(this.Password.length !== 4){
                     alert('Pin Must be 4 digits');
                     return false;
@@ -68,15 +69,10 @@
                         ClientStore: this.ClientStore
                     }).then(function (response) {
                         console.log(response.data.ErrorMessage);
-                        if (response.data.ErrorMessage.ErrorCode === 1) {
-                            alert('Successfully Registered. Please Login');
-                            $("#RegisterForm").hide();
-                            $("#LoginForm").show();
-                            $("#ForgotPin").hide();
-
-                        }
-                        else {
-                            alert(response.data.ErrorMessage.ErrorDetails);
+                        if(response.data.ErrorMessage.ErrorCode ===1) {
+                            alert('Successfully Registered');
+                            self.$parent.user = response.data;
+                            self.$parent.auth = true;
                         }
                     })
                 }
