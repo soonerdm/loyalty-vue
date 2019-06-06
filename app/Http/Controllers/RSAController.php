@@ -113,7 +113,7 @@ class RSAController extends Controller
 
         //todo
         // Name this in a Session::()
-        $data['ClientStore']    = 1;
+        $data['ClientStore']    = $request->ClientStore;
 
         $data = json_encode($data);
 
@@ -285,6 +285,24 @@ class RSAController extends Controller
         $response = $this->curl_post($url, $data);
         return $response;
     }
+
+    /**
+     * get all stores for brand
+     */
+    public function getStores(){
+
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+
+        $url = $this->build_url($this->brand, 'GetClientStores');
+
+        $url = $url."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
+
+        $response = $this->curl_get($url);
+
+        return $response;
+    }
+
 
     /**
      *

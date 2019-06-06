@@ -2118,6 +2118,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RegisterComponent.vue",
   data: function data() {
@@ -2125,9 +2136,19 @@ __webpack_require__.r(__webpack_exports__);
       FirstName: '',
       LastName: '',
       UserName: '',
+      ClientStore: '',
       Password: '',
-      ZipCode: ''
+      ZipCode: '',
+      Password2: '',
+      stores: []
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.post('/get_stores').then(function (response) {
+      _this.stores = response.data.GetClientStores; //  console.log(response.data.GetClientStores);
+    });
   },
   methods: {
     Register: function Register() {
@@ -2135,13 +2156,13 @@ __webpack_require__.r(__webpack_exports__);
         alert('Pin Must be 4 digits');
         return false;
       } else {
-        axios.post('/register', {
+        axios.post('/register_app', {
           ZipCode: this.ZipCode,
           FirstName: this.FirstName,
           LastName: this.LastName,
           UserName: this.UserName,
           Password: this.Password,
-          store_code_login: this.store_code_login
+          ClientStore: this.ClientStore
         }).then(function (response) {
           console.log(response.data.ErrorMessage);
 
@@ -2154,6 +2175,13 @@ __webpack_require__.r(__webpack_exports__);
             alert(response.data.ErrorMessage.ErrorDetails);
           }
         });
+      }
+    },
+    checkpass: function checkpass() {
+      if (this.Password !== this.Password2) {
+        alert('Pins Do Not Match');
+        this.$refs.Password.focus();
+        return false;
       }
     }
   }
@@ -38115,7 +38143,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+        _c("label", { attrs: { for: "password" } }, [_vm._v("Pin")]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -38126,6 +38154,7 @@ var render = function() {
               expression: "Password"
             }
           ],
+          ref: "Password",
           staticClass: "form-control",
           attrs: {
             id: "password",
@@ -38143,6 +38172,60 @@ var render = function() {
             }
           }
         })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "Password2" } }, [_vm._v("Confirm Pin")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.Password2,
+              expression: "Password2"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "Password2",
+            name: "Password2",
+            maxlength: "4",
+            type: "password"
+          },
+          domProps: { value: _vm.Password2 },
+          on: {
+            blur: function($event) {
+              return _vm.checkpass()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.Password2 = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "ClientStore" } }, [
+          _vm._v("Preferred Store")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { name: "ClientStore", id: "ClientStore" }
+          },
+          _vm._l(_vm.stores, function(store) {
+            return _c("option", { domProps: { value: store.ClientStoreId } }, [
+              _vm._v(_vm._s(store.ClientStoreName))
+            ])
+          }),
+          0
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
@@ -50880,8 +50963,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
 __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> 3967d9db8665729a98a09c3d4e87f032fc3dc8d2
 
 
 /***/ })

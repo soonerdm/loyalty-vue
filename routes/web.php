@@ -26,6 +26,8 @@ Route::post('/clip_offer', 'RSAController@clip_offer');
 
 Route::post('forgot_pin', 'RSAController@forgot_pin');
 
+Route::post('get_stores', 'RSAController@getStores');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/my_coupons', 'RSAController@get_user_clips');
@@ -34,4 +36,4 @@ Route::get('logout', 'RSAController@logout');
 
 Route::Post('validate', 'RSAController@validate_user');
 
-Route::Post('register', 'RSAController@register_user');
+Route::Post('register_app', 'RSAController@register_user');
