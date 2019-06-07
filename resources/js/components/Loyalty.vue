@@ -82,6 +82,7 @@
                 this.auth = false;
                 this.user = {};
                 this.clipped = [];
+                location.reload();
             }
         }
     }

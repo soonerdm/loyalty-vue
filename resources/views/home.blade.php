@@ -6,39 +6,41 @@
 
     <script type="application/javascript">
         $(document).ready(function(){
-            $('#SignInLink').click(function(){
-                $("#RegisterForm").hide();
-                $("#LoginForm").show();
-                $("#ForgotPin").hide();
+            $('body').on('click', '#SignInLink', function(){
+                $("#RegisterForm").fadeOut( function() {
+                    $("#ForgotPin").fadeOut( function() {
+                        $("#LoginForm").fadeIn();
+                    });
+                });
             });
-            $('#RegisterLink').click(function(){
-                $("#RegisterForm").show();
-                $("#LoginForm").hide();
-                $("#ForgotPin").hide();
+            $('body').on('click', '#RegisterLink', function(){
+                $("#LoginForm").fadeOut( function() {
+                    $("#ForgotPin").fadeOut( function() {
+                        $("#RegisterForm").fadeIn();
+                    });
+                });
             });
-            $('#ForgotPinLink').click(function(){
-                $("#RegisterForm").hide();
-                $("#LoginForm").hide();
-                $("#ForgotPin").show();
+            $('body').on('click', '#ForgotPinLink', function(){
+                $("#LoginForm").fadeOut( function() {
+                    $("#RegisterForm").fadeOut( function() {
+                        $("#ForgotPin").fadeIn();
+                    });
+                });
             });
-            $('#ForgotPinLink2').click(function(){
-                $("#RegisterForm").hide();
-                $("#LoginForm").hide();
-                $("#ForgotPin").show();
+            $('body').on('click', '#ForgotPinLink2', function(){
+                $("#LoginForm").fadeOut( function() {
+                    $("#RegisterForm").fadeOut( function() {
+                        $("#ForgotPin").fadeIn();
+                    });
+                });
             });
-            $('#LoginLink').click(function(){
-                $("#RegisterForm").hide();
-                $("#LoginForm").show();
-                $("#ForgotPin").hide();
+            $('body').on('click', '#LoginLink', function(){
+                $("#RegisterForm").fadeOut( function() {
+                    $("#ForgotPin").fadeOut( function(){
+                        $("#LoginForm").fadeIn();
+                    });
+                });
             });
-            $('#MyClipsLink').click(function(){
-                $('#store-coupons').hide();
-                $('#my-coupons').show();
-            });
-            $('#AllCouponsLink').click(function() {
-                $('#store-coupons').show();
-                $('#my-coupons').hide();
-            })
         });
     </script>
 

@@ -2047,6 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
       this.auth = false;
       this.user = {};
       this.clipped = [];
+      location.reload();
     }
   }
 });
@@ -37690,7 +37691,7 @@ var staticRenderFns = [
           staticClass: "text-white float-right",
           attrs: { href: "#", id: "LoginLink" }
         },
-        [_vm._v("Login")]
+        [_vm._v("Sign In")]
       )
     ])
   }
@@ -37926,7 +37927,8 @@ var render = function() {
                   value: _vm.auth,
                   expression: "auth"
                 }
-              ]
+              ],
+              staticClass: "fadeIn"
             },
             [
               _c("div", { staticClass: "card" }, [
