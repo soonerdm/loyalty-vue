@@ -80,13 +80,26 @@
                 this.loading = false;
                 this.coupons = response.data.Offers;
             });
+
+            if (localStorage.auth) {
+                this.auth = localStorage.auth;
+            }
+
+            if (localStorage.user) {
+                this.user = JSON.parse(localStorage.user);
+            }
+
+            if (localStorage.clipped) {
+                this.clipped = JSON.parse(localStorage.clipped);
+            }
         },
         methods: {
             signOut: function() {
                 this.auth = false;
                 this.user = {};
                 this.clipped = [];
-                location.reload();
+                localStorage.clear();
+                Notify('You have been logged out successfully.', null, null, 'success');
             }
         }
     }

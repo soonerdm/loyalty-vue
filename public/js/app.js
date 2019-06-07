@@ -1934,9 +1934,12 @@ __webpack_require__.r(__webpack_exports__);
             self.UserNameLogin = '';
             self.PasswordLogin = '';
             self.$parent.auth = true;
+            localStorage.auth = true;
             self.$parent.user = response.data;
+            localStorage.user = JSON.stringify(response.data);
             axios.get('/my_coupons').then(function (coupons) {
               self.$parent.clipped = coupons.data;
+              localStorage.clipped = JSON.stringify(coupons.data);
             });
           } else {
             Notify('An error occurred, please try again!', null, null, 'danger');
@@ -2043,13 +2046,26 @@ __webpack_require__.r(__webpack_exports__);
       _this.loading = false;
       _this.coupons = response.data.Offers;
     });
+
+    if (localStorage.auth) {
+      this.auth = localStorage.auth;
+    }
+
+    if (localStorage.user) {
+      this.user = JSON.parse(localStorage.user);
+    }
+
+    if (localStorage.clipped) {
+      this.clipped = JSON.parse(localStorage.clipped);
+    }
   },
   methods: {
     signOut: function signOut() {
       this.auth = false;
       this.user = {};
       this.clipped = [];
-      location.reload();
+      localStorage.clear();
+      Notify('You have been logged out successfully.', null, null, 'success');
     }
   }
 });
