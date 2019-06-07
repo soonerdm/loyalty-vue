@@ -52,10 +52,10 @@
                     CategoryId: CategoryId
                 }).then(function (response){
                     if (response.data.ErrorMessage === "No MemberNumber"){
-                        alert('You must be logged in');
+                        Notify('You must be logged in!', null, null, 'danger');
                     }
                     else {
-                        alert('Coupon Clipped');
+                        Notify('Coupon clipped!', null, null, 'success');
                         axios.get('/my_coupons').then((coupons) => {
                             self.$parent.clipped = coupons.data;
                         });

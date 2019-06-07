@@ -39,7 +39,6 @@
                         UserName: this.UserNameLogin,
                         Password: this.PasswordLogin
                     }).then(function(response){
-                        console.log(response.data);
                         if (response.data.ErrorMessage.ErrorCode === 1){
                             self.logged= true;
                             self.UserNameLogin= '';
@@ -50,11 +49,11 @@
                                 self.$parent.clipped = coupons.data;
                             });
                         } else {
-                            alert(response.data);
+                            Notify('An error occurred, please try again!', null, null, 'danger');
                         }
                     })
                 } else {
-                    alert('All fields required');
+                    Notify('All field are required!', null, null, 'danger');
                 }
             }
         }

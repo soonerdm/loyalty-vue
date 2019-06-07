@@ -30,7 +30,7 @@
 
                 }).then(function (response) {
                     console.log(response.data);
-                    alert(response.data.ErrorMessage.ErrorDetails);
+                    Notify('An error occurred, please try again!', null, null, 'danger');
                 });
             }
         }

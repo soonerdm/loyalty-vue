@@ -1813,9 +1813,9 @@ __webpack_require__.r(__webpack_exports__);
         CategoryId: CategoryId
       }).then(function (response) {
         if (response.data.ErrorMessage === "No MemberNumber") {
-          alert('You must be logged in');
+          Notify('You must be logged in!', null, null, 'danger');
         } else {
-          alert('Coupon Clipped');
+          Notify('Coupon clipped!', null, null, 'success');
           axios.get('/my_coupons').then(function (coupons) {
             self.$parent.clipped = coupons.data;
           });
@@ -1871,7 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
         UserName: this.UserNamePin
       }).then(function (response) {
         console.log(response.data);
-        alert(response.data.ErrorMessage.ErrorDetails);
+        Notify('An error occurred, please try again!', null, null, 'danger');
       });
     }
   }
@@ -1929,8 +1929,6 @@ __webpack_require__.r(__webpack_exports__);
           UserName: this.UserNameLogin,
           Password: this.PasswordLogin
         }).then(function (response) {
-          console.log(response.data);
-
           if (response.data.ErrorMessage.ErrorCode === 1) {
             self.logged = true;
             self.UserNameLogin = '';
@@ -1941,11 +1939,11 @@ __webpack_require__.r(__webpack_exports__);
               self.$parent.clipped = coupons.data;
             });
           } else {
-            alert(response.data);
+            Notify('An error occurred, please try again!', null, null, 'danger');
           }
         });
       } else {
-        alert('All fields required');
+        Notify('All field are required!', null, null, 'danger');
       }
     }
   }
@@ -1962,6 +1960,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2167,7 +2169,7 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
 
       if (this.Password.length !== 4) {
-        alert('Pin Must be 4 digits');
+        Notify('Your Pin must be 4 digits!', null, null, 'danger');
         return false;
       } else {
         axios.post('/register_app', {
@@ -2181,7 +2183,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data.ErrorMessage);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
-            alert('Successfully Registered');
+            Notify('Your account has been registered successfully!', null, null, 'success');
             self.$parent.user = response.data;
             self.$parent.auth = true;
           }
@@ -2190,7 +2192,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     checkpass: function checkpass() {
       if (this.Password !== this.Password2) {
-        alert('Pins Do Not Match');
+        Notify('Pins Do Not Match', null, null, 'danger');
         this.$refs.Password.focus();
         return false;
       }
@@ -37858,6 +37860,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container mt-4" }, [
+    _c("div", { attrs: { id: "notifications" } }),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
@@ -37866,7 +37870,10 @@ var render = function() {
           !_vm.auth
             ? _c(
                 "div",
-                { attrs: { id: "RegisterForm" } },
+                {
+                  staticStyle: { display: "none" },
+                  attrs: { id: "RegisterForm" }
+                },
                 [
                   _c("register-component"),
                   _vm._v(" "),
@@ -37886,10 +37893,7 @@ var render = function() {
           !_vm.auth
             ? _c(
                 "div",
-                {
-                  staticStyle: { display: "none" },
-                  attrs: { id: "LoginForm" }
-                },
+                { attrs: { id: "LoginForm" } },
                 [
                   _c("login-component"),
                   _vm._v(" "),
@@ -37985,18 +37989,29 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.clipped.UserClips, function(c) {
-                        return _c("tr", { key: c.RSAOfferId }, [
-                          _c("td", [
-                            _vm._v(_vm._s(c.Title)),
-                            _c("br"),
-                            _c("small", [_vm._v(_vm._s(c.Details))])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(1, true)
-                        ])
-                      }),
-                      0
+                      [
+                        _c("tr", [
+                          _vm.clipped.UserClips === undefined ||
+                          _vm.clipped.UserClips.length == 0
+                            ? _c("td", { staticClass: "text-muted" }, [
+                                _vm._v("You have no clipped coupons.")
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.clipped.UserClips, function(c) {
+                          return _c("tr", { key: c.RSAOfferId }, [
+                            _c("td", [
+                              _vm._v(_vm._s(c.Title)),
+                              _c("br"),
+                              _c("small", [_vm._v(_vm._s(c.Details))])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ])
+                        })
+                      ],
+                      2
                     )
                   ])
                 ])
@@ -38313,7 +38328,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary text-white" }, [
-      _vm._v("Register Here\n        "),
+      _vm._v("Register\n        "),
       _c(
         "a",
         {

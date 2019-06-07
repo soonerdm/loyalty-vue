@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Font Awesome
-
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
@@ -13,3 +12,15 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Notifications
+#notifications {
+  cursor: pointer;
+  position: fixed;
+  right: 0;
+  z-index: 9999;
+  top: 0;
+  margin-top: 15px;
+  margin-right: 15px;
+  max-width: 300px;
+}
