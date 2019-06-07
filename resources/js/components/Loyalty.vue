@@ -1,5 +1,6 @@
 <template>
     <div class="container mt-4">
+        <div id="notifications"></div>
         <!--<p>coupons: <pre>{{ coupons }}</pre></p>-->
         <div class="row">
             <div class="col-lg-4 col-md-5 col-sm-12 order-1 order-md-12 mb-3">

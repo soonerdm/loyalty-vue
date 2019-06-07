@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div class="card-header bg-primary text-white">Register Here
+        <div class="card-header bg-primary text-white">Register
             <a href="#" id="SignInLink" class="text-white float-right">Sign In</a>
         </div>
         <div class="card-body">
@@ -56,7 +56,7 @@
             Register() {
                 let self = this;
                 if(this.Password.length !== 4){
-                    alert('Pin Must be 4 digits');
+                    Notify('Your Pin must be 4 digits!', null, null, 'danger');
                     return false;
                 }
                 else {
@@ -70,7 +70,7 @@
                     }).then(function (response) {
                         console.log(response.data.ErrorMessage);
                         if(response.data.ErrorMessage.ErrorCode ===1) {
-                            alert('Successfully Registered');
+                            Notify('Your account has been registered successfully!', null, null, 'success');
                             self.$parent.user = response.data;
                             self.$parent.auth = true;
                         }
@@ -79,7 +79,7 @@
             },
             checkpass(){
                 if(this.Password !== this.Password2){
-                    alert('Pins Do Not Match');
+                    Notify('Pins Do Not Match', null, null, 'danger');
                     this.$refs.Password.focus();
                     return false;
                 }

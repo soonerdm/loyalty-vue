@@ -50,11 +50,11 @@
                                 self.$parent.clipped = coupons.data;
                             });
                         } else {
-                            alert(response.data);
+                            Notify('An error occurred, please try again!', null, null, 'danger');
                         }
                     })
                 } else {
-                    alert('All fields required');
+                    Notify('All field are required!', null, null, 'danger');
                 }
             }
         }

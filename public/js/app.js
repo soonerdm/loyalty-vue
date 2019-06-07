@@ -1941,11 +1941,11 @@ __webpack_require__.r(__webpack_exports__);
               self.$parent.clipped = coupons.data;
             });
           } else {
-            alert(response.data);
+            Notify('message', null, null, 'danger');
           }
         });
       } else {
-        alert('All fields required');
+        Notify('All field are required!', null, null, 'danger');
       }
     }
   }
@@ -1962,6 +1962,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2167,7 +2168,7 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
 
       if (this.Password.length !== 4) {
-        alert('Pin Must be 4 digits');
+        Notify('Your Pin must be 4 digits!', null, null, 'danger');
         return false;
       } else {
         axios.post('/register_app', {
@@ -2181,7 +2182,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(response.data.ErrorMessage);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
-            alert('Successfully Registered');
+            Notify('Your account has been registered successfully!', null, null, 'success');
             self.$parent.user = response.data;
             self.$parent.auth = true;
           }
@@ -37858,6 +37859,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container mt-4" }, [
+    _c("div", { attrs: { id: "notifications" } }),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
@@ -38313,7 +38316,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary text-white" }, [
-      _vm._v("Register Here\n        "),
+      _vm._v("Register\n        "),
       _c(
         "a",
         {
