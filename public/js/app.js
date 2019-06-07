@@ -1797,6 +1797,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1818,6 +1820,7 @@ __webpack_require__.r(__webpack_exports__);
           Notify('Coupon clipped!', null, null, 'success');
           axios.get('/my_coupons').then(function (coupons) {
             self.$parent.clipped = coupons.data;
+            localStorage.clipped = JSON.stringify(coupons.data);
           });
         }
       })["catch"](function (error) {
@@ -37577,8 +37580,8 @@ var render = function() {
                     ? _c(
                         "a",
                         {
-                          staticClass: "btn btn-block btn-primary",
-                          attrs: { href: "#" },
+                          staticClass: "btn btn-block btn-primary text-white",
+                          staticStyle: { cursor: "pointer" },
                           on: {
                             click: function($event) {
                               return _vm.add(o.RSAOfferId, o.CategoryId)
@@ -37587,7 +37590,7 @@ var render = function() {
                         },
                         [
                           _c("i", { staticClass: "fa fa-cut" }),
-                          _vm._v(" Clip Coupon")
+                          _vm._v(" Clip Coupon\n                ")
                         ]
                       )
                     : _vm._e()
