@@ -58,6 +58,7 @@
                         Notify('Coupon clipped!', null, null, 'success');
                         axios.get('/my_coupons').then((coupons) => {
                             self.$parent.clipped = coupons.data;
+                            localStorage.clipped = JSON.stringify(coupons.data);
                         });
                     }
                 }).catch(function (error){
