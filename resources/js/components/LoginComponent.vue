@@ -4,7 +4,7 @@
             <a href="#" class="text-white float-right" id="RegisterLink">Register</a>
         </div>
         <div class="card-body">
-            <form v-on:submit="login()">
+            <form v-on:submit.prevent="login()">
                 <div class="form-group">
                     <label for="UserNameLogin">User Name</label>
                     <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin">

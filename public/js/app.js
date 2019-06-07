@@ -37726,6 +37726,7 @@ var render = function() {
         {
           on: {
             submit: function($event) {
+              $event.preventDefault()
               return _vm.login()
             }
           }
@@ -37927,8 +37928,7 @@ var render = function() {
                   value: _vm.auth,
                   expression: "auth"
                 }
-              ],
-              staticClass: "fadeIn"
+              ]
             },
             [
               _c("div", { staticClass: "card" }, [
