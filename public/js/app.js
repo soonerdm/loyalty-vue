@@ -1797,6 +1797,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1808,21 +1810,27 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     add: function add(coupon_id, CategoryId) {
       var self = this;
-      axios.post('/clip_offer', {
-        RSAOfferId: coupon_id,
-        CategoryId: CategoryId
-      }).then(function (response) {
-        if (response.data.ErrorMessage === "No MemberNumber") {
-          Notify('You must be logged in!', null, null, 'danger');
-        } else {
-          Notify('Coupon clipped!', null, null, 'success');
-          axios.get('/my_coupons').then(function (coupons) {
-            self.$parent.clipped = coupons.data;
-          });
-        }
-      })["catch"](function (error) {
-        console.log(error.data);
-      });
+
+      if (self.$parent.auth === true) {
+        axios.post('/clip_offer', {
+          RSAOfferId: coupon_id,
+          CategoryId: CategoryId
+        }).then(function (response) {
+          if (response.data.ErrorMessage === "No MemberNumber") {
+            Notify('You must be logged in!', null, null, 'danger');
+          } else {
+            Notify('Coupon clipped!', null, null, 'success');
+            axios.get('/my_coupons').then(function (coupons) {
+              self.$parent.clipped = coupons.data;
+              localStorage.clipped = JSON.stringify(coupons.data);
+            });
+          }
+        })["catch"](function (error) {
+          Notify('There was an error. Please try again.', null, null, 'danger');
+        });
+      } else {
+        Notify('You must be logged in to do that.', null, null, 'danger');
+      }
     },
     loadMore: function loadMore() {
       this.couponsToShow += 15;
@@ -37577,8 +37585,8 @@ var render = function() {
                     ? _c(
                         "a",
                         {
-                          staticClass: "btn btn-block btn-primary",
-                          attrs: { href: "#" },
+                          staticClass: "btn btn-block btn-primary text-white",
+                          staticStyle: { cursor: "pointer" },
                           on: {
                             click: function($event) {
                               return _vm.add(o.RSAOfferId, o.CategoryId)
@@ -37587,7 +37595,7 @@ var render = function() {
                         },
                         [
                           _c("i", { staticClass: "fa fa-cut" }),
-                          _vm._v(" Clip Coupon")
+                          _vm._v(" Clip Coupon\n                ")
                         ]
                       )
                     : _vm._e()

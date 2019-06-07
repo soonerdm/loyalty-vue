@@ -19,7 +19,9 @@
                     </p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
-                    <a href="#" class="btn btn-block btn-primary" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton"><i class="fa fa-cut"></i> Clip Coupon</a>
+                    <a class="btn btn-block btn-primary text-white" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton" style="cursor: pointer">
+                        <i class="fa fa-cut"></i> Clip Coupon
+                    </a>
                 </div>
             </div>
 
@@ -47,22 +49,27 @@
         methods: {
             add: function (coupon_id, CategoryId){
                 let self = this;
-                axios.post('/clip_offer', {
-                    RSAOfferId: coupon_id,
-                    CategoryId: CategoryId
-                }).then(function (response){
-                    if (response.data.ErrorMessage === "No MemberNumber"){
-                        Notify('You must be logged in!', null, null, 'danger');
-                    }
-                    else {
-                        Notify('Coupon clipped!', null, null, 'success');
-                        axios.get('/my_coupons').then((coupons) => {
-                            self.$parent.clipped = coupons.data;
-                        });
-                    }
-                }).catch(function (error){
-                    console.log(error.data);
-                  });
+                if (self.$parent.auth === true) {
+                    axios.post('/clip_offer', {
+                        RSAOfferId: coupon_id,
+                        CategoryId: CategoryId
+                    }).then(function (response){
+                        if (response.data.ErrorMessage === "No MemberNumber"){
+                            Notify('You must be logged in!', null, null, 'danger');
+                        }
+                        else {
+                            Notify('Coupon clipped!', null, null, 'success');
+                            axios.get('/my_coupons').then((coupons) => {
+                                self.$parent.clipped = coupons.data;
+                                localStorage.clipped = JSON.stringify(coupons.data);
+                            });
+                        }
+                    }).catch(function (error){
+                        Notify('There was an error. Please try again.', null, null, 'danger');
+                    });
+                } else {
+                    Notify('You must be logged in to do that.', null, null, 'danger');
+                }
             },
 
             loadMore(){
