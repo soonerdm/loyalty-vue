@@ -1810,22 +1810,27 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     add: function add(coupon_id, CategoryId) {
       var self = this;
-      axios.post('/clip_offer', {
-        RSAOfferId: coupon_id,
-        CategoryId: CategoryId
-      }).then(function (response) {
-        if (response.data.ErrorMessage === "No MemberNumber") {
-          Notify('You must be logged in!', null, null, 'danger');
-        } else {
-          Notify('Coupon clipped!', null, null, 'success');
-          axios.get('/my_coupons').then(function (coupons) {
-            self.$parent.clipped = coupons.data;
-            localStorage.clipped = JSON.stringify(coupons.data);
-          });
-        }
-      })["catch"](function (error) {
-        console.log(error.data);
-      });
+
+      if (self.$parent.auth === true) {
+        axios.post('/clip_offer', {
+          RSAOfferId: coupon_id,
+          CategoryId: CategoryId
+        }).then(function (response) {
+          if (response.data.ErrorMessage === "No MemberNumber") {
+            Notify('You must be logged in!', null, null, 'danger');
+          } else {
+            Notify('Coupon clipped!', null, null, 'success');
+            axios.get('/my_coupons').then(function (coupons) {
+              self.$parent.clipped = coupons.data;
+              localStorage.clipped = JSON.stringify(coupons.data);
+            });
+          }
+        })["catch"](function (error) {
+          Notify('There was an error. Please try again.', null, null, 'danger');
+        });
+      } else {
+        Notify('You must be logged in to do that.', null, null, 'danger');
+      }
     },
     loadMore: function loadMore() {
       this.couponsToShow += 15;

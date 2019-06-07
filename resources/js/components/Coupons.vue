@@ -49,23 +49,27 @@
         methods: {
             add: function (coupon_id, CategoryId){
                 let self = this;
-                axios.post('/clip_offer', {
-                    RSAOfferId: coupon_id,
-                    CategoryId: CategoryId
-                }).then(function (response){
-                    if (response.data.ErrorMessage === "No MemberNumber"){
-                        Notify('You must be logged in!', null, null, 'danger');
-                    }
-                    else {
-                        Notify('Coupon clipped!', null, null, 'success');
-                        axios.get('/my_coupons').then((coupons) => {
-                            self.$parent.clipped = coupons.data;
-                            localStorage.clipped = JSON.stringify(coupons.data);
-                        });
-                    }
-                }).catch(function (error){
-                    console.log(error.data);
-                  });
+                if (self.$parent.auth === true) {
+                    axios.post('/clip_offer', {
+                        RSAOfferId: coupon_id,
+                        CategoryId: CategoryId
+                    }).then(function (response){
+                        if (response.data.ErrorMessage === "No MemberNumber"){
+                            Notify('You must be logged in!', null, null, 'danger');
+                        }
+                        else {
+                            Notify('Coupon clipped!', null, null, 'success');
+                            axios.get('/my_coupons').then((coupons) => {
+                                self.$parent.clipped = coupons.data;
+                                localStorage.clipped = JSON.stringify(coupons.data);
+                            });
+                        }
+                    }).catch(function (error){
+                        Notify('There was an error. Please try again.', null, null, 'danger');
+                    });
+                } else {
+                    Notify('You must be logged in to do that.', null, null, 'danger');
+                }
             },
 
             loadMore(){
