@@ -2022,6 +2022,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37867,7 +37870,10 @@ var render = function() {
           !_vm.auth
             ? _c(
                 "div",
-                { attrs: { id: "RegisterForm" } },
+                {
+                  staticStyle: { display: "none" },
+                  attrs: { id: "RegisterForm" }
+                },
                 [
                   _c("register-component"),
                   _vm._v(" "),
@@ -37887,10 +37893,7 @@ var render = function() {
           !_vm.auth
             ? _c(
                 "div",
-                {
-                  staticStyle: { display: "none" },
-                  attrs: { id: "LoginForm" }
-                },
+                { attrs: { id: "LoginForm" } },
                 [
                   _c("login-component"),
                   _vm._v(" "),
@@ -37986,18 +37989,29 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "tbody",
-                      _vm._l(_vm.clipped.UserClips, function(c) {
-                        return _c("tr", { key: c.RSAOfferId }, [
-                          _c("td", [
-                            _vm._v(_vm._s(c.Title)),
-                            _c("br"),
-                            _c("small", [_vm._v(_vm._s(c.Details))])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(1, true)
-                        ])
-                      }),
-                      0
+                      [
+                        _c("tr", [
+                          _vm.clipped.UserClips === undefined ||
+                          _vm.clipped.UserClips.length == 0
+                            ? _c("td", { staticClass: "text-muted" }, [
+                                _vm._v("You have no clipped coupons.")
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.clipped.UserClips, function(c) {
+                          return _c("tr", { key: c.RSAOfferId }, [
+                            _c("td", [
+                              _vm._v(_vm._s(c.Title)),
+                              _c("br"),
+                              _c("small", [_vm._v(_vm._s(c.Details))])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ])
+                        })
+                      ],
+                      2
                     )
                   ])
                 ])

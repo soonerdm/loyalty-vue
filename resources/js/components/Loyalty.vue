@@ -4,11 +4,11 @@
         <!--<p>coupons: <pre>{{ coupons }}</pre></p>-->
         <div class="row">
             <div class="col-lg-4 col-md-5 col-sm-12 order-1 order-md-12 mb-3">
-                <div id="RegisterForm" v-if="!auth">
+                <div id="RegisterForm" v-if="!auth" style="display: none;">
                     <register-component></register-component>
                     <a href="#" class="float-right" id="ForgotPinLink">Forgot Pin</a>
                 </div>
-                <div id="LoginForm" v-if="!auth" style="display: none;">
+                <div id="LoginForm" v-if="!auth">
                     <login-component></login-component>
                     <a href="#" class="float-right" id="ForgotPinLink2">Forgot Pin</a>
                 </div>
@@ -38,13 +38,16 @@
                             </div>
                             <table class="table table-condensed">
                                 <thead>
-                                <tr><th colspan="2" class="text-center"><i class="fa fa-cut"></i> My Clipped Coupons</th></tr>
+                                    <tr><th colspan="2" class="text-center"><i class="fa fa-cut"></i> My Clipped Coupons</th></tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="c in clipped.UserClips" :key="c.RSAOfferId">
-                                    <td>{{ c.Title }}<br /><small>{{ c.Details }}</small></td>
-                                    <td><button class="btn btn-sm btn-danger"><b>&times;</b></button></td>
-                                </tr>
+                                    <tr>
+                                        <td class="text-muted" v-if="clipped.UserClips === undefined || clipped.UserClips.length == 0">You have no clipped coupons.</td>
+                                    </tr>
+                                    <tr v-for="c in clipped.UserClips" :key="c.RSAOfferId">
+                                        <td>{{ c.Title }}<br /><small>{{ c.Details }}</small></td>
+                                        <td><button class="btn btn-sm btn-danger"><b>&times;</b></button></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
