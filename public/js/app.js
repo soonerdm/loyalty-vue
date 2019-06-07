@@ -1813,9 +1813,9 @@ __webpack_require__.r(__webpack_exports__);
         CategoryId: CategoryId
       }).then(function (response) {
         if (response.data.ErrorMessage === "No MemberNumber") {
-          alert('You must be logged in');
+          Notify('You must be logged in!', null, null, 'danger');
         } else {
-          alert('Coupon Clipped');
+          Notify('Coupon clipped!', null, null, 'success');
           axios.get('/my_coupons').then(function (coupons) {
             self.$parent.clipped = coupons.data;
           });
@@ -1871,7 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
         UserName: this.UserNamePin
       }).then(function (response) {
         console.log(response.data);
-        alert(response.data.ErrorMessage.ErrorDetails);
+        Notify('An error occurred, please try again!', null, null, 'danger');
       });
     }
   }
@@ -1929,8 +1929,6 @@ __webpack_require__.r(__webpack_exports__);
           UserName: this.UserNameLogin,
           Password: this.PasswordLogin
         }).then(function (response) {
-          console.log(response.data);
-
           if (response.data.ErrorMessage.ErrorCode === 1) {
             self.logged = true;
             self.UserNameLogin = '';
@@ -1941,7 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
               self.$parent.clipped = coupons.data;
             });
           } else {
-            Notify('message', null, null, 'danger');
+            Notify('An error occurred, please try again!', null, null, 'danger');
           }
         });
       } else {
@@ -2191,7 +2189,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     checkpass: function checkpass() {
       if (this.Password !== this.Password2) {
-        alert('Pins Do Not Match');
+        Notify('Pins Do Not Match', null, null, 'danger');
         this.$refs.Password.focus();
         return false;
       }

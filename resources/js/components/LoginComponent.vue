@@ -39,7 +39,6 @@
                         UserName: this.UserNameLogin,
                         Password: this.PasswordLogin
                     }).then(function(response){
-                        console.log(response.data);
                         if (response.data.ErrorMessage.ErrorCode === 1){
                             self.logged= true;
                             self.UserNameLogin= '';

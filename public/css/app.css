@@ -16518,10 +16518,10 @@ a.text-dark:focus {
 #notifications {
   cursor: pointer;
   position: fixed;
-  right: 0px;
+  right: 0;
   z-index: 9999;
-  bottom: 0px;
-  margin-bottom: 22px;
+  top: 0;
+  margin-top: 15px;
   margin-right: 15px;
   max-width: 300px;
 }
