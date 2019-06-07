@@ -5,7 +5,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <div  v-for="o in $parent.coupons.slice(0, couponsToShow)" class="col-lg-4 col-md-6 col-sm-6 mb-3" :key="o.RSAOfferId">
+        <div  v-for="o in $parent.coupons.slice(0, couponsToShow)" class="col-12 col-sm-12 col-md-6 col-lg-4 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
                 <div class="mt-3 text-center">
                     <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>

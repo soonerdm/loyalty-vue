@@ -2018,6 +2018,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2037,7 +2042,13 @@ __webpack_require__.r(__webpack_exports__);
       _this.coupons = response.data.Offers;
     });
   },
-  methods: {}
+  methods: {
+    signOut: function signOut() {
+      this.auth = false;
+      this.user = {};
+      this.clipped = [];
+    }
+  }
 });
 
 /***/ }),
@@ -37510,7 +37521,10 @@ var render = function() {
       _vm._l(_vm.$parent.coupons.slice(0, _vm.couponsToShow), function(o) {
         return _c(
           "div",
-          { key: o.RSAOfferId, staticClass: "col-lg-4 col-md-6 col-sm-6 mb-3" },
+          {
+            key: o.RSAOfferId,
+            staticClass: "col-12 col-sm-12 col-md-6 col-lg-4 mb-3"
+          },
           [
             _c("div", { staticClass: "card h-100" }, [
               _c("div", { staticClass: "mt-3 text-center" }, [
@@ -37793,7 +37807,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary text-white" }, [
-      _vm._v("Login Here\n        "),
+      _vm._v("Sign In\n        "),
       _c(
         "a",
         {
@@ -37843,139 +37857,161 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container mt-4" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
+      _c(
+        "div",
+        { staticClass: "col-lg-4 col-md-5 col-sm-12 order-1 order-md-12 mb-3" },
+        [
+          !_vm.auth
+            ? _c(
+                "div",
+                { attrs: { id: "RegisterForm" } },
+                [
+                  _c("register-component"),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "float-right",
+                      attrs: { href: "#", id: "ForgotPinLink" }
+                    },
+                    [_vm._v("Forgot Pin")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.auth
+            ? _c(
+                "div",
+                {
+                  staticStyle: { display: "none" },
+                  attrs: { id: "LoginForm" }
+                },
+                [
+                  _c("login-component"),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "float-right",
+                      attrs: { href: "#", id: "ForgotPinLink2" }
+                    },
+                    [_vm._v("Forgot Pin")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.auth
+            ? _c(
+                "div",
+                {
+                  staticStyle: { display: "none" },
+                  attrs: { id: "ForgotPin" }
+                },
+                [_c("forgot-pin-component")],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.auth,
+                  expression: "auth"
+                }
+              ]
+            },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "div",
+                  { staticClass: "card-header bg-primary text-white" },
+                  [
+                    _c("i", { staticClass: "fa fa-user-circle" }),
+                    _vm._v(
+                      " Welcome, " +
+                        _vm._s(_vm.user.FirstName) +
+                        "!\n                        "
+                    ),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-white float-right",
+                        attrs: { href: "#", id: "SignOut" },
+                        on: { click: _vm.signOut }
+                      },
+                      [_vm._v("Sign Out")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("dt", [_vm._v("Member #")]),
+                      _vm._v(" "),
+                      _c("dd", [_vm._v(_vm._s(_vm.user.MemberNumber))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("dt", [_vm._v("Total Savings")]),
+                      _vm._v(" "),
+                      _c("dd", [
+                        _vm._v("$" + _vm._s(_vm.user.TotalSavingsAmount))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mb-3" }, [
+                      _c("dt", [_vm._v("Bar Code")]),
+                      _vm._v(" "),
+                      _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: { src: _vm.user.MyCardBarCodeImagePath }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("table", { staticClass: "table table-condensed" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.clipped.UserClips, function(c) {
+                        return _c("tr", { key: c.RSAOfferId }, [
+                          _c("td", [
+                            _vm._v(_vm._s(c.Title)),
+                            _c("br"),
+                            _c("small", [_vm._v(_vm._s(c.Details))])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1, true)
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-8 col-md-7 order-2 order-md-1" }, [
         _c(
           "div",
           { attrs: { id: "store-coupons" } },
           [_c("coupons-component")],
           1
         )
-      ]),
-      _vm._v(" "),
-      !_vm.auth
-        ? _c(
-            "div",
-            { staticClass: "col-md-4", attrs: { id: "RegisterForm" } },
-            [
-              _c("register-component"),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "float-right",
-                  attrs: { href: "#", id: "ForgotPinLink" }
-                },
-                [_vm._v("Forgot Pin")]
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.auth
-        ? _c(
-            "div",
-            {
-              staticClass: "col-md-4",
-              staticStyle: { display: "none" },
-              attrs: { id: "LoginForm" }
-            },
-            [
-              _c("login-component"),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "float-right",
-                  attrs: { href: "#", id: "ForgotPinLink2" }
-                },
-                [_vm._v("Forgot Pin")]
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.auth
-        ? _c(
-            "div",
-            {
-              staticClass: "col-md-4",
-              staticStyle: { display: "none" },
-              attrs: { id: "ForgotPin" }
-            },
-            [_c("forgot-pin-component")],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.auth,
-              expression: "auth"
-            }
-          ],
-          staticClass: "col-md-4"
-        },
-        [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header bg-primary text-white" }, [
-              _c("i", { staticClass: "fa fa-user-circle" }),
-              _vm._v(" Welcome, " + _vm._s(_vm.user.FirstName) + "!")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-6" }, [
-                  _c("dt", [_vm._v("Member Number")]),
-                  _vm._v(" "),
-                  _c("dd", [_vm._v(_vm._s(_vm.user.MemberNumber))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6" }, [
-                  _c("dt", [_vm._v("Total Savings")]),
-                  _vm._v(" "),
-                  _c("dd", [_vm._v("$" + _vm._s(_vm.user.TotalSavingsAmount))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 mb-3" }, [
-                  _c("dt", [_vm._v("Bar Code")]),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: _vm.user.MyCardBarCodeImagePath }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("table", { staticClass: "table table-condensed" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.clipped.UserClips, function(c) {
-                    return _c("tr", { key: c.RSAOfferId }, [
-                      _c("td", [
-                        _vm._v(_vm._s(c.Title)),
-                        _c("br"),
-                        _c("small", [_vm._v(_vm._s(c.Details))])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1, true)
-                    ])
-                  }),
-                  0
-                )
-              ])
-            ])
-          ])
-        ]
-      )
+      ])
     ])
   ])
 }

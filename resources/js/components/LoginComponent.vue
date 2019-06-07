@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div class="card-header bg-primary text-white">Login Here
+        <div class="card-header bg-primary text-white">Sign In
             <a href="#" class="text-white float-right" id="RegisterLink">Register</a>
         </div>
         <div class="card-body">
