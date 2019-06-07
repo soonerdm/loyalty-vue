@@ -74,6 +74,9 @@
                             self.$parent.user = response.data;
                             self.$parent.auth = true;
                         }
+                        if(response.data.ErrorMessage.ErrorCode === -1){
+                            Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
+                        }
                     })
                 }
             },
