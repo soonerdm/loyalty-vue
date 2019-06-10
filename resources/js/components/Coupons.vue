@@ -11,15 +11,11 @@
                 <div class="product-img" :style="{ backgroundImage: `url('${o.ImagePath}')` }">
                     <img src="/img/transparent.png" class="card-img-top rounded">
                 </div>
-                <!--<div class="mt-3 text-center">-->
-                    <!--<img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>-->
-                <!--</div>-->
                 <div class="card-body">
                     <h5 class="card-title">{{ o.ProductName }}</h5>
                     <p class="card-text">
                         <span class="text-danger font-weight-bold">{{ o.Title }}</span><br />
                         <small>{{ o.Details }}</small>
-                        <!--<small><b>Valid: {{ O.ValidFrom }} to {{ O.ExpiresOn }}</b></small>-->
                     </p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
@@ -28,7 +24,6 @@
                     </a>
                 </div>
             </div>
-
         </div>
         <div class="text-center w-100 mb-3">
             <button class="btn btn-success text-center" v-if="$parent.filteredCoupons.length > 15 && couponsToShow < $parent.filteredCoupons.length" @click="loadMore">
