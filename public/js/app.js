@@ -1971,6 +1971,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
 //
 //
 //
@@ -2043,7 +2049,8 @@ __webpack_require__.r(__webpack_exports__);
       auth: false,
       user: {},
       clipped: [],
-      loading: false
+      loading: false,
+      search: ''
     };
   },
   mounted: function mounted() {
@@ -2074,6 +2081,33 @@ __webpack_require__.r(__webpack_exports__);
       this.clipped = [];
       localStorage.clear();
       Notify('You have been logged out successfully.', null, null, 'success');
+    }
+  },
+  computed: {
+    filteredCoupons: function filteredCoupons() {
+      var _this2 = this;
+
+      if (!this.search) {
+        return this.coupons;
+      }
+
+      var find = function find(object, search) {
+        for (var property in object) {
+          if (object.hasOwnProperty(property)) {
+            if (_typeof(object[property]) == "object") {
+              find(object[property]);
+            } else if (object[property].includes !== undefined) {
+              if (object[property].toLowerCase().includes(search.toLowerCase())) return true;
+            }
+          }
+        }
+
+        return false;
+      };
+
+      return this.coupons.filter(function (coupon) {
+        return find(coupon, _this2.search);
+      });
     }
   }
 });
@@ -2210,6 +2244,10 @@ __webpack_require__.r(__webpack_exports__);
             Notify('Your account has been registered successfully!', null, null, 'success');
             self.$parent.user = response.data;
             self.$parent.auth = true;
+          }
+
+          if (response.data.ErrorMessage.ErrorCode === -1) {
+            Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
           }
         });
       }
@@ -37545,7 +37583,9 @@ var render = function() {
         [_vm._m(0)]
       ),
       _vm._v(" "),
-      _vm._l(_vm.$parent.coupons.slice(0, _vm.couponsToShow), function(o) {
+      _vm._l(_vm.$parent.filteredCoupons.slice(0, _vm.couponsToShow), function(
+        o
+      ) {
         return _c(
           "div",
           {
@@ -37607,8 +37647,8 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "text-center w-100 mb-3" }, [
-        _vm.$parent.coupons.length > 15 &&
-        _vm.couponsToShow < _vm.$parent.coupons.length
+        _vm.$parent.filteredCoupons.length > 15 &&
+        _vm.couponsToShow < _vm.$parent.filteredCoupons.length
           ? _c(
               "button",
               {
@@ -38046,6 +38086,38 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-8 col-md-7 order-2 order-md-1" }, [
+        _c("div", { staticClass: "form-inline w-100 mb-3" }, [
+          _c("label", { attrs: { for: "search" } }, [_vm._v("Filter By:")]),
+          _vm._v("   \n                "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            staticClass: "form-control",
+            staticStyle: { width: "200px" },
+            attrs: {
+              type: "text",
+              name: "search",
+              id: "search",
+              placeholder: "Keyword"
+            },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
         _c(
           "div",
           { attrs: { id: "store-coupons" } },
