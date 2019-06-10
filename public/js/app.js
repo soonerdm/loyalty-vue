@@ -37631,6 +37631,7 @@ var render = function() {
                     _vm._v(_vm._s(o.Title))
                   ]),
                   _c("br"),
+                  _c("br"),
                   _vm._v(" "),
                   _c("small", [_vm._v(_vm._s(o.Details))])
                 ])

@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ o.ProductName }}</h5>
                     <p class="card-text">
-                        <span class="text-danger font-weight-bold">{{ o.Title }}</span><br />
+                        <span class="text-danger font-weight-bold">{{ o.Title }}</span><br /><br />
                         <small>{{ o.Details }}</small>
                     </p>
                 </div>
