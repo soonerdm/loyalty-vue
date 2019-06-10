@@ -1800,6 +1800,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37610,13 +37613,19 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "card h-100" }, [
-              _c("div", { staticClass: "mt-3 text-center" }, [
-                _c("img", {
-                  staticClass: "card-img-top rounded",
-                  staticStyle: { "max-height": "150px", "max-width": "150px" },
-                  attrs: { src: o.ImagePath }
-                })
-              ]),
+              _c(
+                "div",
+                {
+                  staticClass: "product-img",
+                  style: { backgroundImage: "url('" + o.ImagePath + "')" }
+                },
+                [
+                  _c("img", {
+                    staticClass: "card-img-top rounded",
+                    attrs: { src: "/img/transparent.png" }
+                  })
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("h5", { staticClass: "card-title" }, [

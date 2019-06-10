@@ -16526,3 +16526,10 @@ a.text-dark:focus {
   max-width: 300px;
 }
 
+.product-img {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 80%;
+  margin: 10px;
+}
+

@@ -8,9 +8,12 @@
         <div class="w-100 text-muted text-center" v-show="!$parent.filteredCoupons.length && $parent.search">No coupons found.</div>
         <div  v-for="o in $parent.filteredCoupons.slice(0, couponsToShow)" class="col-12 col-sm-12 col-md-6 col-lg-4 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
-                <div class="mt-3 text-center">
-                    <img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>
+                <div class="product-img" :style="{ backgroundImage: `url('${o.ImagePath}')` }">
+                    <img src="/img/transparent.png" class="card-img-top rounded">
                 </div>
+                <!--<div class="mt-3 text-center">-->
+                    <!--<img :src="o.ImagePath" class="card-img-top rounded" style="max-height: 150px; max-width: 150px;"/>-->
+                <!--</div>-->
                 <div class="card-body">
                     <h5 class="card-title">{{ o.ProductName }}</h5>
                     <p class="card-text">
