@@ -54,9 +54,8 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 order-2 order-md-1">
-                <div class="form-inline w-100 mb-3">
-                    <label for="search">Filter By:</label> &nbsp;&nbsp;
-                    <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Keyword" style="width: 200px">
+                <div class="w-100 mb-3 text-right">
+                    <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword" style="width: 200px">
                 </div>
                 <!--<p>coupons: <pre>{{ filteredCoupons }}</pre></p>-->
                 <div id="store-coupons">

@@ -1799,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1973,7 +1974,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-//
 //
 //
 //
@@ -37583,6 +37583,22 @@ var render = function() {
         [_vm._m(0)]
       ),
       _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.$parent.filteredCoupons.length && _vm.$parent.search,
+              expression: "!$parent.filteredCoupons.length && $parent.search"
+            }
+          ],
+          staticClass: "w-100 text-muted text-center"
+        },
+        [_vm._v("No coupons found.")]
+      ),
+      _vm._v(" "),
       _vm._l(_vm.$parent.filteredCoupons.slice(0, _vm.couponsToShow), function(
         o
       ) {
@@ -38086,9 +38102,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-8 col-md-7 order-2 order-md-1" }, [
-        _c("div", { staticClass: "form-inline w-100 mb-3" }, [
-          _c("label", { attrs: { for: "search" } }, [_vm._v("Filter By:")]),
-          _vm._v("   \n                "),
+        _c("div", { staticClass: "w-100 mb-3 text-right" }, [
           _c("input", {
             directives: [
               {
@@ -38104,7 +38118,7 @@ var render = function() {
               type: "text",
               name: "search",
               id: "search",
-              placeholder: "Keyword"
+              placeholder: "Filter By Keyword"
             },
             domProps: { value: _vm.search },
             on: {

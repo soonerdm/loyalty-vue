@@ -5,6 +5,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
+        <div class="w-100 text-muted text-center" v-show="!$parent.filteredCoupons.length && $parent.search">No coupons found.</div>
         <div  v-for="o in $parent.filteredCoupons.slice(0, couponsToShow)" class="col-12 col-sm-12 col-md-6 col-lg-4 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
                 <div class="mt-3 text-center">
