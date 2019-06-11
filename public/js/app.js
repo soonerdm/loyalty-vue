@@ -1798,6 +1798,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1972,6 +1973,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+//
 //
 //
 //
@@ -37607,6 +37609,20 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "card h-100" }, [
+              o.IsFeatured
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "rounded-bottom bg-success text-white text-center p-1 ml-2 w-50"
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-flag" }),
+                      _vm._v(" Featured!")
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
               _c(
                 "div",
                 {

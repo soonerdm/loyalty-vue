@@ -58,6 +58,7 @@
                     <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword" style="width: 200px">
                 </div>
                 <div id="store-coupons">
+                    <!--<pre>{{ coupons }}</pre>-->
                     <coupons-component></coupons-component>
                 </div>
             </div>
