@@ -36,3 +36,9 @@
 .card-text {
   line-height: 1em;
 }
+
+.featured {
+  position: absolute;
+  top: -1px;
+  z-index: 1;
+}

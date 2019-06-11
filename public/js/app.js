@@ -37614,7 +37614,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "rounded-bottom bg-success text-white text-center p-1 ml-2 w-50"
+                        "rounded-bottom bg-success text-white text-center p-1 ml-2 w-50 featured"
                     },
                     [
                       _c("i", { staticClass: "fa fa-flag" }),
