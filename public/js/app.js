@@ -2041,6 +2041,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37974,18 +37976,7 @@ var render = function() {
                   staticStyle: { display: "none" },
                   attrs: { id: "RegisterForm" }
                 },
-                [
-                  _c("register-component"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "float-right",
-                      attrs: { href: "#", id: "ForgotPinLink" }
-                    },
-                    [_vm._v("Forgot Pin")]
-                  )
-                ],
+                [_c("register-component")],
                 1
               )
             : _vm._e(),
@@ -37994,18 +37985,7 @@ var render = function() {
             ? _c(
                 "div",
                 { attrs: { id: "LoginForm" } },
-                [
-                  _c("login-component"),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "float-right",
-                      attrs: { href: "#", id: "ForgotPinLink2" }
-                    },
-                    [_vm._v("Forgot Pin")]
-                  )
-                ],
+                [_c("login-component"), _vm._v(" "), _vm._m(0)],
                 1
               )
             : _vm._e(),
@@ -38085,7 +38065,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("table", { staticClass: "table table-condensed" }, [
-                    _vm._m(0),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -38107,7 +38087,7 @@ var render = function() {
                               _c("small", [_vm._v(_vm._s(c.Details))])
                             ]),
                             _vm._v(" "),
-                            _vm._m(1, true)
+                            _vm._m(2, true)
                           ])
                         })
                       ],
@@ -38163,6 +38143,16 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-right w-100" }, [
+      _c("a", { attrs: { href: "#", id: "ForgotPinLink" } }, [
+        _vm._v("Forgot Pin")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
