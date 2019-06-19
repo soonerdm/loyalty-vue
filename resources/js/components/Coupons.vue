@@ -8,6 +8,7 @@
         <div class="w-100 text-muted text-center" v-show="!$parent.filteredCoupons.length && $parent.search">No coupons found.</div>
         <div  v-for="o in $parent.filteredCoupons.slice(0, couponsToShow)" class="col-12 col-sm-12 col-md-6 col-lg-4 mb-3" :key="o.RSAOfferId">
             <div class="card h-100">
+                <div class="rounded-bottom bg-success text-white text-center p-1 ml-2 w-50 featured" v-if="o.IsFeatured"><i class="fa fa-flag"></i> Featured!</div>
                 <div class="product-img" :style="{ backgroundImage: `url('${o.ImagePath}')` }">
                     <img src="/img/transparent.png" class="card-img-top rounded">
                 </div>

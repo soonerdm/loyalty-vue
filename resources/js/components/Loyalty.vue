@@ -5,11 +5,13 @@
             <div class="col-lg-4 col-md-5 col-sm-12 order-1 order-md-12 mb-3">
                 <div id="RegisterForm" v-if="!auth" style="display: none;">
                     <register-component></register-component>
-                    <a href="#" class="float-right" id="ForgotPinLink">Forgot Pin</a>
                 </div>
                 <div id="LoginForm" v-if="!auth">
                     <login-component></login-component>
-                    <a href="#" class="float-right" id="ForgotPinLink2">Forgot Pin</a>
+                    <div class="text-right w-100">
+                        <!--<a href="#" data-toggle="modal" data-target="#contactModal">Contact Us</a> |-->
+                        <a href="#" id="ForgotPinLink">Forgot Pin</a>
+                    </div>
                 </div>
                 <div id="ForgotPin" v-if="!auth" style="display: none;">
                     <forgot-pin-component></forgot-pin-component>
@@ -58,6 +60,7 @@
                     <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword" style="width: 200px">
                 </div>
                 <div id="store-coupons">
+                    <!--<pre>{{ coupons }}</pre>-->
                     <coupons-component></coupons-component>
                 </div>
             </div>

@@ -27,13 +27,6 @@
                     });
                 });
             });
-            $('body').on('click', '#ForgotPinLink2', function(){
-                $("#LoginForm").fadeOut( function() {
-                    $("#RegisterForm").fadeOut( function() {
-                        $("#ForgotPin").fadeIn();
-                    });
-                });
-            });
             $('body').on('click', '#LoginLink', function(){
                 $("#RegisterForm").fadeOut( function() {
                     $("#ForgotPin").fadeOut( function(){
