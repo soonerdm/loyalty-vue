@@ -48,7 +48,7 @@
         methods: {
             add: function (coupon_id, CategoryId){
                 let self = this;
-                if (self.$parent.auth === true) {
+                if (self.$parent.auth) {
                     axios.post('/clip_offer', {
                         RSAOfferId: coupon_id,
                         CategoryId: CategoryId
