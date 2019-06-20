@@ -48,8 +48,25 @@
         },
         mounted() {
             axios.post('/get_stores').then((response) => {
-                this.stores = response.data.GetClientStores;
-              //  console.log(response.data.GetClientStores);
+                this.stores = filterOut(response.data.GetClientStores);
+                function filterOut(storeArray){
+                    let mstore = [];
+                    storeArray.forEach(function(store){
+                        let full = document.domain;
+                        let parts = full.split('.');
+                        let d   = parts[1];
+                        let n = 0;
+                        if(d === 'uptowngroceryco' && (store.ClientStoreName.substring(0,3) === 'Upt')){
+                            mstore.push(store);
+                        }
+                        if(d === 'buyforlessok'  && (store.ClientStoreName.substring(0,3) === 'Buy') || (store.ClientStoreName.substring(0,3) === 'Sup')){
+                            console.log(store.ClientStoreName);
+                            mstore.push(store);
+                        }
+
+                    });
+                    return mstore;
+                }
             });
         },
         methods: {

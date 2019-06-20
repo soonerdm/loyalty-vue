@@ -314,6 +314,8 @@ class RSAController extends Controller
     public function get_brand($url){
 
         $domain['buyforlessok'] = 'buyforlessok';
+        $domain['uptowngroceryco'] = 'uptowngroceryco';
+        $domain['smartsaverok'] = 'buyforlessok';
 
         if (!isset($domain[$url])){
             return 'buyforlessok';
