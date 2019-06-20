@@ -14,7 +14,7 @@ class RSAController extends Controller
 
    public function __construct()
    {
-        $url = explode('.', $_SERVER['HTTP_HOST'])[0];
+        $url = explode('.', $_SERVER['HTTP_HOST'])[1];
 
         $this->brand = $this->get_brand($url);
 
