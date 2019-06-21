@@ -2220,7 +2220,29 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.post('/get_stores').then(function (response) {
-      _this.stores = response.data.GetClientStores; //  console.log(response.data.GetClientStores);
+      _this.stores = filterOut(response.data.GetClientStores);
+
+      function filterOut(storeArray) {
+        var mstore = [];
+        storeArray.forEach(function (store) {
+          var full = document.domain;
+          var parts = full.split('.');
+          var d = parts[1];
+
+          if (d === 'uptowngroceryco' && store.ClientStoreName.substring(0, 3) === 'Upt') {
+            mstore.push(store);
+          }
+
+          if (d === 'smartsaverok' && store.ClientStoreName.substring(0, 3) === 'Sma') {
+            mstore.push(store);
+          }
+
+          if (d === 'buyforlessok' && (store.ClientStoreName.substring(0, 3) === 'Buy' || store.ClientStoreName.substring(0, 3) === 'Sup')) {
+            mstore.push(store);
+          }
+        });
+        return mstore;
+      }
     });
   },
   methods: {
@@ -51172,8 +51194,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/davidmeinke/code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/davidmeinke/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

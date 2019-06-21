@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Font Awesome
-
+/*
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
-*
+*/
 // Variables
 @import 'variables';
 
@@ -37,12 +37,10 @@
 .card-text {
   line-height: 1em;
 }
-<<<<<<< HEAD
-=======
+
 
 .featured {
   position: absolute;
   top: -1px;
   z-index: 1;
 }
->>>>>>> 1f674c1df5fee0009ae6258f4d37be07b69ca7cb
