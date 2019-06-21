@@ -111,7 +111,7 @@
                 var find = function(object, search) {
                     for (var property in object) {
                         if (object.hasOwnProperty(property)) {
-                            if (typeof object[property] == "object"){
+                            if (typeof object[property] === "object"){
                                 find(object[property]);
                             } else if (object[property].includes !== undefined){
                                 if (object[property].toLowerCase().includes(search.toLowerCase())) return true;

@@ -26,7 +26,11 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src='/img/@php echo explode('.', $_SERVER['HTTP_HOST'])[1]; @endphp.png' height="50">
+                    @if( (URL::to('') == 'http://loyalty.test:8000') )
+                        <img src="/img/buyforlessok.png" height="50" />
+                    @else
+                        <img src='/img/@php echo explode('.', $_SERVER['HTTP_HOST'])[1]; @endphp.png' height="50" />
+                    @endif
                    <!-- <img src="/img/logo.png" height="50" /> -->
                 </a>
                 {{--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
