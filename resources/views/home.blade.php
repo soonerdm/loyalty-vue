@@ -4,6 +4,8 @@
 
     <loyalty></loyalty>
 
+    <!-- @php echo Session::get('UserToken') @endphp -->
+
     <script type="application/javascript">
         $(document).ready(function(){
             $('body').on('click', '#SignInLink', function(){
