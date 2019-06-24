@@ -20,6 +20,9 @@ Auth::routes();
 
 Route::get('/', 'RSAController@index');
 
+Route::get('/contact', 'ContactController@index');
+Route::post('contact-form', 'ContactController@store');
+
 Route::get('/ava_coupons', 'RSAController@get_coupons');
 
 Route::post('/clip_offer', 'RSAController@clip_offer');
