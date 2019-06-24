@@ -2043,6 +2043,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2081,7 +2083,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       this.user = {};
       this.clipped = [];
       localStorage.clear();
-      Notify('You have been logged out successfully.', null, null, 'success');
+      Notify('You have been logged out.', null, null, 'success');
     }
   },
   computed: {
@@ -38117,7 +38119,9 @@ var render = function() {
                     )
                   ])
                 ])
-              ])
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
             ]
           )
         ]
@@ -38170,9 +38174,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-right w-100" }, [
+      _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
+      _vm._v(" |\n                    "),
       _c("a", { attrs: { href: "#", id: "ForgotPinLink" } }, [
         _vm._v("Forgot Pin")
-      ])
+      ]),
+      _vm._v("  \n                ")
     ])
   },
   function() {
@@ -38196,6 +38203,15 @@ var staticRenderFns = [
       _c("button", { staticClass: "btn btn-sm btn-danger" }, [
         _c("b", [_vm._v("×")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-right w-100" }, [
+      _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
+      _vm._v("  \n                ")
     ])
   }
 ]

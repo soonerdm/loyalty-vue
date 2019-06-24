@@ -9,8 +9,8 @@
                 <div id="LoginForm" v-if="!auth">
                     <login-component></login-component>
                     <div class="text-right w-100">
-                        <!--<a href="#" data-toggle="modal" data-target="#contactModal">Contact Us</a> |-->
-                        <a href="#" id="ForgotPinLink">Forgot Pin</a>
+                        <a href="/contact">Contact Us</a> |
+                        <a href="#" id="ForgotPinLink">Forgot Pin</a> &nbsp;
                     </div>
                 </div>
                 <div id="ForgotPin" v-if="!auth" style="display: none;">
@@ -53,6 +53,9 @@
                             </table>
                         </div>
                     </div>
+                    <div class="text-right w-100">
+                        <a href="/contact">Contact Us</a> &nbsp;
+                    </div>
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 order-2 order-md-1">
@@ -60,7 +63,6 @@
                     <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword" style="width: 200px">
                 </div>
                 <div id="store-coupons">
-                    <!--<pre>{{ coupons }}</pre>-->
                     <coupons-component></coupons-component>
                 </div>
             </div>
@@ -102,7 +104,7 @@
                 this.user = {};
                 this.clipped = [];
                 localStorage.clear();
-                Notify('You have been logged out successfully.', null, null, 'success');
+                Notify('You have been logged out.', null, null, 'success');
             }
         },
         computed: {
