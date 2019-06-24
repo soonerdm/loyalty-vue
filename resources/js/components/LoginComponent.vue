@@ -48,8 +48,10 @@
                             self.$parent.user = response.data;
                             localStorage.user = JSON.stringify(response.data);
                             axios.get('/my_coupons').then((coupons) => {
-                                self.$parent.clipped = coupons.data;
-                                localStorage.clipped = JSON.stringify(coupons.data);
+                                if(coupons.data.ErrorMessage.ErrorCode !== -1) {
+                                    self.$parent.clipped = coupons.data;
+                                    localStorage.clipped = JSON.stringify(coupons.data);
+                                }
                             });
                         } else {
                             Notify('An error occurred, please try again!', null, null, 'danger');
