@@ -13,7 +13,7 @@
                     <img src="/img/transparent.png" class="card-img-top rounded">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ o.ProductName }}</h5>
+                    <h5 class="card-title">{{ pName(o.ProductName) }}</h5>
                     <p class="card-text">
                         <span class="text-danger font-weight-bold">{{ o.Title }}</span><br /><br />
                         <small>{{ o.Details }}</small>
@@ -75,6 +75,15 @@
             loadMore(){
 
                 this.couponsToShow += 15;
+            },
+
+            pName(nm){
+                if (nm === 'Group'){
+                    return '';
+                }
+                else{
+                    return nm;
+                }
             }
 
         }

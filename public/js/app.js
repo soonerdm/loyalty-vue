@@ -1834,6 +1834,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     loadMore: function loadMore() {
       this.couponsToShow += 15;
+    },
+    pName: function pName(nm) {
+      if (nm === 'Group') {
+        return '';
+      } else {
+        return nm;
+      }
     }
   }
 });
@@ -1975,7 +1982,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-//
 //
 //
 //
@@ -37667,7 +37673,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("h5", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(o.ProductName))
+                  _vm._v(_vm._s(_vm.pName(o.ProductName)))
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-text" }, [
@@ -38111,9 +38117,7 @@ var render = function() {
                               _vm._v(_vm._s(c.Title)),
                               _c("br"),
                               _c("small", [_vm._v(_vm._s(c.Details))])
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(2, true)
+                            ])
                           ])
                         })
                       ],
@@ -38123,7 +38127,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(2)
             ]
           )
         ]
@@ -38190,20 +38194,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center", attrs: { colspan: "2" } }, [
+        _c("th", { staticClass: "text-center" }, [
           _c("i", { staticClass: "fa fa-cut" }),
           _vm._v(" My Clipped Coupons")
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-sm btn-danger" }, [
-        _c("b", [_vm._v("×")])
       ])
     ])
   },

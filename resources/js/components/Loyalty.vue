@@ -39,7 +39,7 @@
                             </div>
                             <table class="table table-condensed">
                                 <thead>
-                                    <tr><th colspan="2" class="text-center"><i class="fa fa-cut"></i> My Clipped Coupons</th></tr>
+                                    <tr><th class="text-center"><i class="fa fa-cut"></i> My Clipped Coupons</th></tr>
                                 </thead>
                                 <tbody>
                                     <tr>
@@ -47,7 +47,6 @@
                                     </tr>
                                     <tr v-for="c in clipped.UserClips" :key="c.RSAOfferId">
                                         <td>{{ c.Title }}<br /><small>{{ c.Details }}</small></td>
-                                        <td><button class="btn btn-sm btn-danger"><b>&times;</b></button></td>
                                     </tr>
                                 </tbody>
                             </table>
