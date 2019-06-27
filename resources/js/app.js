@@ -35,6 +35,9 @@ Vue.component('forgot-pin-component', require('./components/ForgotPinComponent.v
 
 const app = new Vue({
     el: '#app',
+    methods: {
+
+    }
 });
 
 Notify = function(text, callback, close_callback, style) {
@@ -43,7 +46,7 @@ Notify = function(text, callback, close_callback, style) {
     var $container = $('#notifications');
     var icon = '<i class="fa fa-info-circle "></i>';
 
-    if (typeof style === 'undefined' ) style = 'warning'
+    if (typeof style === 'undefined' ) style = 'warning';
 
     var html = $('<div class="alert alert-' + style + '  hide">' + icon +  " " + text + '</div>');
 
@@ -53,17 +56,17 @@ Notify = function(text, callback, close_callback, style) {
         style: 'padding-left: 10px;',
         href: '#',
         click: function(e){
-            e.preventDefault()
-            close_callback && close_callback()
-            remove_notice()
+            e.preventDefault();
+            close_callback && close_callback();
+            remove_notice();
         }
-    }).prependTo(html)
+    }).prependTo(html);
 
-    $container.prepend(html)
-    html.removeClass('hide').hide().fadeIn('slow')
+    $container.prepend(html);
+    html.removeClass('hide').hide().fadeIn('slow');
 
     function remove_notice() {
-        html.stop().fadeOut('slow').remove()
+        html.stop().fadeOut('slow').remove();
     }
 
     var timer =  setInterval(remove_notice, time);
@@ -75,9 +78,9 @@ Notify = function(text, callback, close_callback, style) {
     });
 
     html.on('click', function () {
-        clearInterval(timer)
-        callback && callback()
-        remove_notice()
+        clearInterval(timer);
+        callback && callback();
+        remove_notice();
     });
 
 };
