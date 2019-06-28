@@ -105,7 +105,7 @@
                     this.user = {};
                     this.clipped = [];
                     localStorage.clear();
-                    alert('You have been logged out due to inactivity. Please log in again.');
+                    Notify('You have been logged out due to inactivity. Please log in again.', null, null, 'danger');
                 } else {
                     localStorage.timestamp = cur.getTime();
                 }

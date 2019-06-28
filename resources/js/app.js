@@ -33,13 +33,6 @@ Vue.component('forgot-pin-component', require('./components/ForgotPinComponent.v
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-    methods: {
-
-    }
-});
-
 Notify = function(text, callback, close_callback, style) {
 
     var time = '10000';
@@ -84,3 +77,10 @@ Notify = function(text, callback, close_callback, style) {
     });
 
 };
+
+const app = new Vue({
+    el: '#app',
+    methods: {
+
+    }
+});

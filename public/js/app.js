@@ -2096,7 +2096,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         this.user = {};
         this.clipped = [];
         localStorage.clear();
-        alert('You have been logged out due to inactivity. Please log in again.');
+        Notify('You have been logged out due to inactivity. Please log in again.', null, null, 'danger');
       } else {
         localStorage.timestamp = cur.getTime();
       }
@@ -50690,11 +50690,6 @@ Vue.component('forgot-pin-component', __webpack_require__(/*! ./components/Forgo
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
-  el: '#app',
-  methods: {}
-});
-
 Notify = function Notify(text, callback, close_callback, style) {
   var time = '10000';
   var $container = $('#notifications');
@@ -50731,6 +50726,11 @@ Notify = function Notify(text, callback, close_callback, style) {
     remove_notice();
   });
 };
+
+var app = new Vue({
+  el: '#app',
+  methods: {}
+});
 
 /***/ }),
 
