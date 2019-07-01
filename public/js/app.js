@@ -1957,6 +1957,8 @@ __webpack_require__.r(__webpack_exports__);
             localStorage.auth = true;
             self.$parent.user = response.data;
             localStorage.user = JSON.stringify(response.data);
+            var cur = new Date();
+            localStorage.timestamp = cur.getTime();
             axios.get('/my_coupons').then(function (coupons) {
               if (coupons.data.ErrorMessage.ErrorCode !== -1) {
                 self.$parent.clipped = coupons.data;
@@ -2088,6 +2090,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
     if (localStorage.clipped) {
       this.clipped = JSON.parse(localStorage.clipped);
+    }
+
+    if (localStorage.timestamp) {
+      var timeout = parseInt(localStorage.timestamp) + 3600000;
+      var cur = new Date();
+
+      if (parseInt(cur.getTime()) > timeout) {
+        this.auth = false;
+        this.user = {};
+        this.clipped = [];
+        localStorage.clear();
+        Notify('You have been logged out due to inactivity. Please log in again.', null, null, 'danger');
+      } else {
+        localStorage.timestamp = cur.getTime();
+      }
     }
   },
   methods: {
@@ -50678,10 +50695,6 @@ Vue.component('forgot-pin-component', __webpack_require__(/*! ./components/Forgo
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
-  el: '#app'
-});
-
 Notify = function Notify(text, callback, close_callback, style) {
   var time = '10000';
   var $container = $('#notifications');
@@ -50718,6 +50731,11 @@ Notify = function Notify(text, callback, close_callback, style) {
     remove_notice();
   });
 };
+
+var app = new Vue({
+  el: '#app',
+  methods: {}
+});
 
 /***/ }),
 
@@ -51211,8 +51229,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

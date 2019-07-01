@@ -47,6 +47,8 @@
                             localStorage.auth = true;
                             self.$parent.user = response.data;
                             localStorage.user = JSON.stringify(response.data);
+                            var cur = new Date();
+                            localStorage.timestamp = cur.getTime();
                             axios.get('/my_coupons').then((coupons) => {
                                 if(coupons.data.ErrorMessage.ErrorCode !== -1) {
                                     self.$parent.clipped = coupons.data;

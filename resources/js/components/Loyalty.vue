@@ -71,7 +71,8 @@
 
 <script>
     export default {
-        data() {
+
+    data() {
             return {
                 coupons: [],
                 auth: false,
@@ -81,7 +82,7 @@
                 search: ''
             }
         },
-        mounted() {
+        mounted: function() {
             this.loading = true;
             axios.get('/ava_coupons').then((response) => {
                 this.loading = false;
@@ -95,6 +96,19 @@
             }
             if (localStorage.clipped) {
                 this.clipped = JSON.parse(localStorage.clipped);
+            }
+            if (localStorage.timestamp) {
+                var timeout = (parseInt(localStorage.timestamp) + 3600000);
+                var cur = new Date();
+                if (parseInt(cur.getTime()) > timeout) {
+                    this.auth = false;
+                    this.user = {};
+                    this.clipped = [];
+                    localStorage.clear();
+                    Notify('You have been logged out due to inactivity. Please log in again.', null, null, 'danger');
+                } else {
+                    localStorage.timestamp = cur.getTime();
+                }
             }
         },
         methods: {
