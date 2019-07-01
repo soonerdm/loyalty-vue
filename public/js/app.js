@@ -37908,7 +37908,8 @@ var render = function() {
               attrs: {
                 name: "UserNameLogin",
                 type: "text",
-                id: "UserNameLogin"
+                id: "UserNameLogin",
+                required: ""
               },
               domProps: { value: _vm.UserNameLogin },
               on: {
@@ -37941,7 +37942,8 @@ var render = function() {
                 type: "password",
                 name: "PasswordLogin",
                 maxlength: "4",
-                id: "PasswordLogin"
+                id: "PasswordLogin",
+                required: ""
               },
               domProps: { value: _vm.PasswordLogin },
               on: {

@@ -7,11 +7,11 @@
             <form v-on:submit.prevent="login()">
                 <div class="form-group">
                     <label for="UserNameLogin">User Name</label>
-                    <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin">
+                    <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin" required>
                 </div>
                 <div class="form-group">
                     <label for="PasswordLogin">Password</label>
-                    <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control">
+                    <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="SubmitButton" class="btn btn-primary">Login</button>
