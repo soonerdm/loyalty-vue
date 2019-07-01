@@ -2234,6 +2234,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RegisterComponent.vue",
   data: function data() {
@@ -2278,7 +2280,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    Register: function Register() {
+    register: function register() {
       var self = this;
 
       if (this.Password.length !== 4) {
@@ -38294,208 +38296,241 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "FirstName" } }, [_vm._v("First Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.FirstName,
-              expression: "FirstName"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "FirstName", id: "FirstName", type: "text" },
-          domProps: { value: _vm.FirstName },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.FirstName = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "LastName" } }, [_vm._v("Last Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.LastName,
-              expression: "LastName"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "LastName", id: "LastName", type: "text" },
-          domProps: { value: _vm.LastName },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.LastName = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "UserName" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.UserName,
-              expression: "UserName"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "UserName", id: "UserName", type: "text" },
-          domProps: { value: _vm.UserName },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.UserName = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Pin")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Password,
-              expression: "Password"
-            }
-          ],
-          ref: "Password",
-          staticClass: "form-control",
-          attrs: {
-            id: "password",
-            name: "Password",
-            maxlength: "4",
-            type: "password"
-          },
-          domProps: { value: _vm.Password },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Password = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "Password2" } }, [_vm._v("Confirm Pin")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Password2,
-              expression: "Password2"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            id: "Password2",
-            name: "Password2",
-            maxlength: "4",
-            type: "password"
-          },
-          domProps: { value: _vm.Password2 },
-          on: {
-            blur: function($event) {
-              return _vm.checkpass()
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Password2 = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "ClientStore" } }, [
-          _vm._v("Preferred Store")
-        ]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            staticClass: "form-control",
-            attrs: { name: "ClientStore", id: "ClientStore" }
-          },
-          _vm._l(_vm.stores, function(store) {
-            return _c("option", { domProps: { value: store.ClientStoreId } }, [
-              _vm._v(_vm._s(store.ClientStoreName))
-            ])
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "zipcode" } }, [_vm._v("Zip Code")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.ZipCode,
-              expression: "ZipCode"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { id: "zipcode", name: "ZipCode", type: "text" },
-          domProps: { value: _vm.ZipCode },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.ZipCode = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
       _c(
-        "button",
+        "form",
         {
-          staticClass: "btn btn-primary",
-          attrs: { type: "submit" },
           on: {
-            click: function($event) {
-              return _vm.Register()
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.register()
             }
           }
         },
-        [_vm._v(" Register")]
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "FirstName" } }, [
+              _vm._v("First Name")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.FirstName,
+                  expression: "FirstName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "FirstName",
+                id: "FirstName",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.FirstName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.FirstName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "LastName" } }, [_vm._v("Last Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.LastName,
+                  expression: "LastName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "LastName",
+                id: "LastName",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.LastName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.LastName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "UserName" } }, [_vm._v("Email")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.UserName,
+                  expression: "UserName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "UserName",
+                id: "UserName",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.UserName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.UserName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "password" } }, [_vm._v("Pin")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Password,
+                  expression: "Password"
+                }
+              ],
+              ref: "Password",
+              staticClass: "form-control",
+              attrs: {
+                id: "password",
+                name: "Password",
+                maxlength: "4",
+                type: "password",
+                required: ""
+              },
+              domProps: { value: _vm.Password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Password = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "Password2" } }, [
+              _vm._v("Confirm Pin")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Password2,
+                  expression: "Password2"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "Password2",
+                name: "Password2",
+                maxlength: "4",
+                type: "password",
+                required: ""
+              },
+              domProps: { value: _vm.Password2 },
+              on: {
+                blur: function($event) {
+                  return _vm.checkpass()
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Password2 = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "ClientStore" } }, [
+              _vm._v("Preferred Store")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "form-control",
+                attrs: { name: "ClientStore", id: "ClientStore", required: "" }
+              },
+              _vm._l(_vm.stores, function(store) {
+                return _c(
+                  "option",
+                  { domProps: { value: store.ClientStoreId } },
+                  [_vm._v(_vm._s(store.ClientStoreName))]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "zipcode" } }, [_vm._v("Zip Code")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.ZipCode,
+                  expression: "ZipCode"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "zipcode",
+                name: "ZipCode",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.ZipCode },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.ZipCode = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+            [_vm._v(" Register")]
+          )
+        ]
       )
     ])
   ])
