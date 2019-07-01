@@ -1886,7 +1886,12 @@ __webpack_require__.r(__webpack_exports__);
         UserName: this.UserNamePin
       }).then(function (response) {
         console.log(response.data);
-        Notify('An error occurred, please try again!', null, null, 'danger');
+
+        if (response.data.ErrorMessage.ErrorCode === 1) {
+          Notify('An email has been sent to that email address to reset your pin', null, null, 'success');
+        } else {
+          Notify('An error occurred, please try again!', null, null, 'danger');
+        }
       });
     }
   }
@@ -37783,7 +37788,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { name: "UserNameLogin", type: "text", id: "UserNamePin" },
+          attrs: { name: "UserNamePin", type: "text", id: "UserNamePin" },
           domProps: { value: _vm.UserNamePin },
           on: {
             input: function($event) {

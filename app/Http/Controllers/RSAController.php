@@ -279,7 +279,7 @@ class RSAController extends Controller
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
-        $data['UserName']       = $request->UserNamePin;
+        $data['UserName']       = $request->UserName;
 
         $data = json_encode($data);
 
@@ -386,13 +386,11 @@ class RSAController extends Controller
         return 'https://'.$brand.'.rsaamerica.com/PartnerApi/SSWebRestApi.svc/'.$service;
     }
 
+
     /**
      * @param $store_code
      * @return mixed
      */
-
-
-
     public function curl_get($url){
         $curl = curl_init();
 

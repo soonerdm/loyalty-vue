@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="UserNamePin">User Name</label>
-                <input class="form-control" name="UserNameLogin" v-model="UserNamePin" type="text" id="UserNamePin">
+                <input class="form-control" name="UserNamePin" v-model="UserNamePin" type="text" id="UserNamePin">
             </div>
             <div class="form-group">
                 <button type="submit" id="SubmitButton" class="btn btn-primary" v-on:click="forgotPin()">Send Pin Reset Link</button>
@@ -30,7 +30,12 @@
 
                 }).then(function (response) {
                     console.log(response.data);
-                    Notify('An error occurred, please try again!', null, null, 'danger');
+                    if(response.data.ErrorMessage.ErrorCode ===1){
+                       Notify('An email has been sent to that email address to reset your pin', null, null, 'success');
+                    }
+                    else{
+                        Notify('An error occurred, please try again!', null, null, 'danger');
+                    }
                 });
             }
         }
