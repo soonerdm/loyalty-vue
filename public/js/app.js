@@ -1799,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1841,6 +1842,15 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return nm;
       }
+    },
+    expDate: function expDate(date) {
+      var ms = date.substring(date.lastIndexOf("(") + 1, date.lastIndexOf("+"));
+      ms = parseInt(ms);
+      var formatted = new Date(ms);
+      var day = formatted.getDate();
+      var mon = formatted.getMonth();
+      var year = formatted.getFullYear();
+      return mon + '/' + day + '/' + year;
     }
   }
 });
@@ -37707,7 +37717,13 @@ var render = function() {
                   _c("br"),
                   _c("br"),
                   _vm._v(" "),
-                  _c("small", [_vm._v(_vm._s(o.Details))])
+                  _c("small", [_vm._v(_vm._s(o.Details))]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", { staticStyle: { "font-size": "8px" } }, [
+                    _vm._v("Exp. " + _vm._s(_vm.expDate(o.ExpiresOn)))
+                  ])
                 ])
               ]),
               _vm._v(" "),
