@@ -1848,7 +1848,7 @@ __webpack_require__.r(__webpack_exports__);
       ms = parseInt(ms);
       var formatted = new Date(ms);
       var day = formatted.getDate();
-      var mon = formatted.getMonth();
+      var mon = formatted.getMonth() + 1;
       var year = formatted.getFullYear();
       return mon + '/' + day + '/' + year;
     }
