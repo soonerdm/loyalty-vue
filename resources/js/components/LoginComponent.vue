@@ -5,16 +5,22 @@
         </div>
         <div class="card-body">
             <form v-on:submit.prevent="login()">
-                <div class="form-group">
-                    <label for="UserNameLogin">User Name</label>
+                <label for="UserNameLogin">User Name</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle"></i></span>
+                    </div>
                     <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin" required>
                 </div>
-                <div class="form-group">
-                    <label for="PasswordLogin">Password</label>
+                <label for="PasswordLogin">Password</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+                    </div>
                     <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <button type="submit" id="SubmitButton" class="btn btn-primary">Login</button>
+                    <button type="submit" id="SubmitButton" class="btn btn-primary float-right">Login</button>
                 </div>
             </form>
         </div>

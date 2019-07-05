@@ -1941,6 +1941,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginComponent.vue",
   data: function data() {
@@ -2004,6 +2010,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+//
+//
+//
 //
 //
 //
@@ -37921,10 +37930,12 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "UserNameLogin" } }, [
-              _vm._v("User Name")
-            ]),
+          _c("label", { attrs: { for: "UserNameLogin" } }, [
+            _vm._v("User Name")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group mb-3" }, [
+            _vm._m(1),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -37954,10 +37965,12 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "PasswordLogin" } }, [
-              _vm._v("Password")
-            ]),
+          _c("label", { attrs: { for: "PasswordLogin" } }, [
+            _vm._v("Password")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group mb-3" }, [
+            _vm._m(2),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -37988,7 +38001,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(3)
         ]
       )
     ])
@@ -38015,11 +38028,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_c("i", { staticClass: "fa fa-user-circle" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_c("i", { staticClass: "fa fa-key" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
+          staticClass: "btn btn-primary float-right",
           attrs: { type: "submit", id: "SubmitButton" }
         },
         [_vm._v("Login")]
@@ -38192,35 +38229,40 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-8 col-md-7 order-2 order-md-1" }, [
-        _c("div", { staticClass: "w-100 mb-3 text-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.search,
-                expression: "search"
-              }
-            ],
-            staticClass: "form-control",
-            staticStyle: { width: "200px" },
-            attrs: {
-              type: "text",
-              name: "search",
-              id: "search",
-              placeholder: "Filter By Keyword"
-            },
-            domProps: { value: _vm.search },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c(
+          "div",
+          { staticClass: "input-group mb-3", staticStyle: { width: "250px" } },
+          [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
                 }
-                _vm.search = $event.target.value
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "search",
+                id: "search",
+                placeholder: "Filter By Keyword"
+              },
+              domProps: { value: _vm.search },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                }
               }
-            }
-          })
-        ]),
+            })
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -38237,7 +38279,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right w-100" }, [
+    return _c("div", { staticClass: "text-right w-100 mt-1" }, [
       _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
       _vm._v(" |\n                    "),
       _c("a", { attrs: { href: "#", id: "ForgotPinLink" } }, [
@@ -38278,9 +38320,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right w-100" }, [
+    return _c("div", { staticClass: "text-right mt-1 w-100" }, [
       _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
       _vm._v("  \n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_c("i", { staticClass: "fa fa-search" })]
+      )
     ])
   }
 ]

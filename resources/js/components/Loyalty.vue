@@ -8,7 +8,7 @@
                 </div>
                 <div id="LoginForm" v-if="!auth">
                     <login-component></login-component>
-                    <div class="text-right w-100">
+                    <div class="text-right w-100 mt-1">
                         <a href="/contact">Contact Us</a> |
                         <a href="#" id="ForgotPinLink">Forgot Pin</a> &nbsp;
                     </div>
@@ -59,14 +59,17 @@
                             </table>
                         </div>
                     </div>
-                    <div class="text-right w-100">
+                    <div class="text-right mt-1 w-100">
                         <a href="/contact">Contact Us</a> &nbsp;
                     </div>
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 order-2 order-md-1">
-                <div class="w-100 mb-3 text-right">
-                    <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword" style="width: 200px">
+                <div class="input-group mb-3" style="width: 250px">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword">
                 </div>
                 <div id="store-coupons">
                     <coupons-component></coupons-component>
