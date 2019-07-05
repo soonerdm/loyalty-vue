@@ -42,7 +42,14 @@
                                     <tr><th class="text-center"><i class="fa fa-cut"></i> My Clipped Coupons</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-if="loadingClipped">
+                                        <td class="text-center">
+                                            <div class="spinner-border text-secondary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr v-if="!loadingClipped">
                                         <td class="text-muted" v-if="clipped.UserClips === undefined || clipped.UserClips.length == 0">You have no clipped coupons.</td>
                                     </tr>
                                     <tr v-for="c in clipped.UserClips" :key="c.RSAOfferId">
@@ -79,6 +86,7 @@
                 user: {},
                 clipped: [],
                 loading: false,
+                loadingClipped: false,
                 search: ''
             }
         },

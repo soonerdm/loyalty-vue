@@ -1947,7 +1947,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       UserNameLogin: '',
       PasswordLogin: '',
-      logged: false
+      logged: false,
+      loading: false
     };
   },
   methods: {
@@ -1959,6 +1960,8 @@ __webpack_require__.r(__webpack_exports__);
           UserName: this.UserNameLogin,
           Password: this.PasswordLogin
         }).then(function (response) {
+          self.$parent.loadingClipped = true;
+
           if (response.data.ErrorMessage.ErrorCode === 1) {
             self.logged = true;
             self.UserNameLogin = '';
@@ -1970,6 +1973,8 @@ __webpack_require__.r(__webpack_exports__);
             var cur = new Date();
             localStorage.timestamp = cur.getTime();
             axios.get('/my_coupons').then(function (coupons) {
+              self.$parent.loadingClipped = false;
+
               if (coupons.data.ErrorMessage.ErrorCode !== -1) {
                 self.$parent.clipped = coupons.data;
                 localStorage.clipped = JSON.stringify(coupons.data);
@@ -2070,6 +2075,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2078,6 +2090,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       user: {},
       clipped: [],
       loading: false,
+      loadingClipped: false,
       search: ''
     };
   },
@@ -38144,14 +38157,18 @@ var render = function() {
                     _c(
                       "tbody",
                       [
-                        _c("tr", [
-                          _vm.clipped.UserClips === undefined ||
-                          _vm.clipped.UserClips.length == 0
-                            ? _c("td", { staticClass: "text-muted" }, [
-                                _vm._v("You have no clipped coupons.")
-                              ])
-                            : _vm._e()
-                        ]),
+                        _vm.loadingClipped ? _c("tr", [_vm._m(2)]) : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.loadingClipped
+                          ? _c("tr", [
+                              _vm.clipped.UserClips === undefined ||
+                              _vm.clipped.UserClips.length == 0
+                                ? _c("td", { staticClass: "text-muted" }, [
+                                    _vm._v("You have no clipped coupons.")
+                                  ])
+                                : _vm._e()
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _vm._l(_vm.clipped.UserClips, function(c) {
                           return _c("tr", { key: c.RSAOfferId }, [
@@ -38169,7 +38186,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(3)
             ]
           )
         ]
@@ -38241,6 +38258,21 @@ var staticRenderFns = [
           _vm._v(" My Clipped Coupons")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "text-center" }, [
+      _c(
+        "div",
+        {
+          staticClass: "spinner-border text-secondary",
+          attrs: { role: "status" }
+        },
+        [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+      )
     ])
   },
   function() {

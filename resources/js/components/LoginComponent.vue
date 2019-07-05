@@ -28,7 +28,8 @@
             return {
                 UserNameLogin: '',
                 PasswordLogin: '',
-                logged: false
+                logged: false,
+                loading: false,
             };
         },
         methods:{
@@ -39,6 +40,7 @@
                         UserName: this.UserNameLogin,
                         Password: this.PasswordLogin
                     }).then(function(response){
+                        self.$parent.loadingClipped = true;
                         if (response.data.ErrorMessage.ErrorCode === 1){
                             self.logged= true;
                             self.UserNameLogin= '';
@@ -50,6 +52,7 @@
                             var cur = new Date();
                             localStorage.timestamp = cur.getTime();
                             axios.get('/my_coupons').then((coupons) => {
+                                self.$parent.loadingClipped = false;
                                 if(coupons.data.ErrorMessage.ErrorCode !== -1) {
                                     self.$parent.clipped = coupons.data;
                                     localStorage.clipped = JSON.stringify(coupons.data);
