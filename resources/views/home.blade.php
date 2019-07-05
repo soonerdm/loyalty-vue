@@ -12,22 +12,19 @@
                         $("#LoginForm").fadeIn();
                     });
                 });
-            });
-            $('body').on('click', '#RegisterLink', function(){
+            }).on('click', '#RegisterLink', function(){
                 $("#LoginForm").fadeOut( function() {
                     $("#ForgotPin").fadeOut( function() {
                         $("#RegisterForm").fadeIn();
                     });
                 });
-            });
-            $('body').on('click', '#ForgotPinLink', function(){
+            }).on('click', '#ForgotPinLink', function(){
                 $("#LoginForm").fadeOut( function() {
                     $("#RegisterForm").fadeOut( function() {
                         $("#ForgotPin").fadeIn();
                     });
                 });
-            });
-            $('body').on('click', '#LoginLink', function(){
+            }).on('click', '#LoginLink', function(){
                 $("#RegisterForm").fadeOut( function() {
                     $("#ForgotPin").fadeOut( function(){
                         $("#LoginForm").fadeIn();
