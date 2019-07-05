@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header bg-primary text-white">Register
-            <a href="#" id="SignInLink" class="text-white float-right">Sign In</a>
+            <a href="#" id="SignInLink" class="btn btn-sm btn-outline-light float-right">Sign In</a>
         </div>
         <div class="card-body">
             <form v-on:submit.prevent="register()">

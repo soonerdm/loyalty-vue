@@ -19,8 +19,8 @@
                 <div v-show="auth">
                     <div class="card">
                         <div class="card-header bg-primary text-white">
-                            <i class="fa fa-user-circle"></i> Welcome, {{ user.FirstName }}!
-                            <a href="#" id="SignOut" class="text-white float-right" v-on:click="signOut">Sign Out</a>
+                            <span class="user-info"><i class="fa fa-user-circle"></i> Welcome, {{ user.FirstName }}!</span>
+                            <a href="#" id="SignOut" class="btn btn-sm btn-outline-light float-right" v-on:click="signOut">Sign Out</a>
                         </div>
                         <div class="card-body">
                             <div class="row">

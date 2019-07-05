@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header bg-primary text-white">Forgot Pin
-            <a href="#" class="text-white float-right" id="LoginLink">Sign In</a>
+            <a href="#" class="btn btn-sm btn-outline-light float-right" id="LoginLink">Sign In</a>
         </div>
         <div class="card-body">
             <div class="form-group">

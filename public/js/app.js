@@ -37877,7 +37877,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "text-white float-right",
+          staticClass: "btn btn-sm btn-outline-light float-right",
           attrs: { href: "#", id: "LoginLink" }
         },
         [_vm._v("Sign In")]
@@ -38004,7 +38004,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "text-white float-right",
+          staticClass: "btn btn-sm btn-outline-light float-right",
           attrs: { href: "#", id: "RegisterLink" }
         },
         [_vm._v("Register")]
@@ -38107,16 +38107,15 @@ var render = function() {
                   "div",
                   { staticClass: "card-header bg-primary text-white" },
                   [
-                    _c("i", { staticClass: "fa fa-user-circle" }),
-                    _vm._v(
-                      " Welcome, " +
-                        _vm._s(_vm.user.FirstName) +
-                        "!\n                        "
-                    ),
+                    _c("span", { staticClass: "user-info" }, [
+                      _c("i", { staticClass: "fa fa-user-circle" }),
+                      _vm._v(" Welcome, " + _vm._s(_vm.user.FirstName) + "!")
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "a",
                       {
-                        staticClass: "text-white float-right",
+                        staticClass: "btn btn-sm btn-outline-light float-right",
                         attrs: { href: "#", id: "SignOut" },
                         on: { click: _vm.signOut }
                       },
@@ -38593,7 +38592,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "text-white float-right",
+          staticClass: "btn btn-sm btn-outline-light float-right",
           attrs: { href: "#", id: "SignInLink" }
         },
         [_vm._v("Sign In")]
