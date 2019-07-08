@@ -2092,6 +2092,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38140,14 +38141,19 @@ var render = function() {
               ]
             },
             [
-              _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card", attrs: { id: "print-card" } }, [
                 _c(
                   "div",
                   { staticClass: "card-header bg-primary text-white" },
                   [
                     _c("span", { staticClass: "user-info" }, [
                       _c("i", { staticClass: "fa fa-user-circle" }),
-                      _vm._v(" Welcome, " + _vm._s(_vm.user.FirstName) + "!")
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.user.FirstName) +
+                          " " +
+                          _vm._s(_vm.user.LastName)
+                      )
                     ]),
                     _vm._v(" "),
                     _c(
@@ -38322,6 +38328,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-right mt-1 w-100" }, [
+      _c("a", { attrs: { href: "#", onclick: "window.print()" } }, [
+        _vm._v("Print Card")
+      ]),
+      _vm._v(" |\n                    "),
       _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
       _vm._v("  \n                ")
     ])

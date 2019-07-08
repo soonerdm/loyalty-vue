@@ -17,9 +17,9 @@
                     <forgot-pin-component></forgot-pin-component>
                 </div>
                 <div v-show="auth">
-                    <div class="card">
+                    <div class="card" id="print-card">
                         <div class="card-header bg-primary text-white">
-                            <span class="user-info"><i class="fa fa-user-circle"></i> Welcome, {{ user.FirstName }}!</span>
+                            <span class="user-info"><i class="fa fa-user-circle"></i> {{ user.FirstName }} {{ user.LastName }}</span>
                             <a href="#" id="SignOut" class="btn btn-sm btn-outline-light float-right" v-on:click="signOut">Sign Out</a>
                         </div>
                         <div class="card-body">
@@ -60,6 +60,7 @@
                         </div>
                     </div>
                     <div class="text-right mt-1 w-100">
+                        <a href="#" onclick="window.print()">Print Card</a> |
                         <a href="/contact">Contact Us</a> &nbsp;
                     </div>
                 </div>

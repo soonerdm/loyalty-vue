@@ -16515,6 +16515,31 @@ a.text-dark:focus {
   }
 }
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #store-coupons {
+    display: none;
+  }
+
+  #SignOut {
+    display: none;
+  }
+
+  #print-card,
+  #print-card * {
+    visibility: visible;
+  }
+
+  #print-card {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+}
+
 #notifications {
   cursor: pointer;
   position: fixed;
