@@ -32,6 +32,20 @@
                 });
             });
         });
+        // Scroll to top affix
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('#top-link-block').fadeIn();
+            } else {
+                $('#top-link-block').fadeOut();
+            }
+        });
+        $('#top-link-block').click(function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
     </script>
 
 @endsection

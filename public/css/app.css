@@ -16552,3 +16552,24 @@ a.text-dark:focus {
   z-index: 1;
 }
 
+#top-link-block {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 3px;
+  z-index: 500;
+  opacity: 0.7;
+}
+
+#top-link-block a {
+  color: #2a2a2a;
+}
+
+#top-link-block a:hover {
+  text-decoration: none;
+}
+
+#top-link-block .well {
+  border-radius: 4px;
+}
+
