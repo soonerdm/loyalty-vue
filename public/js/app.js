@@ -1953,8 +1953,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       UserNameLogin: '',
       PasswordLogin: '',
-      logged: false,
-      loading: false
+      logged: false
     };
   },
   methods: {
@@ -1986,8 +1985,10 @@ __webpack_require__.r(__webpack_exports__);
                 localStorage.clipped = JSON.stringify(coupons.data);
               }
             });
+          } else if (response.data.ErrorMessage.ErrorCode === -1) {
+            Notify('Invalid user name or password. Please try again.', null, null, 'danger');
           } else {
-            Notify('An error occurred, please try again!', null, null, 'danger');
+            Notify('An error occurred, please try again.', null, null, 'danger');
           }
         });
       } else {

@@ -34,8 +34,7 @@
             return {
                 UserNameLogin: '',
                 PasswordLogin: '',
-                logged: false,
-                loading: false,
+                logged: false
             };
         },
         methods:{
@@ -64,8 +63,12 @@
                                     localStorage.clipped = JSON.stringify(coupons.data);
                                 }
                             });
-                        } else {
-                            Notify('An error occurred, please try again!', null, null, 'danger');
+                        } else if (response.data.ErrorMessage.ErrorCode === -1){
+                            Notify('Invalid user name or password. Please try again.', null, null, 'danger');
+                        }
+
+                        else {
+                            Notify('An error occurred, please try again.', null, null, 'danger');
                         }
                     })
                 } else {
