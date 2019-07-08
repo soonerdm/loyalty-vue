@@ -10,7 +10,7 @@
                     <login-component></login-component>
                     <div class="text-right w-100 mt-1">
                         <a href="/contact">Contact Us</a> |
-                        <a href="#" id="ForgotPinLink">Forgot Pin</a> &nbsp;
+                        <a href="#" id="ForgotPinLink">Forgot Password</a> &nbsp;
                     </div>
                 </div>
                 <div id="ForgotPin" v-if="!auth" style="display: none;">

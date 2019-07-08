@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div class="card-header bg-primary text-white">Forgot Pin
+        <div class="card-header bg-primary text-white">Forgot Password
             <a href="#" class="btn btn-sm btn-outline-light float-right" id="LoginLink">Sign In</a>
         </div>
         <div class="card-body">
@@ -9,7 +9,7 @@
                 <input class="form-control" name="UserNamePin" v-model="UserNamePin" type="text" id="UserNamePin">
             </div>
             <div class="form-group">
-                <button type="submit" id="SubmitButton" class="btn btn-primary" v-on:click="forgotPin()">Send Pin Reset Link</button>
+                <button type="submit" id="SubmitButton" class="btn btn-primary" v-on:click="forgotPin()">Email Reset Link</button>
             </div>
         </div>
     </div>

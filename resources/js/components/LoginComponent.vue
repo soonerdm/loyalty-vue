@@ -20,7 +20,7 @@
                     <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <button type="submit" id="SubmitButton" class="btn btn-primary float-right">Login</button>
+                    <button type="submit" id="SubmitButton" class="btn btn-primary">Login</button>
                 </div>
             </form>
         </div>

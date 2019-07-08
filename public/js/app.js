@@ -37870,7 +37870,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Send Pin Reset Link")]
+          [_vm._v("Email Reset Link")]
         )
       ])
     ])
@@ -37882,7 +37882,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary text-white" }, [
-      _vm._v("Forgot Pin\n        "),
+      _vm._v("Forgot Password\n        "),
       _c(
         "a",
         {
@@ -38056,7 +38056,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary float-right",
+          staticClass: "btn btn-primary",
           attrs: { type: "submit", id: "SubmitButton" }
         },
         [_vm._v("Login")]
@@ -38283,7 +38283,7 @@ var staticRenderFns = [
       _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
       _vm._v(" |\n                    "),
       _c("a", { attrs: { href: "#", id: "ForgotPinLink" } }, [
-        _vm._v("Forgot Pin")
+        _vm._v("Forgot Password")
       ]),
       _vm._v("  \n                ")
     ])
