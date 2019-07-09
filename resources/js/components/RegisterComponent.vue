@@ -63,7 +63,7 @@
                         if(d === 'smartsaverok' && (store.ClientStoreName.substring(0,3) === 'Sma')){
                             mstore.push(store);
                         }
-                        if(d === 'buyforlessok'  && ((store.ClientStoreName.substring(0,3) === 'Buy') || (store.ClientStoreName.substring(0,3) === 'Sup'))){
+                        if(d === 'buyforlessok' || d === 'test' && ((store.ClientStoreName.substring(0,3) === 'Buy') || (store.ClientStoreName.substring(0,3) === 'Sup'))){
                             mstore.push(store);
                         }
 
