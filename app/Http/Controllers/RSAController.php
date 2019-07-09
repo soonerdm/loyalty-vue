@@ -6,6 +6,7 @@ use App\Brand;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Hocza\Sendy\Facades\Sendy;
 
 class RSAController extends Controller
 {
@@ -104,15 +105,12 @@ class RSAController extends Controller
      * @return @JSON response
      */
 
-    public function register_user(Request $request){
-
+    public function register_user(Request $request)
+    {
         $data = $request->toArray();
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
-
-        //todo
-        // Name this in a Session::()
         $data['ClientStore']    = $request->ClientStore;
 
         $data = json_encode($data);
@@ -124,19 +122,32 @@ class RSAController extends Controller
         $data = json_decode($response);
 
        if($data->ErrorMessage->ErrorCode == 1){
-            $loggedInRaw = $this->get_user($request->UserName, $request->Password);
+           $loggedInRaw = $this->get_user($request->UserName, $request->Password);
 
-            $loggedIn = json_decode($loggedInRaw);
+           $loggedIn = json_decode($loggedInRaw);
 
-            Session::put('MemberNumber', $loggedIn->MemberNumber);
-            Session::put('UserId', $loggedIn->UserId);
-            Session::put('UserToken', $loggedIn->UserToken);
+           Session::put('MemberNumber', $loggedIn->MemberNumber);
+           Session::put('UserId', $loggedIn->UserId);
+           Session::put('UserToken', $loggedIn->UserToken);
+
+           //Add to Sendy List
+           $list_id = 'dwPhRy3UuuVLNgn1u1iRJA';
+           $name = $request->FirstName . ' ' . $request->LastName;
+
+           if ($this->brand == 'smartsaverok') {
+               $list_id = 'bARzZutqxyHGZ8U7Sr6DVQ';
+           } elseif ($this->brand == 'uptowngroceryco') {
+               $list_id = 'ViKqF1OGzY6BZ8IGc72A7w';
+           }
+
+           Sendy::setListId($list_id)->subscribe([
+               'email' => $request->UserName,
+               'name' => $name
+           ]);
 
            return $loggedInRaw;
       }
        else return $response;
-
-
 
     }
 
