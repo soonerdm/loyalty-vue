@@ -18,9 +18,6 @@ class RSAController extends Controller
         $url = explode('.', $_SERVER['HTTP_HOST'])[1];
 
         $this->brand = $this->get_brand($url);
-
-
-
    }
 
     /**
@@ -28,9 +25,26 @@ class RSAController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('home');
+        $brand = $this->brand;
+
+        switch ($this->brand) {
+            case 'buyforlessok':
+                $brand = 'Buy For Less / SuperMercado';
+        break;
+            case 'smartsaverok':
+                $brand = 'Smart Saver';
+        break;
+            case 'uptowngroceryco':
+                $brand = 'Uptown Grocery';
+        break;
+            default:
+                $brand = 'Buy For Less / SuperMercado';
+        }
+
+        return view('home', compact('brand'));
     }
 
     /**
