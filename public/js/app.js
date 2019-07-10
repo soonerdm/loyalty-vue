@@ -1799,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1841,6 +1842,15 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return nm;
       }
+    },
+    expDate: function expDate(date) {
+      var ms = date.substring(date.lastIndexOf("(") + 1, date.lastIndexOf("+"));
+      ms = parseInt(ms);
+      var formatted = new Date(ms);
+      var day = formatted.getDate();
+      var mon = formatted.getMonth() + 1;
+      var year = formatted.getFullYear();
+      return mon + '/' + day + '/' + year;
     }
   }
 });
@@ -1931,6 +1941,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginComponent.vue",
   data: function data() {
@@ -1949,6 +1965,8 @@ __webpack_require__.r(__webpack_exports__);
           UserName: this.UserNameLogin,
           Password: this.PasswordLogin
         }).then(function (response) {
+          self.$parent.loadingClipped = true;
+
           if (response.data.ErrorMessage.ErrorCode === 1) {
             self.logged = true;
             self.UserNameLogin = '';
@@ -1960,13 +1978,17 @@ __webpack_require__.r(__webpack_exports__);
             var cur = new Date();
             localStorage.timestamp = cur.getTime();
             axios.get('/my_coupons').then(function (coupons) {
+              self.$parent.loadingClipped = false;
+
               if (coupons.data.ErrorMessage.ErrorCode !== -1) {
                 self.$parent.clipped = coupons.data;
                 localStorage.clipped = JSON.stringify(coupons.data);
               }
             });
+          } else if (response.data.ErrorMessage.ErrorCode === -1) {
+            Notify('Invalid user name or password. Please try again.', null, null, 'danger');
           } else {
-            Notify('An error occurred, please try again!', null, null, 'danger');
+            Notify('An error occurred, please try again.', null, null, 'danger');
           }
         });
       } else {
@@ -2060,6 +2082,17 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2068,6 +2101,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       user: {},
       clipped: [],
       loading: false,
+      loadingClipped: false,
       search: ''
     };
   },
@@ -2234,6 +2268,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RegisterComponent.vue",
   data: function data() {
@@ -2269,7 +2305,7 @@ __webpack_require__.r(__webpack_exports__);
             mstore.push(store);
           }
 
-          if (d === 'buyforlessok' && (store.ClientStoreName.substring(0, 3) === 'Buy' || store.ClientStoreName.substring(0, 3) === 'Sup')) {
+          if (d === 'buyforlessok' || d === 'test' && (store.ClientStoreName.substring(0, 3) === 'Buy' || store.ClientStoreName.substring(0, 3) === 'Sup')) {
             mstore.push(store);
           }
         });
@@ -2278,7 +2314,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    Register: function Register() {
+    register: function register() {
       var self = this;
 
       if (this.Password.length !== 4) {
@@ -37705,7 +37741,13 @@ var render = function() {
                   _c("br"),
                   _c("br"),
                   _vm._v(" "),
-                  _c("small", [_vm._v(_vm._s(o.Details))])
+                  _c("small", [_vm._v(_vm._s(o.Details))]),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", { staticStyle: { "font-size": "8px" } }, [
+                    _vm._v("Exp. " + _vm._s(_vm.expDate(o.ExpiresOn)))
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -37830,7 +37872,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Send Pin Reset Link")]
+          [_vm._v("Email Reset Link")]
         )
       ])
     ])
@@ -37842,11 +37884,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header bg-primary text-white" }, [
-      _vm._v("Forgot Pin\n        "),
+      _vm._v("Forgot Password\n        "),
       _c(
         "a",
         {
-          staticClass: "text-white float-right",
+          staticClass: "btn btn-sm btn-outline-light float-right",
           attrs: { href: "#", id: "LoginLink" }
         },
         [_vm._v("Sign In")]
@@ -37890,10 +37932,12 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "UserNameLogin" } }, [
-              _vm._v("User Name")
-            ]),
+          _c("label", { attrs: { for: "UserNameLogin" } }, [
+            _vm._v("User Name")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group mb-3" }, [
+            _vm._m(1),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -37908,7 +37952,8 @@ var render = function() {
               attrs: {
                 name: "UserNameLogin",
                 type: "text",
-                id: "UserNameLogin"
+                id: "UserNameLogin",
+                required: ""
               },
               domProps: { value: _vm.UserNameLogin },
               on: {
@@ -37922,10 +37967,12 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "PasswordLogin" } }, [
-              _vm._v("Password")
-            ]),
+          _c("label", { attrs: { for: "PasswordLogin" } }, [
+            _vm._v("Password")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group mb-3" }, [
+            _vm._m(2),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -37941,7 +37988,8 @@ var render = function() {
                 type: "password",
                 name: "PasswordLogin",
                 maxlength: "4",
-                id: "PasswordLogin"
+                id: "PasswordLogin",
+                required: ""
               },
               domProps: { value: _vm.PasswordLogin },
               on: {
@@ -37955,7 +38003,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(3)
         ]
       )
     ])
@@ -37971,10 +38019,34 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "text-white float-right",
+          staticClass: "btn btn-sm btn-outline-light float-right",
           attrs: { href: "#", id: "RegisterLink" }
         },
         [_vm._v("Register")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_c("i", { staticClass: "fa fa-user-circle" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_c("i", { staticClass: "fa fa-key" })]
       )
     ])
   },
@@ -38069,21 +38141,25 @@ var render = function() {
               ]
             },
             [
-              _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card", attrs: { id: "print-card" } }, [
                 _c(
                   "div",
                   { staticClass: "card-header bg-primary text-white" },
                   [
-                    _c("i", { staticClass: "fa fa-user-circle" }),
-                    _vm._v(
-                      " Welcome, " +
-                        _vm._s(_vm.user.FirstName) +
-                        "!\n                        "
-                    ),
+                    _c("span", { staticClass: "user-info" }, [
+                      _c("i", { staticClass: "fa fa-user-circle" }),
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.user.FirstName) +
+                          " " +
+                          _vm._s(_vm.user.LastName)
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "a",
                       {
-                        staticClass: "text-white float-right",
+                        staticClass: "btn btn-sm btn-outline-light float-right",
                         attrs: { href: "#", id: "SignOut" },
                         on: { click: _vm.signOut }
                       },
@@ -38124,14 +38200,18 @@ var render = function() {
                     _c(
                       "tbody",
                       [
-                        _c("tr", [
-                          _vm.clipped.UserClips === undefined ||
-                          _vm.clipped.UserClips.length == 0
-                            ? _c("td", { staticClass: "text-muted" }, [
-                                _vm._v("You have no clipped coupons.")
-                              ])
-                            : _vm._e()
-                        ]),
+                        _vm.loadingClipped ? _c("tr", [_vm._m(2)]) : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.loadingClipped
+                          ? _c("tr", [
+                              _vm.clipped.UserClips === undefined ||
+                              _vm.clipped.UserClips.length == 0
+                                ? _c("td", { staticClass: "text-muted" }, [
+                                    _vm._v("You have no clipped coupons.")
+                                  ])
+                                : _vm._e()
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _vm._l(_vm.clipped.UserClips, function(c) {
                           return _c("tr", { key: c.RSAOfferId }, [
@@ -38149,42 +38229,47 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(3)
             ]
           )
         ]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-8 col-md-7 order-2 order-md-1" }, [
-        _c("div", { staticClass: "w-100 mb-3 text-right" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.search,
-                expression: "search"
-              }
-            ],
-            staticClass: "form-control",
-            staticStyle: { width: "200px" },
-            attrs: {
-              type: "text",
-              name: "search",
-              id: "search",
-              placeholder: "Filter By Keyword"
-            },
-            domProps: { value: _vm.search },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c(
+          "div",
+          { staticClass: "input-group mb-3", staticStyle: { width: "250px" } },
+          [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
                 }
-                _vm.search = $event.target.value
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "search",
+                id: "search",
+                placeholder: "Filter By Keyword"
+              },
+              domProps: { value: _vm.search },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                }
               }
-            }
-          })
-        ]),
+            })
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -38201,11 +38286,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right w-100" }, [
+    return _c("div", { staticClass: "text-right w-100 mt-1" }, [
       _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
       _vm._v(" |\n                    "),
       _c("a", { attrs: { href: "#", id: "ForgotPinLink" } }, [
-        _vm._v("Forgot Pin")
+        _vm._v("Forgot Password")
       ]),
       _vm._v("  \n                ")
     ])
@@ -38227,9 +38312,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right w-100" }, [
+    return _c("td", { staticClass: "text-center" }, [
+      _c(
+        "div",
+        {
+          staticClass: "spinner-border spinner-border-sm text-secondary",
+          attrs: { role: "status" }
+        },
+        [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-right mt-1 w-100" }, [
+      _c("a", { attrs: { href: "#", onclick: "window.print()" } }, [
+        _vm._v("Print Card")
+      ]),
+      _vm._v(" |\n                    "),
       _c("a", { attrs: { href: "/contact" } }, [_vm._v("Contact Us")]),
       _vm._v("  \n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_c("i", { staticClass: "fa fa-search" })]
+      )
     ])
   }
 ]
@@ -38292,208 +38408,241 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "FirstName" } }, [_vm._v("First Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.FirstName,
-              expression: "FirstName"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "FirstName", id: "FirstName", type: "text" },
-          domProps: { value: _vm.FirstName },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.FirstName = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "LastName" } }, [_vm._v("Last Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.LastName,
-              expression: "LastName"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "LastName", id: "LastName", type: "text" },
-          domProps: { value: _vm.LastName },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.LastName = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "UserName" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.UserName,
-              expression: "UserName"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { name: "UserName", id: "UserName", type: "text" },
-          domProps: { value: _vm.UserName },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.UserName = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Pin")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Password,
-              expression: "Password"
-            }
-          ],
-          ref: "Password",
-          staticClass: "form-control",
-          attrs: {
-            id: "password",
-            name: "Password",
-            maxlength: "4",
-            type: "password"
-          },
-          domProps: { value: _vm.Password },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Password = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "Password2" } }, [_vm._v("Confirm Pin")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Password2,
-              expression: "Password2"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            id: "Password2",
-            name: "Password2",
-            maxlength: "4",
-            type: "password"
-          },
-          domProps: { value: _vm.Password2 },
-          on: {
-            blur: function($event) {
-              return _vm.checkpass()
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Password2 = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "ClientStore" } }, [
-          _vm._v("Preferred Store")
-        ]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            staticClass: "form-control",
-            attrs: { name: "ClientStore", id: "ClientStore" }
-          },
-          _vm._l(_vm.stores, function(store) {
-            return _c("option", { domProps: { value: store.ClientStoreId } }, [
-              _vm._v(_vm._s(store.ClientStoreName))
-            ])
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "zipcode" } }, [_vm._v("Zip Code")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.ZipCode,
-              expression: "ZipCode"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { id: "zipcode", name: "ZipCode", type: "text" },
-          domProps: { value: _vm.ZipCode },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.ZipCode = $event.target.value
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
       _c(
-        "button",
+        "form",
         {
-          staticClass: "btn btn-primary",
-          attrs: { type: "submit" },
           on: {
-            click: function($event) {
-              return _vm.Register()
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.register()
             }
           }
         },
-        [_vm._v(" Register")]
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "FirstName" } }, [
+              _vm._v("First Name")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.FirstName,
+                  expression: "FirstName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "FirstName",
+                id: "FirstName",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.FirstName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.FirstName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "LastName" } }, [_vm._v("Last Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.LastName,
+                  expression: "LastName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "LastName",
+                id: "LastName",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.LastName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.LastName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "UserName" } }, [_vm._v("Email")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.UserName,
+                  expression: "UserName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                name: "UserName",
+                id: "UserName",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.UserName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.UserName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "password" } }, [_vm._v("Pin")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Password,
+                  expression: "Password"
+                }
+              ],
+              ref: "Password",
+              staticClass: "form-control",
+              attrs: {
+                id: "password",
+                name: "Password",
+                maxlength: "4",
+                type: "password",
+                required: ""
+              },
+              domProps: { value: _vm.Password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Password = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "Password2" } }, [
+              _vm._v("Confirm Pin")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Password2,
+                  expression: "Password2"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "Password2",
+                name: "Password2",
+                maxlength: "4",
+                type: "password",
+                required: ""
+              },
+              domProps: { value: _vm.Password2 },
+              on: {
+                blur: function($event) {
+                  return _vm.checkpass()
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Password2 = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "ClientStore" } }, [
+              _vm._v("Preferred Store")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "form-control",
+                attrs: { name: "ClientStore", id: "ClientStore", required: "" }
+              },
+              _vm._l(_vm.stores, function(store) {
+                return _c(
+                  "option",
+                  { domProps: { value: store.ClientStoreId } },
+                  [_vm._v(_vm._s(store.ClientStoreName))]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "zipcode" } }, [_vm._v("Zip Code")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.ZipCode,
+                  expression: "ZipCode"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "zipcode",
+                name: "ZipCode",
+                type: "text",
+                required: ""
+              },
+              domProps: { value: _vm.ZipCode },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.ZipCode = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+            [_vm._v(" Register")]
+          )
+        ]
       )
     ])
   ])
@@ -38508,7 +38657,7 @@ var staticRenderFns = [
       _c(
         "a",
         {
-          staticClass: "text-white float-right",
+          staticClass: "btn btn-sm btn-outline-light float-right",
           attrs: { href: "#", id: "SignInLink" }
         },
         [_vm._v("Sign In")]

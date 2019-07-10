@@ -6,6 +6,7 @@ use App\Brand;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Hocza\Sendy\Facades\Sendy;
 
 class RSAController extends Controller
 {
@@ -17,9 +18,6 @@ class RSAController extends Controller
         $url = explode('.', $_SERVER['HTTP_HOST'])[1];
 
         $this->brand = $this->get_brand($url);
-
-
-
    }
 
     /**
@@ -27,9 +25,26 @@ class RSAController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('home');
+        $brand = $this->brand;
+
+        switch ($this->brand) {
+            case 'buyforlessok':
+                $brand = 'Buy For Less / SuperMercado';
+        break;
+            case 'smartsaverok':
+                $brand = 'Smart Saver';
+        break;
+            case 'uptowngroceryco':
+                $brand = 'Uptown Grocery';
+        break;
+            default:
+                $brand = 'Buy For Less / SuperMercado';
+        }
+
+        return view('home', compact('brand'));
     }
 
     /**
@@ -104,39 +119,55 @@ class RSAController extends Controller
      * @return @JSON response
      */
 
-    public function register_user(Request $request){
-
+    public function register_user(Request $request)
+    {
         $data = $request->toArray();
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
-
-        //todo
-        // Name this in a Session::()
         $data['ClientStore']    = $request->ClientStore;
 
         $data = json_encode($data);
 
-        $url =  $this->build_url($this->brand, 'RegisterUser');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url =  $this->build_url($brand, 'RegisterUser');
 
         $response = $this->curl_post($url, $data);
 
         $data = json_decode($response);
 
        if($data->ErrorMessage->ErrorCode == 1){
-            $loggedInRaw = $this->get_user($request->UserName, $request->Password);
+           $loggedInRaw = $this->get_user($request->UserName, $request->Password);
 
-            $loggedIn = json_decode($loggedInRaw);
+           $loggedIn = json_decode($loggedInRaw);
 
-            Session::put('MemberNumber', $loggedIn->MemberNumber);
-            Session::put('UserId', $loggedIn->UserId);
-            Session::put('UserToken', $loggedIn->UserToken);
+           Session::put('MemberNumber', $loggedIn->MemberNumber);
+           Session::put('UserId', $loggedIn->UserId);
+           Session::put('UserToken', $loggedIn->UserToken);
+
+           //Add to Sendy List
+           $list_id = 'dwPhRy3UuuVLNgn1u1iRJA';
+           $name = $request->FirstName . ' ' . $request->LastName;
+
+           if ($this->brand == 'smartsaverok') {
+               $list_id = 'bARzZutqxyHGZ8U7Sr6DVQ';
+           } elseif ($this->brand == 'uptowngroceryco') {
+               $list_id = 'ViKqF1OGzY6BZ8IGc72A7w';
+           }
+
+           Sendy::setListId($list_id)->subscribe([
+               'email' => $request->UserName,
+               'name' => $name
+           ]);
 
            return $loggedInRaw;
       }
        else return $response;
-
-
 
     }
 
@@ -145,7 +176,13 @@ class RSAController extends Controller
         $data['UserName'] = $UserName;
         $data['Password'] = $Password;
 
-        $url = $this->build_url($this->brand, 'ValidateUser');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'ValidateUser');
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
@@ -177,7 +214,13 @@ class RSAController extends Controller
         $data['UserName'] = $request->UserName;
         $data['Password'] = $request->Password;
 
-        $url = $this->build_url($this->brand, 'ValidateUser');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'ValidateUser');
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
@@ -206,8 +249,8 @@ class RSAController extends Controller
      * @param Request $request
      * @return bool|string
      */
-    public function get_coupons(){
-
+    public function get_coupons()
+    {
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         if(empty(Session::get('UserToken'))){
@@ -216,11 +259,15 @@ class RSAController extends Controller
 
         $data = json_encode($data);
 
-        $url = $this->build_url($this->brand, 'GetRSAOffers');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'GetRSAOffers');
 
         $response = $this->curl_post($url, $data);
-
-       // $response = json_decode($response);
 
         return $response;
     }
@@ -249,7 +296,13 @@ class RSAController extends Controller
 
         $data = json_encode($data);
 
-        $url = $this->build_url($this->brand, 'ClipOffer');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'ClipOffer');
 
         $response = $this->curl_post($url, $data);
         return $response;
@@ -267,7 +320,13 @@ class RSAController extends Controller
             return json_encode($data['ErrorMessage'] = "Not Logged In" );
         }
 
-        $url = $this->build_url($this->brand, 'GetUserClips');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'GetUserClips');
 
         $url = $url."/".Session::get('UserToken')."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
 
@@ -287,7 +346,13 @@ class RSAController extends Controller
 
         $data = json_encode($data);
 
-        $url = $this->build_url($this->brand, 'ForgotPin');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'ForgotPin');
 
         $response = $this->curl_post($url, $data);
         return $response;
@@ -301,7 +366,13 @@ class RSAController extends Controller
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
 
-        $url = $this->build_url($this->brand, 'GetClientStores');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'GetClientStores');
 
         $url = $url."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
 
@@ -318,7 +389,7 @@ class RSAController extends Controller
 
         $domain['buyforlessok'] = 'buyforlessok';
         $domain['uptowngroceryco'] = 'uptowngroceryco';
-        $domain['smartsaverok'] = 'buyforlessok';
+        $domain['smartsaverok'] = 'smartsaverok';
 
         if (!isset($domain[$url])){
             return 'buyforlessok';

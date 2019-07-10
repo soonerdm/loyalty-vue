@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Loyalty Rewards Program</title>
+    <title>{{ $brand }} Loyalty Rewards Program</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container" id="top">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     @if( (URL::to('') == 'http://loyalty.test:8000') )
                         <img src="/img/buyforlessok.png" height="50" />
@@ -79,6 +79,12 @@
             </div>
         </nav>
         @yield('content')
+    <!-- Scroll to Top Affix -->
+        <span id="top-link-block"><small>
+            <a href="#top" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+                top <i class="fa fa-chevron-up"></i>
+            </a></small>
+        </span>
     </div>
 </body>
 </html>

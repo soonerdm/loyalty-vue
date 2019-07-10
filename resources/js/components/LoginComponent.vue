@@ -1,17 +1,23 @@
 <template>
     <div class="card">
         <div class="card-header bg-primary text-white">Sign In
-            <a href="#" class="text-white float-right" id="RegisterLink">Register</a>
+            <a href="#" class="btn btn-sm btn-outline-light float-right" id="RegisterLink">Register</a>
         </div>
         <div class="card-body">
             <form v-on:submit.prevent="login()">
-                <div class="form-group">
-                    <label for="UserNameLogin">User Name</label>
-                    <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin">
+                <label for="UserNameLogin">User Name</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-user-circle"></i></span>
+                    </div>
+                    <input class="form-control" name="UserNameLogin" v-model="UserNameLogin" type="text" id="UserNameLogin" required>
                 </div>
-                <div class="form-group">
-                    <label for="PasswordLogin">Password</label>
-                    <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control">
+                <label for="PasswordLogin">Password</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+                    </div>
+                    <input type="password" name="PasswordLogin" maxlength="4" v-model="PasswordLogin" id="PasswordLogin" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="SubmitButton" class="btn btn-primary">Login</button>
@@ -39,6 +45,7 @@
                         UserName: this.UserNameLogin,
                         Password: this.PasswordLogin
                     }).then(function(response){
+                        self.$parent.loadingClipped = true;
                         if (response.data.ErrorMessage.ErrorCode === 1){
                             self.logged= true;
                             self.UserNameLogin= '';
@@ -50,13 +57,18 @@
                             var cur = new Date();
                             localStorage.timestamp = cur.getTime();
                             axios.get('/my_coupons').then((coupons) => {
+                                self.$parent.loadingClipped = false;
                                 if(coupons.data.ErrorMessage.ErrorCode !== -1) {
                                     self.$parent.clipped = coupons.data;
                                     localStorage.clipped = JSON.stringify(coupons.data);
                                 }
                             });
-                        } else {
-                            Notify('An error occurred, please try again!', null, null, 'danger');
+                        } else if (response.data.ErrorMessage.ErrorCode === -1){
+                            Notify('Invalid user name or password. Please try again.', null, null, 'danger');
+                        }
+
+                        else {
+                            Notify('An error occurred, please try again.', null, null, 'danger');
                         }
                     })
                 } else {

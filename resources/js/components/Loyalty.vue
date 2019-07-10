@@ -8,19 +8,19 @@
                 </div>
                 <div id="LoginForm" v-if="!auth">
                     <login-component></login-component>
-                    <div class="text-right w-100">
+                    <div class="text-right w-100 mt-1">
                         <a href="/contact">Contact Us</a> |
-                        <a href="#" id="ForgotPinLink">Forgot Pin</a> &nbsp;
+                        <a href="#" id="ForgotPinLink">Forgot Password</a> &nbsp;
                     </div>
                 </div>
                 <div id="ForgotPin" v-if="!auth" style="display: none;">
                     <forgot-pin-component></forgot-pin-component>
                 </div>
                 <div v-show="auth">
-                    <div class="card">
+                    <div class="card" id="print-card">
                         <div class="card-header bg-primary text-white">
-                            <i class="fa fa-user-circle"></i> Welcome, {{ user.FirstName }}!
-                            <a href="#" id="SignOut" class="text-white float-right" v-on:click="signOut">Sign Out</a>
+                            <span class="user-info"><i class="fa fa-user-circle"></i> {{ user.FirstName }} {{ user.LastName }}</span>
+                            <a href="#" id="SignOut" class="btn btn-sm btn-outline-light float-right" v-on:click="signOut">Sign Out</a>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -42,7 +42,14 @@
                                     <tr><th class="text-center"><i class="fa fa-cut"></i> My Clipped Coupons</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-if="loadingClipped">
+                                        <td class="text-center">
+                                            <div class="spinner-border spinner-border-sm text-secondary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr v-if="!loadingClipped">
                                         <td class="text-muted" v-if="clipped.UserClips === undefined || clipped.UserClips.length == 0">You have no clipped coupons.</td>
                                     </tr>
                                     <tr v-for="c in clipped.UserClips" :key="c.RSAOfferId">
@@ -52,14 +59,18 @@
                             </table>
                         </div>
                     </div>
-                    <div class="text-right w-100">
+                    <div class="text-right mt-1 w-100">
+                        <a href="#" onclick="window.print()">Print Card</a> |
                         <a href="/contact">Contact Us</a> &nbsp;
                     </div>
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 order-2 order-md-1">
-                <div class="w-100 mb-3 text-right">
-                    <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword" style="width: 200px">
+                <div class="input-group mb-3" style="width: 250px">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                    </div>
+                    <input class="form-control" type="text" name="search" id="search" v-model="search" placeholder="Filter By Keyword">
                 </div>
                 <div id="store-coupons">
                     <coupons-component></coupons-component>
@@ -79,6 +90,7 @@
                 user: {},
                 clipped: [],
                 loading: false,
+                loadingClipped: false,
                 search: ''
             }
         },

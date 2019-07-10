@@ -16,7 +16,8 @@
                     <h5 class="card-title">{{ pName(o.ProductName) }}</h5>
                     <p class="card-text">
                         <span class="text-danger font-weight-bold">{{ o.Title }}</span><br /><br />
-                        <small>{{ o.Details }}</small>
+                        <small>{{ o.Details }}</small><br /><br />
+                        <span style="font-size: 8px;">Exp. {{ expDate(o.ExpiresOn) }}</span>
                     </p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
@@ -73,7 +74,6 @@
             },
 
             loadMore(){
-
                 this.couponsToShow += 15;
             },
 
@@ -84,8 +84,20 @@
                 else{
                     return nm;
                 }
-            }
+            },
 
+            expDate(date){
+                var ms = date.substring(
+                    date.lastIndexOf("(") + 1,
+                    date.lastIndexOf("+")
+                );
+                ms = parseInt(ms);
+                var formatted = new Date(ms);
+                var day = formatted.getDate();
+                var mon = formatted.getMonth() + 1;
+                var year = formatted.getFullYear();
+                return mon + '/' + day + '/' + year;
+            }
         }
      }
 

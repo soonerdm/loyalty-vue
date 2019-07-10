@@ -1,41 +1,43 @@
 <template>
     <div class="card">
         <div class="card-header bg-primary text-white">Register
-            <a href="#" id="SignInLink" class="text-white float-right">Sign In</a>
+            <a href="#" id="SignInLink" class="btn btn-sm btn-outline-light float-right">Sign In</a>
         </div>
         <div class="card-body">
-            <div class="form-group">
-                <label for="FirstName">First Name</label>
-                <input class="form-control" name="FirstName" v-model="FirstName" id="FirstName" type="text">
-            </div>
-            <div class="form-group">
-                <label for="LastName">Last Name</label>
-                <input name="LastName" class="form-control" v-model="LastName" id="LastName" type="text">
-            </div>
-            <div class="form-group">
-                <label for="UserName">Email</label>
-                <input class="form-control" name="UserName" v-model="UserName" id="UserName" type="text">
-            </div>
-            <div class="form-group">
-                <label for="password">Pin</label>
-                <input class="form-control" id="password" name="Password" maxlength="4" v-model="Password" ref="Password" type="password">
-            </div>
-            <div class="form-group">
-                <label for="Password2">Confirm Pin</label>
-                <input class="form-control" id="Password2" name="Password2" maxlength="4" v-model="Password2" type="password" v-on:blur="checkpass()">
-            </div>
-            <div class="form-group">
-                <label for="ClientStore">Preferred Store</label>
-                <select name="ClientStore" id="ClientStore" class="form-control" >
-                    <option v-for="store in stores" v-bind:value="store.ClientStoreId">{{store.ClientStoreName}}</option>
-                </select>
+            <form v-on:submit.prevent="register()">
+                <div class="form-group">
+                    <label for="FirstName">First Name</label>
+                    <input class="form-control" name="FirstName" v-model="FirstName" id="FirstName" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label for="LastName">Last Name</label>
+                    <input name="LastName" class="form-control" v-model="LastName" id="LastName" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label for="UserName">Email</label>
+                    <input class="form-control" name="UserName" v-model="UserName" id="UserName" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Pin</label>
+                    <input class="form-control" id="password" name="Password" maxlength="4" v-model="Password" ref="Password" type="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="Password2">Confirm Pin</label>
+                    <input class="form-control" id="Password2" name="Password2" maxlength="4" v-model="Password2" type="password" v-on:blur="checkpass()" required>
+                </div>
+                <div class="form-group">
+                    <label for="ClientStore">Preferred Store</label>
+                    <select name="ClientStore" id="ClientStore" class="form-control" required>
+                        <option v-for="store in stores" v-bind:value="store.ClientStoreId">{{store.ClientStoreName}}</option>
+                    </select>
 
-            </div>
-            <div class="form-group">
-                <label for="zipcode">Zip Code</label>
-                <input class="form-control" id="zipcode" name="ZipCode" v-model="ZipCode" type="text">
-            </div>
-            <button type="submit" class="btn btn-primary" v-on:click="Register()"> Register</button>
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">Zip Code</label>
+                    <input class="form-control" id="zipcode" name="ZipCode" v-model="ZipCode" type="text" required>
+                </div>
+                <button type="submit" class="btn btn-primary"> Register</button>
+            </form>
         </div>
     </div>
 </template>
@@ -61,7 +63,7 @@
                         if(d === 'smartsaverok' && (store.ClientStoreName.substring(0,3) === 'Sma')){
                             mstore.push(store);
                         }
-                        if(d === 'buyforlessok'  && ((store.ClientStoreName.substring(0,3) === 'Buy') || (store.ClientStoreName.substring(0,3) === 'Sup'))){
+                        if(d === 'buyforlessok' || d === 'test' && ((store.ClientStoreName.substring(0,3) === 'Buy') || (store.ClientStoreName.substring(0,3) === 'Sup'))){
                             mstore.push(store);
                         }
 
@@ -71,7 +73,7 @@
             });
         },
         methods: {
-            Register() {
+            register() {
                 let self = this;
                 if(this.Password.length !== 4){
                     Notify('Your Pin must be 4 digits!', null, null, 'danger');

@@ -16515,6 +16515,31 @@ a.text-dark:focus {
   }
 }
 
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #store-coupons {
+    display: none;
+  }
+
+  #SignOut {
+    display: none;
+  }
+
+  #print-card,
+  #print-card * {
+    visibility: visible;
+  }
+
+  #print-card {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+}
+
 #notifications {
   cursor: pointer;
   position: fixed;
@@ -16534,13 +16559,42 @@ a.text-dark:focus {
   margin: 10px;
 }
 
+.card-header {
+  font-size: 1.3em;
+}
+
 .card-text {
   line-height: 1em;
+}
+
+.user-info {
+  font-size: 0.8em;
 }
 
 .featured {
   position: absolute;
   top: -1px;
   z-index: 1;
+}
+
+#top-link-block {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 3px;
+  z-index: 500;
+  opacity: 0.7;
+}
+
+#top-link-block a {
+  color: #2a2a2a;
+}
+
+#top-link-block a:hover {
+  text-decoration: none;
+}
+
+#top-link-block .well {
+  border-radius: 4px;
 }
 
