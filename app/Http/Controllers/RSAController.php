@@ -339,7 +339,7 @@ class RSAController extends Controller
 
         $domain['buyforlessok'] = 'buyforlessok';
         $domain['uptowngroceryco'] = 'uptowngroceryco';
-        $domain['smartsaverok'] = 'buyforlessok';
+        $domain['smartsaverok'] = 'smartsaverok';
 
         if (!isset($domain[$url])){
             return 'buyforlessok';
