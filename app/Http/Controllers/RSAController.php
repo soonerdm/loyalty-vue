@@ -210,6 +210,10 @@ class RSAController extends Controller
 
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+        if(empty(Session::get('UserToken'))){
+            $data['UserToken'] = Session::get('UserToken');
+        }
+
         $data = json_encode($data);
 
         $url = $this->build_url($this->brand, 'GetRSAOffers');
