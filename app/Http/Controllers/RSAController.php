@@ -231,17 +231,21 @@ class RSAController extends Controller
      * @param Request $request
      * @return bool|string
      */
-    public function get_coupons(){
-
+    public function get_coupons()
+    {
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         $data = json_encode($data);
 
-        $url = $this->build_url($this->brand, 'GetRSAOffers');
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $url = $this->build_url($brand, 'GetRSAOffers');
 
         $response = $this->curl_post($url, $data);
-
-       // $response = json_decode($response);
 
         return $response;
     }
