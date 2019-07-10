@@ -2337,7 +2337,6 @@ __webpack_require__.r(__webpack_exports__);
 
           if (response.data.ErrorMessage.ErrorCode === 1) {
             Notify('Your account has been registered successfully!', null, null, 'success');
-            console.log(response.data);
             self.$parent.user = response.data;
             self.$parent.auth = true;
           }
