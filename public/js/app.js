@@ -1800,6 +1800,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37786,8 +37787,19 @@ var render = function() {
                           }
                         },
                         [
-                          _c("i", { staticClass: "fa fa-cut" }),
-                          _vm._v(" Clip Coupon\n                ")
+                          !_vm.checkClipped(o.RSAOfferId)
+                            ? _c("span", [
+                                _c("i", { staticClass: "fa fa-cut" }),
+                                _vm._v(" Clip Coupon")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.checkClipped(o.RSAOfferId)
+                            ? _c("span", [
+                                _c("i", { staticClass: "fa fa-check" }),
+                                _vm._v(" Clipped!")
+                              ])
+                            : _vm._e()
                         ]
                       )
                     : _vm._e()

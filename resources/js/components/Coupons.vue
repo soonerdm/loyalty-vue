@@ -22,7 +22,8 @@
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
                     <button class="btn btn-block btn-primary text-white" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton" :disabled="checkClipped(o.RSAOfferId)">
-                        <i class="fa fa-cut"></i> Clip Coupon
+                        <span v-if="!checkClipped(o.RSAOfferId)"><i class="fa fa-cut"></i> Clip Coupon</span>
+                        <span v-if="checkClipped(o.RSAOfferId)"><i class="fa fa-check"></i> Clipped!</span>
                     </button>
                 </div>
             </div>
