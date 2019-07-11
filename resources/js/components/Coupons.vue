@@ -21,9 +21,9 @@
                     </p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
-                    <a class="btn btn-block btn-primary text-white" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton" style="cursor: pointer">
+                    <button class="btn btn-block btn-primary text-white" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton" :disabled="checkClipped(o.RSAOfferId)">
                         <i class="fa fa-cut"></i> Clip Coupon
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -43,9 +43,6 @@
                 clipButton: true,
                 couponsToShow: 15
             }
-        },
-        mounted() {
-
         },
         methods: {
             add: function (coupon_id, CategoryId){
@@ -72,11 +69,9 @@
                     Notify('You must be logged in to do that.', null, null, 'danger');
                 }
             },
-
             loadMore(){
                 this.couponsToShow += 15;
             },
-
             pName(nm){
                 if (nm === 'Group'){
                     return '';
@@ -85,18 +80,30 @@
                     return nm;
                 }
             },
-
             expDate(date){
-                var ms = date.substring(
+                let ms = date.substring(
                     date.lastIndexOf("(") + 1,
                     date.lastIndexOf("+")
                 );
                 ms = parseInt(ms);
-                var formatted = new Date(ms);
-                var day = formatted.getDate();
-                var mon = formatted.getMonth() + 1;
-                var year = formatted.getFullYear();
+                let formatted = new Date(ms);
+                let day = formatted.getDate();
+                let mon = formatted.getMonth() + 1;
+                let year = formatted.getFullYear();
                 return mon + '/' + day + '/' + year;
+            },
+            checkClipped(id){
+                if (this.$parent.clipped !== undefined) {
+                    let clipped = this.$parent.clipped.UserClips;
+                    let found = false;
+                    for (var i in clipped) {
+                        if (parseInt(clipped[i].RSAOfferId) === parseInt(id)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    return found;
+                }
             }
         }
      }

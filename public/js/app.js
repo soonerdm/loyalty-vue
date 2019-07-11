@@ -1807,7 +1807,6 @@ __webpack_require__.r(__webpack_exports__);
       couponsToShow: 15
     };
   },
-  mounted: function mounted() {},
   methods: {
     add: function add(coupon_id, CategoryId) {
       var self = this;
@@ -1851,6 +1850,21 @@ __webpack_require__.r(__webpack_exports__);
       var mon = formatted.getMonth() + 1;
       var year = formatted.getFullYear();
       return mon + '/' + day + '/' + year;
+    },
+    checkClipped: function checkClipped(id) {
+      if (this.$parent.clipped !== undefined) {
+        var clipped = this.$parent.clipped.UserClips;
+        var found = false;
+
+        for (var i in clipped) {
+          if (parseInt(clipped[i].RSAOfferId) === parseInt(id)) {
+            found = true;
+            break;
+          }
+        }
+
+        return found;
+      }
     }
   }
 });
@@ -37761,10 +37775,10 @@ var render = function() {
                 [
                   _vm.clipButton
                     ? _c(
-                        "a",
+                        "button",
                         {
                           staticClass: "btn btn-block btn-primary text-white",
-                          staticStyle: { cursor: "pointer" },
+                          attrs: { disabled: _vm.checkClipped(o.RSAOfferId) },
                           on: {
                             click: function($event) {
                               return _vm.add(o.RSAOfferId, o.CategoryId)
@@ -51382,8 +51396,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
