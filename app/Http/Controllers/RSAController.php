@@ -503,6 +503,27 @@ class RSAController extends Controller
     }
 
 
+    public function update_store(Request $request){
+
+        $data['SecurityKey']    = ENV('RSA_SecurityKey');
+        $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
+        $data['UserToken']      = $request->UserToken;
+        $data['StoreId']        = $request->StoreId;
+
+        $brand = $this->brand;
+
+        if ($this->brand == 'smartsaverok') {
+            $brand = 'buyforlessok';
+        }
+
+        $data = json_encode($data);
+
+        $url = $this->build_url($brand, 'ForgotPin');
+
+        $response = $this->curl_post($url, $data);
+        return $response;
+
+    }
 
 
     public function logout(){
