@@ -7,6 +7,29 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public $brand;
+
+    public function __construct()
+    {
+        $url = explode('.', $_SERVER['HTTP_HOST'])[1];
+
+        $this->brand = $this->get_brand($url);
+    }
+
+    public function get_brand($url)
+    {
+        $domain['buyforlessok'] = 'buyforlessok';
+        $domain['uptowngroceryco'] = 'uptowngroceryco';
+        $domain['smartsaverok'] = 'smartsaverok';
+
+        if (!isset($domain[$url])){
+            return 'buyforlessok';
+        }
+        else {
+            return $domain[$url];
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +37,23 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact');
+        $brand = $this->brand;
+
+        switch ($this->brand) {
+            case 'buyforlessok':
+                $brand = 'Buy For Less / SuperMercado';
+                break;
+            case 'smartsaverok':
+                $brand = 'Smart Saver';
+                break;
+            case 'uptowngroceryco':
+                $brand = 'Uptown Grocery';
+                break;
+            default:
+                $brand = 'Buy For Less / SuperMercado';
+        }
+
+        return view('contact', compact('brand'));
     }
 
     /**
