@@ -2137,6 +2137,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2196,17 +2198,26 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       Notify('You have been logged out.', null, null, 'success');
     },
     changeStore: function changeStore() {
-      console.log('UserToken: ' + this.user.UserToken);
-      console.log('ClientStore: ' + this.storeChange);
+      var self = this;
       axios.post('/update_store', {
         UserToken: this.user.UserToken,
         StoreId: this.storeChange
       }).then(function (response) {
-        console.log(response); //                    if(response.data.ErrorMessage.ErrorCode === 1) {
-        //                        Notify('Your preferred store has been updated!', null, null, 'success');
-        //                    } else if(response.data.ErrorMessage.ErrorCode === -1) {
-        //                        Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
-        //                    }
+        if (response.data.ErrorMessage.ErrorCode === 1) {
+          Notify('Your preferred store has been updated!', null, null, 'success');
+          self.user.ClientStoreId = self.storeChange;
+
+          for (var key in self.stores) {
+            if (parseInt(self.stores[key].ClientStoreId) === parseInt(self.storeChange)) {
+              self.user.ClientStoreName = self.stores[key].ClientStoreName;
+              break;
+            }
+          }
+
+          localStorage.user = JSON.stringify(self.user);
+        } else if (response.data.ErrorMessage.ErrorCode === -1) {
+          Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
+        }
       });
     }
   },
@@ -51595,8 +51606,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -33,7 +33,7 @@
                                     <dd><small>${{ user.TotalSavingsAmount }}</small></dd>
                                 </div>
                                 <div class="col-12">
-                                    <dt>Store  <!-- <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small> --></dt>
+                                    <dt>Store  <!-- <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small>--></dt>
                                     <dd><small>{{ user.ClientStoreName }}</small></dd>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -80,6 +80,8 @@
                     <coupons-component></coupons-component>
                 </div>
             </div>
+            <!--<pre>{{ user }}</pre>-->
+            <!--<pre>{{ stores }}</pre>-->
         </div>
         <!-- Change Store Modal -->
         <div class="modal fade" id="changeStoreModal" tabindex="-1" role="dialog" aria-labelledby="changeStoreModalTitle" aria-hidden="true">
@@ -163,18 +165,24 @@
                 Notify('You have been logged out.', null, null, 'success');
             },
             changeStore: function() {
-                console.log('UserToken: ' + this.user.UserToken);
-                console.log('ClientStore: ' + this.storeChange);
+                let self = this;
                 axios.post('/update_store', {
                     UserToken: this.user.UserToken,
                     StoreId: this.storeChange
                 }).then(function (response) {
-                    console.log(response);
-//                    if(response.data.ErrorMessage.ErrorCode === 1) {
-//                        Notify('Your preferred store has been updated!', null, null, 'success');
-//                    } else if(response.data.ErrorMessage.ErrorCode === -1) {
-//                        Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
-//                    }
+                    if(response.data.ErrorMessage.ErrorCode === 1) {
+                        Notify('Your preferred store has been updated!', null, null, 'success');
+                        self.user.ClientStoreId = self.storeChange;
+                        for (var key in self.stores) {
+                            if (parseInt(self.stores[key].ClientStoreId) === parseInt(self.storeChange)) {
+                                self.user.ClientStoreName = self.stores[key].ClientStoreName;
+                                break;
+                            }
+                        }
+                        localStorage.user = JSON.stringify(self.user);
+                    } else if(response.data.ErrorMessage.ErrorCode === -1) {
+                        Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
+                    }
                 })
             }
         },
