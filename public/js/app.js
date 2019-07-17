@@ -2214,6 +2214,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           }
 
           localStorage.user = JSON.stringify(self.user);
+          $('#changeStoreModal').modal('hide');
         } else if (response.data.ErrorMessage.ErrorCode === -1) {
           Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
         }
@@ -38472,11 +38473,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      disabled: !_vm.storeChange
-                    },
+                    attrs: { type: "button", disabled: !_vm.storeChange },
                     on: {
                       click: function($event) {
                         return _vm.changeStore()

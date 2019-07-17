@@ -102,7 +102,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="changeStore()" :disabled="!storeChange">Save changes</button>
+                        <button type="button" class="btn btn-primary" v-on:click="changeStore()" :disabled="!storeChange">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -179,6 +179,7 @@
                             }
                         }
                         localStorage.user = JSON.stringify(self.user);
+                        $('#changeStoreModal').modal('hide');
                     } else if(response.data.ErrorMessage.ErrorCode === -1) {
                         Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
                     }
