@@ -518,7 +518,7 @@ class RSAController extends Controller
 
         $data = json_encode($data);
 
-        $url = $this->build_url($brand, 'ForgotPin');
+        $url = $this->build_url($brand, 'UpdateStore');
 
         $response = $this->curl_post($url, $data);
         return $response;
