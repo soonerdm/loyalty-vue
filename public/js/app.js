@@ -2200,7 +2200,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       console.log('ClientStore: ' + this.storeChange);
       axios.post('/update_store', {
         UserToken: this.user.UserToken,
-        ClientStore: this.storeChange
+        StoreId: this.storeChange
       }).then(function (response) {
         console.log(response); //                    if(response.data.ErrorMessage.ErrorCode === 1) {
         //                        Notify('Your preferred store has been updated!', null, null, 'success');
@@ -38265,7 +38265,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12" }, [
-                      _c("dt", [_vm._v("Store ")]),
+                      _c("dt", [_vm._v("Store  ")]),
                       _vm._v(" "),
                       _c("dd", [
                         _c("small", [_vm._v(_vm._s(_vm.user.ClientStoreName))])
@@ -51595,8 +51595,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/joshwillson/Code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/loyalty/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/code/loyalty/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

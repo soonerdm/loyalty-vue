@@ -33,7 +33,7 @@
                                     <dd><small>${{ user.TotalSavingsAmount }}</small></dd>
                                 </div>
                                 <div class="col-12">
-                                    <dt>Store <!-- - <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small> --></dt>
+                                    <dt>Store  <!-- <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small> --></dt>
                                     <dd><small>{{ user.ClientStoreName }}</small></dd>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -167,7 +167,7 @@
                 console.log('ClientStore: ' + this.storeChange);
                 axios.post('/update_store', {
                     UserToken: this.user.UserToken,
-                    ClientStore: this.storeChange
+                    StoreId: this.storeChange
                 }).then(function (response) {
                     console.log(response);
 //                    if(response.data.ErrorMessage.ErrorCode === 1) {
