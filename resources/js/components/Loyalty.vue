@@ -33,7 +33,7 @@
                                     <dd><small>${{ user.TotalSavingsAmount }}</small></dd>
                                 </div>
                                 <div class="col-12">
-                                    <dt>Store  <!-- <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small>--></dt>
+                                    <dt>Store - <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small></dt>
                                     <dd><small>{{ user.ClientStoreName }}</small></dd>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -80,8 +80,6 @@
                     <coupons-component></coupons-component>
                 </div>
             </div>
-            <!--<pre>{{ user }}</pre>-->
-            <!--<pre>{{ stores }}</pre>-->
         </div>
         <!-- Change Store Modal -->
         <div class="modal fade" id="changeStoreModal" tabindex="-1" role="dialog" aria-labelledby="changeStoreModalTitle" aria-hidden="true">
@@ -97,13 +95,14 @@
                         <div class="form-group">
                             <label for="storeChange">Preferred Store</label>
                             <select name="storeChange" id="storeChange" v-model="storeChange" class="form-control" required>
+                                <option value="" selected>Select...</option>
                                 <option v-for="store in stores" v-bind:value="store.ClientStoreId">{{store.ClientStoreName}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="changeStore()">Save changes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="changeStore()" :disabled="!storeChange">Save changes</button>
                     </div>
                 </div>
             </div>

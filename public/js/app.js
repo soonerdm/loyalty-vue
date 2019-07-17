@@ -2138,7 +2138,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38276,7 +38275,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12" }, [
-                      _c("dt", [_vm._v("Store  ")]),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c("dd", [
                         _c("small", [_vm._v(_vm._s(_vm.user.ClientStoreName))])
@@ -38294,12 +38293,12 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("table", { staticClass: "table table-condensed" }, [
-                    _vm._m(1),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c(
                       "tbody",
                       [
-                        _vm.loadingClipped ? _c("tr", [_vm._m(2)]) : _vm._e(),
+                        _vm.loadingClipped ? _c("tr", [_vm._m(3)]) : _vm._e(),
                         _vm._v(" "),
                         !_vm.loadingClipped
                           ? _c("tr", [
@@ -38328,7 +38327,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(4)
             ]
           )
         ]
@@ -38339,7 +38338,7 @@ var render = function() {
           "div",
           { staticClass: "input-group mb-3", staticStyle: { width: "250px" } },
           [
-            _vm._m(4),
+            _vm._m(5),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -38400,7 +38399,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38441,14 +38440,20 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.stores, function(store) {
-                      return _c(
-                        "option",
-                        { domProps: { value: store.ClientStoreId } },
-                        [_vm._v(_vm._s(store.ClientStoreName))]
-                      )
-                    }),
-                    0
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v("Select...")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.stores, function(store) {
+                        return _c(
+                          "option",
+                          { domProps: { value: store.ClientStoreId } },
+                          [_vm._v(_vm._s(store.ClientStoreName))]
+                        )
+                      })
+                    ],
+                    2
                   )
                 ])
               ]),
@@ -38467,7 +38472,11 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-primary",
-                    attrs: { type: "button", "data-dismiss": "modal" },
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      disabled: !_vm.storeChange
+                    },
                     on: {
                       click: function($event) {
                         return _vm.changeStore()
@@ -38496,6 +38505,27 @@ var staticRenderFns = [
         _vm._v("Forgot Password")
       ]),
       _vm._v("  \n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("dt", [
+      _vm._v("Store - "),
+      _c("small", [
+        _c(
+          "a",
+          {
+            attrs: {
+              href: "#",
+              "data-toggle": "modal",
+              "data-target": "#changeStoreModal"
+            }
+          },
+          [_vm._v("Change")]
+        )
+      ])
     ])
   },
   function() {
