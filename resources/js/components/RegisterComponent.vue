@@ -30,7 +30,6 @@
                     <select name="ClientStore" id="ClientStore" class="form-control" required>
                         <option v-for="store in stores" v-bind:value="store.ClientStoreId">{{store.ClientStoreName}}</option>
                     </select>
-
                 </div>
                 <div class="form-group">
                     <label for="zipcode">Zip Code</label>
@@ -72,6 +71,7 @@
                     });
                     return mstore;
                 }
+                this.$parent.stores = this.stores;
             });
         },
         methods: {

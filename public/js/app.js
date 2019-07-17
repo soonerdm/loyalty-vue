@@ -2108,6 +2108,35 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2117,7 +2146,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       clipped: [],
       loading: false,
       loadingClipped: false,
-      search: ''
+      search: '',
+      stores: [],
+      storeChange: ''
     };
   },
   mounted: function mounted() {
@@ -2163,6 +2194,20 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       this.clipped = [];
       localStorage.clear();
       Notify('You have been logged out.', null, null, 'success');
+    },
+    changeStore: function changeStore() {
+      console.log('UserToken: ' + this.user.UserToken);
+      console.log('ClientStore: ' + this.storeChange);
+      axios.post('/update_store', {
+        UserToken: this.user.UserToken,
+        ClientStore: this.storeChange
+      }).then(function (response) {
+        console.log(response); //                    if(response.data.ErrorMessage.ErrorCode === 1) {
+        //                        Notify('Your preferred store has been updated!', null, null, 'success');
+        //                    } else if(response.data.ErrorMessage.ErrorCode === -1) {
+        //                        Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
+        //                    }
+      });
     }
   },
   computed: {
@@ -2284,7 +2329,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RegisterComponent.vue",
   data: function data() {
@@ -2330,6 +2374,8 @@ __webpack_require__.r(__webpack_exports__);
         });
         return mstore;
       }
+
+      _this.$parent.stores = _this.stores;
     });
   },
   methods: {
@@ -38203,14 +38249,26 @@ var render = function() {
                     _c("div", { staticClass: "col-6" }, [
                       _c("dt", [_vm._v("Member #")]),
                       _vm._v(" "),
-                      _c("dd", [_vm._v(_vm._s(_vm.user.MemberNumber))])
+                      _c("dd", [
+                        _c("small", [_vm._v(_vm._s(_vm.user.MemberNumber))])
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-6" }, [
                       _c("dt", [_vm._v("Total Savings")]),
                       _vm._v(" "),
                       _c("dd", [
-                        _vm._v("$" + _vm._s(_vm.user.TotalSavingsAmount))
+                        _c("small", [
+                          _vm._v("$" + _vm._s(_vm.user.TotalSavingsAmount))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("dt", [_vm._v("Store ")]),
+                      _vm._v(" "),
+                      _c("dd", [
+                        _c("small", [_vm._v(_vm._s(_vm.user.ClientStoreName))])
                       ])
                     ]),
                     _vm._v(" "),
@@ -38308,7 +38366,111 @@ var render = function() {
           1
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "changeStoreModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "changeStoreModalTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "storeChange" } }, [
+                    _vm._v("Preferred Store")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.storeChange,
+                          expression: "storeChange"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "storeChange",
+                        id: "storeChange",
+                        required: ""
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.storeChange = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    _vm._l(_vm.stores, function(store) {
+                      return _c(
+                        "option",
+                        { domProps: { value: store.ClientStoreId } },
+                        [_vm._v(_vm._s(store.ClientStoreName))]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.changeStore()
+                      }
+                    }
+                  },
+                  [_vm._v("Save changes")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -38375,6 +38537,31 @@ var staticRenderFns = [
         "span",
         { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
         [_c("i", { staticClass: "fa fa-search" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "changeStoreModalTitle" } },
+        [_vm._v("Change Store")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   }

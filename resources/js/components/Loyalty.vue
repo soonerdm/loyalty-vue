@@ -26,11 +26,15 @@
                             <div class="row">
                                 <div class="col-6">
                                     <dt>Member #</dt>
-                                    <dd>{{ user.MemberNumber }}</dd>
+                                    <dd><small>{{ user.MemberNumber }}</small></dd>
                                 </div>
                                 <div class="col-6">
                                     <dt>Total Savings</dt>
-                                    <dd>${{ user.TotalSavingsAmount }}</dd>
+                                    <dd><small>${{ user.TotalSavingsAmount }}</small></dd>
+                                </div>
+                                <div class="col-12">
+                                    <dt>Store <!-- - <small><a href="#" data-toggle="modal" data-target="#changeStoreModal">Change</a></small> --></dt>
+                                    <dd><small>{{ user.ClientStoreName }}</small></dd>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <dt>Bar Code</dt>
@@ -77,6 +81,31 @@
                 </div>
             </div>
         </div>
+        <!-- Change Store Modal -->
+        <div class="modal fade" id="changeStoreModal" tabindex="-1" role="dialog" aria-labelledby="changeStoreModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changeStoreModalTitle">Change Store</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="storeChange">Preferred Store</label>
+                            <select name="storeChange" id="storeChange" v-model="storeChange" class="form-control" required>
+                                <option v-for="store in stores" v-bind:value="store.ClientStoreId">{{store.ClientStoreName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="changeStore()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -91,7 +120,9 @@
                 clipped: [],
                 loading: false,
                 loadingClipped: false,
-                search: ''
+                search: '',
+                stores: [],
+                storeChange: ''
             }
         },
         mounted: function() {
@@ -130,6 +161,21 @@
                 this.clipped = [];
                 localStorage.clear();
                 Notify('You have been logged out.', null, null, 'success');
+            },
+            changeStore: function() {
+                console.log('UserToken: ' + this.user.UserToken);
+                console.log('ClientStore: ' + this.storeChange);
+                axios.post('/update_store', {
+                    UserToken: this.user.UserToken,
+                    ClientStore: this.storeChange
+                }).then(function (response) {
+                    console.log(response);
+//                    if(response.data.ErrorMessage.ErrorCode === 1) {
+//                        Notify('Your preferred store has been updated!', null, null, 'success');
+//                    } else if(response.data.ErrorMessage.ErrorCode === -1) {
+//                        Notify(response.data.ErrorMessage.ErrorDetails, null, null, 'danger');
+//                    }
+                })
             }
         },
         computed: {

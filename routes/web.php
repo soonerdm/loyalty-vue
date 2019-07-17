@@ -40,3 +40,5 @@ Route::get('logout', 'RSAController@logout');
 Route::Post('validate', 'RSAController@validate_user');
 
 Route::Post('register_app', 'RSAController@register_user');
+
+Route::Post('update_store', 'RSAController@update_store');
