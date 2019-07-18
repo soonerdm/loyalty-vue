@@ -10,21 +10,14 @@ use Hocza\Sendy\Facades\Sendy;
 
 class RSAController extends Controller
 {
-
     public $brand;
 
-   public function __construct()
-   {
+    public function __construct()
+    {
         $url = explode('.', $_SERVER['HTTP_HOST'])[1];
 
         $this->brand = $this->get_brand($url);
-   }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    }
 
     public function index()
     {
@@ -46,78 +39,6 @@ class RSAController extends Controller
 
         return view('home', compact('brand'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
-     * @param Request $request
-     * Register new user
-     * @return @JSON response
-     */
 
     public function register_user(Request $request)
     {
@@ -166,9 +87,9 @@ class RSAController extends Controller
            ]);
 
            return $loggedInRaw;
-      }
-       else return $response;
+       }
 
+       else return $response;
     }
 
     public function get_user($UserName, $Password){
@@ -194,23 +115,8 @@ class RSAController extends Controller
         return  $response;
     }
 
-
-
-
-    /**
-     * @param Request $request
-     * validate user AKA login
-     * returns user profile
-     */
-    public function validate_user(Request $request){
-
-        //  dd($request);
-        // $url = $this->build_url($this->get_brand($request->store_code)->loyalty_url, 'ValidateUser');
-
-      //  $brand = $this->get_brand($request->store_code);
-
-        //dd($brand);
-
+    public function validate_user(Request $request)
+    {
         $data['UserName'] = $request->UserName;
         $data['Password'] = $request->Password;
 
@@ -225,11 +131,7 @@ class RSAController extends Controller
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
 
-
-
         $data = json_encode($data);
-
-       // print_r($data);
 
         $response = $this->curl_post($url, $data);
 
@@ -242,13 +144,8 @@ class RSAController extends Controller
         }
 
         return $response;
-
     }
 
-    /**
-     * @param Request $request
-     * @return bool|string
-     */
     public function get_coupons()
     {
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
@@ -272,16 +169,10 @@ class RSAController extends Controller
         return $response;
     }
 
-    /**
-     * @param Request $request
-     * @return bool|string
-     */
     public function clip_offer(Request $request){
 
         $data['RSAOfferId']     = $request->RSAOfferId;
         $data['CategoryId']     = $request->CategoryId;
-
-      // die("Member Num ". Session::get('MemberNumber'));
 
         if(empty(Session::get('MemberNumber'))){
             $data['ErrorMessage'] = "No MemberNumber";
@@ -305,8 +196,8 @@ class RSAController extends Controller
         $url = $this->build_url($brand, 'ClipOffer');
 
         $response = $this->curl_post($url, $data);
-        return $response;
 
+        return $response;
     }
 
     /**
@@ -314,8 +205,9 @@ class RSAController extends Controller
      * Session UserToken
      * returns users clipped coupons
      */
-    public function get_user_clips(){
 
+    public function get_user_clips()
+    {
         if(empty(Session::get('UserToken'))){
             return json_encode($data['ErrorMessage'] = "Not Logged In" );
         }
@@ -330,16 +222,13 @@ class RSAController extends Controller
 
         $url = $url."/".Session::get('UserToken')."/".ENV('RSA_EnterpriseId')."/".ENV('RSA_SecurityKey');
 
-       // echo $url;
-
         $response = $this->curl_get($url);
 
         return $response;
-
     }
 
-    public function forgot_pin(Request $request){
-
+    public function forgot_pin(Request $request)
+    {
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         $data['UserName']       = $request->UserName;
@@ -361,8 +250,9 @@ class RSAController extends Controller
     /**
      * get all stores for brand
      */
-    public function getStores(){
 
+    public function getStores()
+    {
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
 
@@ -381,12 +271,8 @@ class RSAController extends Controller
         return $response;
     }
 
-
-    /**
-     *
-     */
-    public function get_brand($url){
-
+    public function get_brand($url)
+    {
         $domain['buyforlessok'] = 'buyforlessok';
         $domain['uptowngroceryco'] = 'uptowngroceryco';
         $domain['smartsaverok'] = 'smartsaverok';
@@ -397,32 +283,10 @@ class RSAController extends Controller
         else {
             return $domain[$url];
         }
-
-
     }
 
-
-    /**
-     * @param $url
-     * @param $data
-     * @return bool|string
-     */
-    public function curl_post($url, $data){
-        /*
-        $client = new Client([
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-type' => 'application/json',
-                "cache-control: no-cache"]
-        ]);
-
-        $response = $client->post($url,
-            ['json' => $data]
-        );
-
-        return $response;
-        */
-
+    public function curl_post($url, $data)
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -457,16 +321,18 @@ class RSAController extends Controller
      * @param $service // Pass the service we want to use
      * @return string
      */
+
     public function build_url($brand, $service){
         return 'https://'.$brand.'.rsaamerica.com/PartnerApi/SSWebRestApi.svc/'.$service;
     }
-
 
     /**
      * @param $store_code
      * @return mixed
      */
-    public function curl_get($url){
+
+    public function curl_get($url)
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -493,18 +359,10 @@ class RSAController extends Controller
         } else {
             return $response;
         }
-
-        //        $client = new Client();
-//        $response = $client->get($url);
-//        $answer = $response->getBody()->getContents();
-//        return $answer;
-
-
     }
 
-
-    public function update_store(Request $request){
-
+    public function update_store(Request $request)
+    {
         $data['SecurityKey']    = ENV('RSA_SecurityKey');
         $data['EnterpriseId']   = ENV('RSA_EnterpriseId');
         $data['UserToken']      = $request->UserToken;
@@ -521,16 +379,8 @@ class RSAController extends Controller
         $url = $this->build_url($brand, 'UpdateStore');
 
         $response = $this->curl_post($url, $data);
+
         return $response;
 
     }
-
-
-    public function logout(){
-        Session::flush();
-        $response ='';
-
-        return back();
-    }
-
 }

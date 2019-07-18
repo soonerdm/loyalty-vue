@@ -30,11 +30,6 @@ class ContactController extends Controller
         }
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $brand = $this->brand;
@@ -56,22 +51,11 @@ class ContactController extends Controller
         return view('contact', compact('brand'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -87,49 +71,40 @@ class ContactController extends Controller
                 ->subject("[Loyalty Program] Message From " . $request->name);
         });
 
-        return view('contact-confirm');
+        $brand = $this->brand;
+
+        switch ($this->brand) {
+            case 'buyforlessok':
+                $brand = 'Buy For Less / SuperMercado';
+                break;
+            case 'smartsaverok':
+                $brand = 'Smart Saver';
+                break;
+            case 'uptowngroceryco':
+                $brand = 'Uptown Grocery';
+                break;
+            default:
+                $brand = 'Buy For Less / SuperMercado';
+        }
+
+        return view('contact-confirm', compact('brand'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
