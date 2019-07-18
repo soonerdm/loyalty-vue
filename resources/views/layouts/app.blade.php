@@ -8,7 +8,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ $brand }} Loyalty Rewards Program</title>
-        <link rel="shortcut icon" type="image/x-icon" href="/img/@php echo explode('.', $_SERVER['HTTP_HOST'])[1]; @endphp-favicon.png"/>
+        @if(explode('.', $_SERVER['HTTP_HOST'])[1] == 'test:8000')
+            <link rel="shortcut icon" type="image/x-icon" href="/img/buyforlessok-favicon.png" />
+        @else
+            <link rel="shortcut icon" type="image/x-icon" href="/img/@php echo explode('.', $_SERVER['HTTP_HOST'])[1]; @endphp-favicon.png" />
+        @endif
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
