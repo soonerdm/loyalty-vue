@@ -21,7 +21,7 @@
                     </p>
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
-                    <button class="btn btn-block btn-primary text-white" @click="add( o.RSAOfferId, o.CategoryId )" v-if="clipButton" :disabled="checkClipped(o.RSAOfferId)">
+                    <button class="btn btn-block btn-primary text-white" @click="add( o.RSAOfferId, o.CategoryId )" :disabled="checkClipped(o.RSAOfferId)">
                         <span v-if="!checkClipped(o.RSAOfferId)"><i class="fa fa-cut"></i> Clip Coupon</span>
                         <span v-if="checkClipped(o.RSAOfferId)"><i class="fa fa-check"></i> Clipped!</span>
                     </button>
@@ -41,7 +41,6 @@
     export default {
         data: function () {
             return {
-                clipButton: true,
                 couponsToShow: 15
             }
         },

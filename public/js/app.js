@@ -1804,7 +1804,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      clipButton: true,
       couponsToShow: 15
     };
   },
@@ -37831,35 +37830,33 @@ var render = function() {
                 "div",
                 { staticClass: "card-footer bg-transparent border-top-0" },
                 [
-                  _vm.clipButton
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-block btn-primary text-white",
-                          attrs: { disabled: _vm.checkClipped(o.RSAOfferId) },
-                          on: {
-                            click: function($event) {
-                              return _vm.add(o.RSAOfferId, o.CategoryId)
-                            }
-                          }
-                        },
-                        [
-                          !_vm.checkClipped(o.RSAOfferId)
-                            ? _c("span", [
-                                _c("i", { staticClass: "fa fa-cut" }),
-                                _vm._v(" Clip Coupon")
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.checkClipped(o.RSAOfferId)
-                            ? _c("span", [
-                                _c("i", { staticClass: "fa fa-check" }),
-                                _vm._v(" Clipped!")
-                              ])
-                            : _vm._e()
-                        ]
-                      )
-                    : _vm._e()
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-primary text-white",
+                      attrs: { disabled: _vm.checkClipped(o.RSAOfferId) },
+                      on: {
+                        click: function($event) {
+                          return _vm.add(o.RSAOfferId, o.CategoryId)
+                        }
+                      }
+                    },
+                    [
+                      !_vm.checkClipped(o.RSAOfferId)
+                        ? _c("span", [
+                            _c("i", { staticClass: "fa fa-cut" }),
+                            _vm._v(" Clip Coupon")
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.checkClipped(o.RSAOfferId)
+                        ? _c("span", [
+                            _c("i", { staticClass: "fa fa-check" }),
+                            _vm._v(" Clipped!")
+                          ])
+                        : _vm._e()
+                    ]
+                  )
                 ]
               )
             ])
